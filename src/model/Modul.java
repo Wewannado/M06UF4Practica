@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,7 +29,8 @@ public class Modul implements Serializable {
     
     private String nom;
     
-    private ArrayList<Object> uF;
+    @OneToMany
+    private ArrayList<UnitatFormativa> uF;
 
     public Long getId() {
         return id;

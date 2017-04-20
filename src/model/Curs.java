@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +18,6 @@ import javax.persistence.Table;
  * @author Roger G. Coscojuela
  */
 @Entity
-@NamedQuery(name = "CursId", query = "SELECT c FROM Client c WHERE c.id=:id")
 @Table(name = "M6UF4_CURS")
 public class Curs implements Serializable {
 
@@ -26,7 +26,8 @@ public class Curs implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private ArrayList<Object> uF;
+    
+    private ArrayList<UnitatFormativa> uF;
 
     public enum Nom {
 
@@ -50,11 +51,11 @@ public class Curs implements Serializable {
         this.id = id;
     }
 
-    public ArrayList<Object> getuF() {
+    public ArrayList<UnitatFormativa> getuF() {
         return uF;
     }
 
-    public void setuF(ArrayList<Object> uF) {
+    public void setuF(ArrayList<UnitatFormativa> uF) {
         this.uF = uF;
     }
 
