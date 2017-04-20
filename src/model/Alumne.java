@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Alumne implements Serializable {
@@ -17,6 +18,8 @@ public class Alumne implements Serializable {
     private String cognom;
     private String correu;
     private String telefon;
+    @OneToOne(mappedBy = "alumne")
+    private Matricula matricula;
 
     public Alumne(Long idAlumne, String nom, String cognom, String correu, String telefon) {
         this.idAlumne = idAlumne;

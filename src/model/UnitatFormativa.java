@@ -21,6 +21,8 @@ import javax.persistence.Table;
 @Table(name = "M6UF4_UF")
 public class UnitatFormativa implements Serializable {
 
+    @ManyToOne
+    private Matricula matricula;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
