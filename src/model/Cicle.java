@@ -1,10 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cicle implements Serializable {
@@ -15,7 +17,10 @@ public class Cicle implements Serializable {
     private Long idCicle;
     private String nom;
     private String grau;
-    
+    @OneToMany(mappedBy = "cicleModul")
+    private List<Modul> moduls;
+    @OneToMany(mappedBy = "cicleCurs")
+    private List<Curs> cursos;
 
     @Override
     public int hashCode() {
