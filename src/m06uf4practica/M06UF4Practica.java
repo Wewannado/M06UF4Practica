@@ -1,6 +1,3 @@
-/*
- * Author Roger G. Coscojuela
- */
 package m06uf4practica;
 
 import controlador.Curs_Controller;
@@ -12,9 +9,6 @@ import model.Curs;
  */
 public class M06UF4Practica {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
         
@@ -23,5 +17,5 @@ public class M06UF4Practica {
         cc.Insertar(c);
         
     }
-    
+
 }
