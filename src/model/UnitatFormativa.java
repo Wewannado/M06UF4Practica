@@ -1,10 +1,10 @@
 /*
  * Author Roger G. Coscojuela
  */
+
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,30 +17,13 @@ import javax.persistence.Table;
  * @author Roger G. Coscojuela
  */
 @Entity
-@NamedQuery(name = "CursId", query = "SELECT c FROM Client c WHERE c.id=:id")
-@Table(name = "M6UF4_CURS")
-public class Curs implements Serializable {
-
+@NamedQuery(name = "UFperNom", query = "SELECT uf FROM UnitatFormativa uf WHERE uf.nom=:nom")
+@Table(name = "M6UF4_UF")
+public class UnitatFormativa implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private ArrayList<Object> uF;
-
-    public enum Nom {
-
-        PRIMER, SEGON
-    }
-
-    public Curs() {
-    }
-
-    public Curs(Long id, ArrayList uF) {
-        this.id = id;
-        this.uF = uF;
-
-    }
 
     public Long getId() {
         return id;
@@ -48,14 +31,6 @@ public class Curs implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ArrayList<Object> getuF() {
-        return uF;
-    }
-
-    public void setuF(ArrayList<Object> uF) {
-        this.uF = uF;
     }
 
     @Override
@@ -68,16 +43,19 @@ public class Curs implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Curs)) {
+        if (!(object instanceof UnitatFormativa)) {
             return false;
         }
-        Curs other = (Curs) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        UnitatFormativa other = (UnitatFormativa) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "TODO";
+        return "model.UnitatFormativa[ id=" + id + " ]";
     }
 
 }
