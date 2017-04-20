@@ -10,29 +10,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  *
  * @author Roger G. Coscojuela
  */
 @Entity
-@NamedQuery(name = "UFperNom", query = "SELECT uf FROM UnitatFormativa uf WHERE uf.nom=:nom")
-@Table(name = "M6UF4_UF")
 public class UnitatFormativa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idUF;
 
     private String nom;
     private int hores;
-    @JoinColumn(name = "idCurs")
+
+    @ManyToOne
+    @JoinColumn(name = "idUnidad")
     private UnitatFormativa uf;
+
+    @ManyToOne
     @JoinColumn(name = "idModul")
     private Modul modul;
+
+    @ManyToOne
     @JoinColumn(name = "idMatricula")
     private Matricula matricula;
 

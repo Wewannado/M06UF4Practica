@@ -1,79 +1,76 @@
-/*
- * Author Roger G. Coscojuela
- */
 package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-/**
- *
- * @author Roger G. Coscojuela
- */
+import javax.persistence.OneToMany;
+
 @Entity
-@Table(name = "M6UF4_CURS")
 public class Curs implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long idCurs;
 
-    
-    private ArrayList<UnitatFormativa> uF;
+    @OneToMany(mappedBy = "uf")
+    private List<UnitatFormativa> unidades;
 
     public enum Nom {
 
         PRIMER, SEGON
     }
+    @ManyToOne
+    @JoinColumn(name = "idCicle")
+    private Cicle cicleCurs;
 
     public Curs() {
     }
 
-    public Curs(Long id, ArrayList uF) {
-        this.id = id;
-        this.uF = uF;
+    public Curs(Long id, ArrayList unidades) {
+        this.idCurs = id;
+        this.unidades = unidades;
 
     }
 
     public Long getId() {
-        return id;
+        return idCurs;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idCurs = id;
     }
 
-    public ArrayList<UnitatFormativa> getuF() {
-        return uF;
+    public List<UnitatFormativa> getUnidades() {
+        return unidades;
     }
 
-    public void setuF(ArrayList<UnitatFormativa> uF) {
-        this.uF = uF;
+    public void setUnidades(List<UnitatFormativa> unidades) {
+        this.unidades = unidades;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idCurs != null ? idCurs.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the idCurs fields are not set
         if (!(object instanceof Curs)) {
             return false;
         }
         Curs other = (Curs) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        return !((this.idCurs == null && other.idCurs != null) || (this.idCurs != null && !this.idCurs.equals(other.idCurs)));
     }
 
     @Override

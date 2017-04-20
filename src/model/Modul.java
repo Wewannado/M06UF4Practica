@@ -1,60 +1,60 @@
 /*
  * Author Roger G. Coscojuela
  */
-
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author Roger G. Coscojuela
  */
 @Entity
-@NamedQuery(name = "ModulNom", query = "SELECT m FROM Modul m WHERE m.nom=:nom")
-@Table(name = "M6UF4_MODULS")
 public class Modul implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long idModul;
+
     private String nom;
-    
-    @OneToMany
-    private ArrayList<UnitatFormativa> uF;
+    @ManyToOne
+    @JoinColumn(name = "idCicle")
+    private Cicle cicleModul;
+    @OneToMany(mappedBy = "modul")
+    private List<UnitatFormativa> uF;
 
     public Long getId() {
-        return id;
+        return idModul;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idModul = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idModul != null ? idModul.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the idModul fields are not set
         if (!(object instanceof Modul)) {
             return false;
         }
         Modul other = (Modul) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idModul == null && other.idModul != null) || (this.idModul != null && !this.idModul.equals(other.idModul))) {
             return false;
         }
         return true;
@@ -62,7 +62,7 @@ public class Modul implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Modul[ id=" + id + " ]";
+        return "model.Modul[ id=" + idModul + " ]";
     }
 
 }

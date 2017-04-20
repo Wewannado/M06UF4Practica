@@ -16,7 +16,7 @@ public class Familia implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idFamilia;
     private String nom;
-    @OneToMany
+    @OneToMany(mappedBy = "familia")
     private List<Cicle> cicles;
 
     public Familia(Long idFamilia, String nom, List<Cicle> cicles) {
