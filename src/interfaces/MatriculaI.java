@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.util.List;
 import model.Cicle;
 import model.Curs;
 import model.Familia;
@@ -18,5 +19,5 @@ public interface MatriculaI extends GenericaDAO<Matricula> {
 
     Matricula cercarPerNif(String nif);
 
-    Matricula cercarTots();
+    List<Matricula> cercarTots();
 }

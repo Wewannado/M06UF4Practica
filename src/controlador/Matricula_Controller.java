@@ -1,12 +1,18 @@
 package controlador;
 
+import interfaces.MatriculaI;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.RollbackException;
+import model.Cicle;
+import model.Curs;
+import model.Familia;
 
 import model.Matricula;
+import model.UnitatFormativa;
 
-public class Matricula_Controller {
+public class Matricula_Controller implements MatriculaI {
 
     public boolean Insertar(Matricula m) throws RollbackException {
         EM_Controller oem = new EM_Controller();
@@ -19,5 +25,50 @@ public class Matricula_Controller {
         System.out.println("close");
         em.close();
         return true;
+    }
+
+    @Override
+    public Matricula cercarPerUf(UnitatFormativa uf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Matricula cercarPerCurs(Curs curs) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Matricula cercarPerCicle(Cicle cicle) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Matricula cercarPerFamilia(Familia familia) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Matricula cercarPerNif(String nif) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Matricula> cercarTots() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void afegir(Matricula clase) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void modificar(Matricula clase) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void eliminar(Matricula clase) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

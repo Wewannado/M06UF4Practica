@@ -1,8 +1,9 @@
 package interfaces;
 
+import java.util.List;
 import model.Curs;
 
 public interface CursI extends GenericaDAO<Curs> {
 
-    Curs cercarTots();
+    List<Curs> cercarTots();
 }

@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.util.List;
 import model.Alumne;
 
 public interface AlumneI extends GenericaDAO<Alumne> {
@@ -8,5 +9,5 @@ public interface AlumneI extends GenericaDAO<Alumne> {
 
     Alumne cercarCognom(String cognom);
 
-    Alumne cercarTots();
+    List<Alumne> cercarTots();
 }
