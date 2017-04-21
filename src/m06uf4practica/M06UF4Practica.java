@@ -20,7 +20,7 @@ public class M06UF4Practica {
         
         Matricula_Controller mc = new Matricula_Controller();
         Matricula mm = new Matricula();
-        mm.setModalitat(Matricula.Modalitat.UFSOLTES);
+        mm.setModalitat("UFSOLTES");
         mc.Insertar(mm);
         
     }

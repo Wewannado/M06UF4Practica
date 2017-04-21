@@ -14,11 +14,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Matricula implements Serializable {
 
-    public enum Modalitat {
-
-        CURSCOMPLET, UFSOLTES
-    }
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -32,8 +27,8 @@ public class Matricula implements Serializable {
     @OneToMany(mappedBy = "uf")
     private List<UnitatFormativa> ufs;
 
-    @Column(name = "Modalitat")
-    private Modalitat modalitat;
+    
+    private String modalitat;
 
     private int descompte;
 
@@ -69,11 +64,11 @@ public class Matricula implements Serializable {
         this.ufs = ufs;
     }
 
-    public Modalitat getModalitat() {
+    public String getModalitat() {
         return modalitat;
     }
 
-    public void setModalitat(Modalitat modalitat) {
+    public void setModalitat(String modalitat) {
         this.modalitat = modalitat;
     }
 
