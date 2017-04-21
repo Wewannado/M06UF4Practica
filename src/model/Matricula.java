@@ -26,9 +26,10 @@ public class Matricula implements Serializable {
 
     @OneToMany(mappedBy = "uf")
     private List<UnitatFormativa> ufs;
-
+    
+    
     private Modalitat modalitat;
-
+    
     private int descompte;
 
     public Long getIdMatricula() {
