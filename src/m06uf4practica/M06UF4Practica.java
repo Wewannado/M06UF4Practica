@@ -1,7 +1,6 @@
 package m06uf4practica;
 
-import controlador.Curs_Controller;
-import model.Curs;
+
 
 /**
  *
