@@ -1,9 +1,9 @@
 package model;
 
-import utilitats.Modalitat;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +14,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Matricula implements Serializable {
 
+    public enum Modalitat {
+
+        CURSCOMPLET, UFSOLTES
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -22,14 +27,14 @@ public class Matricula implements Serializable {
     @OneToOne
     private Alumne alumne;
 
-    private Date date;
+    private Date fecha;
 
     @OneToMany(mappedBy = "uf")
     private List<UnitatFormativa> ufs;
-    
-    
+
+    @Column(name = "Modalitat")
     private Modalitat modalitat;
-    
+
     private int descompte;
 
     public Long getIdMatricula() {
@@ -49,11 +54,11 @@ public class Matricula implements Serializable {
     }
 
     public Date getDate() {
-        return date;
+        return fecha;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.fecha = date;
     }
 
     public List<UnitatFormativa> getUfs() {
@@ -79,11 +84,5 @@ public class Matricula implements Serializable {
     public void setDescompte(int descompte) {
         this.descompte = descompte;
     }
-
-  
-
-    
-
-  
 
 }
