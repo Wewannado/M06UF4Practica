@@ -23,8 +23,8 @@ public class Alumne_controller implements AlumneI {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT a FROM Alumne a "
-                + "WHERE a.nomUsuari =:usuariRegistrat");
-        //q.setParameter("usuariRegistrat", usuari);
+                + "WHERE a.nif =:nifP");
+        q.setParameter("nifP", nif);
         return (Alumne) q.getSingleResult();
     }
 
