@@ -530,7 +530,7 @@ public class GUI extends javax.swing.JFrame {
     private void bnCercarNifAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCercarNifAlumneActionPerformed
         nif = nifAlumne.getText();
         a = ac.cercarNif(nif);
-        
+        tableAlumne.getModel().setValueAt(a.getNom(), 1, 1);
     }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
 
     /**
