@@ -14,6 +14,7 @@ public class Alumne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idAlumne;
+    private String nif;
     private String nom;
     private String cognom;
     private String correu;
@@ -21,12 +22,12 @@ public class Alumne implements Serializable {
     @OneToOne(mappedBy = "alumne")
     private Matricula matricula;
 
-    public Alumne(Long idAlumne, String nom, String cognom, String correu, String telefon) {
-        this.idAlumne = idAlumne;
+    public Alumne(String nif, String nom, String cognom, String correu, String telefon) {
+        this.nif = nif;
         this.nom = nom;
         this.cognom = cognom;
         this.correu = correu;
-        this.telefon = telefon;
+        this.telefon = telefon;      
     }
 
     public Long getIdAlumne() {
@@ -35,6 +36,14 @@ public class Alumne implements Serializable {
 
     public void setIdAlumne(Long idAlumne) {
         this.idAlumne = idAlumne;
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     public String getNom() {
@@ -67,6 +76,14 @@ public class Alumne implements Serializable {
 
     public void setTelefon(String telefon) {
         this.telefon = telefon;
+    }
+
+    public Matricula getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
     }
 
     @Override

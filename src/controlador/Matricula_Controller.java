@@ -14,7 +14,7 @@ import model.UnitatFormativa;
 
 public class Matricula_Controller implements MatriculaI {
 
-    public boolean Insertar(Matricula m) throws RollbackException {
+    public void Insertar(Matricula m) throws RollbackException {
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -24,7 +24,6 @@ public class Matricula_Controller implements MatriculaI {
         etx.commit();
         System.out.println("close");
         em.close();
-        return true;
     }
 
     @Override
