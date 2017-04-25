@@ -8,6 +8,7 @@ package vista;
 import controlador.Alumne_controller;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Alumne;
 
 /**
@@ -363,8 +364,18 @@ public class GUI extends javax.swing.JFrame {
         });
 
         btnModificarAlumne.setText("Modificar Alumne");
+        btnModificarAlumne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarAlumneActionPerformed(evt);
+            }
+        });
 
         btnEliminarAlumne.setText("Eliminar Alumne");
+        btnEliminarAlumne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAlumneActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -714,12 +725,13 @@ public class GUI extends javax.swing.JFrame {
         ac = new Alumne_controller();
         a = new Alumne(nif, nom, cognom, correu, telefon);
         ac.afegir(a);
+        JOptionPane.showMessageDialog(this, "Inserció feta correctament");
     }//GEN-LAST:event_btnAfegirAlumneActionPerformed
 
     private void bnCercarNifAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCercarNifAlumneActionPerformed
         nif = nifAlumne.getText();
+        ac = new Alumne_controller();
         a = ac.cercarNif(nif);
-
     }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
 
     private void btnCercarCognomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCognomActionPerformed
@@ -749,6 +761,29 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCercarTotsAlumneActionPerformed
 
+    private void btnModificarAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarAlumneActionPerformed
+        nif = nifAlumne.getText();
+        nom = nomAlumne.getText();
+        cognom = cognomAlumne.getText();
+        correu = correuAlumne.getText();
+        telefon = telefonAlumne.getText();
+        ac = new Alumne_controller();
+        a = ac.cercarNif(nif);
+        a.setNom(nom);
+        a.setCognom(cognom);
+        a.setCorreu(correu);
+        a.setTelefon(telefon);
+        ac.modificar(a);
+        JOptionPane.showMessageDialog(this, "Modificació feta correctament");
+    }//GEN-LAST:event_btnModificarAlumneActionPerformed
+
+    private void btnEliminarAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumneActionPerformed
+        nif = nifAlumne.getText();
+        ac = new Alumne_controller();
+        a = ac.cercarNif(nif);
+        ac.eliminar(a);
+        JOptionPane.showMessageDialog(this, "Eliminació feta correctament");
+    }//GEN-LAST:event_btnEliminarAlumneActionPerformed
 
     /**
      * @param args the command line arguments
