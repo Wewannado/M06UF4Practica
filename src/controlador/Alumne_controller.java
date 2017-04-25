@@ -7,17 +7,25 @@ package controlador;
 
 import interfaces.AlumneI;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import model.Alumne;
 
 /**
  *
  * @author ALUMNEDAM
  */
-public class Alumne_controller implements AlumneI{
+public class Alumne_controller implements AlumneI {
 
     @Override
     public Alumne cercarNif(String nif) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT a FROM Alumne a "
+                + "WHERE a.nif =:nifP");
+        q.setParameter("nifP", nif);
+        return (Alumne) q.getSingleResult();
     }
 
     @Override
@@ -32,7 +40,15 @@ public class Alumne_controller implements AlumneI{
 
     @Override
     public void afegir(Alumne clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller oem = new EM_Controller();
+        EntityManager em = oem.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        etx.begin();
+        System.out.println("persist");
+        em.persist(clase);
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 
     @Override
@@ -44,5 +60,4 @@ public class Alumne_controller implements AlumneI{
     public void eliminar(Alumne clase) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

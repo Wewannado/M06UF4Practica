@@ -18,10 +18,10 @@ public class M06UF4Practica {
         //Curs c = new Curs();
         //cc.Insertar(c);
         
-        Matricula_Controller mc = new Matricula_Controller();
-        Matricula mm = new Matricula();
-        mm.setModalitat("UFSOLTES");
-        mc.Insertar(mm);
+//        Matricula_Controller mc = new Matricula_Controller();
+//        Matricula mm = new Matricula();
+//        mm.setModalitat("UFSOLTES");
+//        mc.Insertar(mm);
         
     }
 

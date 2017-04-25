@@ -5,17 +5,22 @@
  */
 package vista;
 
+import controlador.Alumne_controller;
+import model.Alumne;
+
 /**
  *
  * @author ALUMNEDAM
  */
 public class GUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI
-     */
+    String nif, nom, cognom, correu, telefon;
+    Alumne_controller ac;
+    Alumne a;
+
     public GUI() {
         initComponents();
+
     }
 
     /**
@@ -184,8 +189,18 @@ public class GUI extends javax.swing.JFrame {
         btnCercarCognom.setText("Cercar Cognom");
 
         bnCercarNifAlumne.setText("Cercar NIF");
+        bnCercarNifAlumne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnCercarNifAlumneActionPerformed(evt);
+            }
+        });
 
         btnAfegirAlumne.setText("Afegir Alumne");
+        btnAfegirAlumne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfegirAlumneActionPerformed(evt);
+            }
+        });
 
         btnModificarAlumne.setText("Modificar Alumne");
 
@@ -500,6 +515,23 @@ public class GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAfegirAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirAlumneActionPerformed
+        nif = nifAlumne.getText();
+        nom = nomAlumne.getText();
+        cognom = cognomAlumne.getText();
+        correu = correuAlumne.getText();
+        telefon = telefonAlumne.getText();
+        ac = new Alumne_controller();
+        a = new Alumne(nif, nom, cognom, correu, telefon);
+        ac.afegir(a);
+    }//GEN-LAST:event_btnAfegirAlumneActionPerformed
+
+    private void bnCercarNifAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCercarNifAlumneActionPerformed
+        nif = nifAlumne.getText();
+        a = ac.cercarNif(nif);
+        
+    }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
 
     /**
      * @param args the command line arguments

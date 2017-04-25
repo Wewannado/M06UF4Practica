@@ -374,11 +374,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cercar NIF"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnCercarNifAlumneActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnAfegirAlumne">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Afegir Alumne"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAfegirAlumneActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnModificarAlumne">
                   <Properties>
