@@ -29,13 +29,21 @@ public class Alumne_controller implements AlumneI {
     }
 
     @Override
-    public Alumne cercarCognom(String cognom) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Alumne> cercarCognom(String cognom) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT a FROM Alumne a "
+                + "WHERE a.cognom =:cognomP");
+        q.setParameter("cognomP", cognom);
+        return (List<Alumne>) q.getResultList();
     }
 
     @Override
     public List<Alumne> cercarTots() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT a FROM Alumne a ");
+        return (List<Alumne>) q.getResultList();
     }
 
     @Override
@@ -53,7 +61,7 @@ public class Alumne_controller implements AlumneI {
 
     @Override
     public void modificar(Alumne clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override

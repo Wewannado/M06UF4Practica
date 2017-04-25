@@ -30,6 +30,10 @@ public class Alumne implements Serializable {
         this.telefon = telefon;      
     }
 
+    public Alumne() {
+    }
+    
+
     public Long getIdAlumne() {
         return idAlumne;
     }

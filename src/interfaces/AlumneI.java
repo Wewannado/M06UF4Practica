@@ -7,7 +7,7 @@ public interface AlumneI extends GenericaDAO<Alumne> {
 
     Alumne cercarNif(String nif);
 
-    Alumne cercarCognom(String cognom);
+    List<Alumne> cercarCognom(String cognom);
 
     List<Alumne> cercarTots();
 }

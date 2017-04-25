@@ -6,6 +6,8 @@
 package vista;
 
 import controlador.Alumne_controller;
+import java.util.ArrayList;
+import java.util.List;
 import model.Alumne;
 
 /**
@@ -203,8 +205,18 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableAlumne);
 
         btnCercarTotsAlumne.setText("Cercar Tots");
+        btnCercarTotsAlumne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarTotsAlumneActionPerformed(evt);
+            }
+        });
 
         btnCercarCognom.setText("Cercar Cognom");
+        btnCercarCognom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarCognomActionPerformed(evt);
+            }
+        });
 
         bnCercarNifAlumne.setText("Cercar NIF");
         bnCercarNifAlumne.addActionListener(new java.awt.event.ActionListener() {
@@ -530,7 +542,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(btnEliminarMatricula))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Matricula", jPanel6);
@@ -543,7 +555,7 @@ public class GUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -566,16 +578,48 @@ public class GUI extends javax.swing.JFrame {
         cognom = cognomAlumne.getText();
         correu = correuAlumne.getText();
         telefon = telefonAlumne.getText();
-        ac = new Alumne_controller();
         a = new Alumne(nif, nom, cognom, correu, telefon);
+        ac = new Alumne_controller();
         ac.afegir(a);
     }//GEN-LAST:event_btnAfegirAlumneActionPerformed
 
     private void bnCercarNifAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCercarNifAlumneActionPerformed
         nif = nifAlumne.getText();
+        ac = new Alumne_controller();
         a = ac.cercarNif(nif);
-        tableAlumne.getModel().setValueAt(a.getNom(), 1, 1);
+        tableAlumne.getModel().setValueAt(a.getNif(), 0, 0);
+        tableAlumne.getModel().setValueAt(a.getNom(), 0, 1);
+        tableAlumne.getModel().setValueAt(a.getCognom(), 0, 2);
+        tableAlumne.getModel().setValueAt(a.getCorreu(), 0, 3);
+        tableAlumne.getModel().setValueAt(a.getTelefon(), 0, 4);
     }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
+
+    private void btnCercarCognomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCognomActionPerformed
+        List<Alumne> alumnes = new ArrayList();
+        cognom = cognomAlumne.getText();
+        ac = new Alumne_controller();
+        alumnes = ac.cercarCognom(cognom);
+        for (int i = 0; i < alumnes.size(); i++) {
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getNif(), i, 0);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getNom(), i, 1);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getCognom(), i, 2);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getCorreu(), i, 3);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getTelefon(), i, 4);
+        }
+    }//GEN-LAST:event_btnCercarCognomActionPerformed
+
+    private void btnCercarTotsAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsAlumneActionPerformed
+        List<Alumne> alumnes = new ArrayList();
+        ac = new Alumne_controller();
+        alumnes = ac.cercarTots();
+        for (int i = 0; i < alumnes.size(); i++) {
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getNif(), i, 0);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getNom(), i, 1);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getCognom(), i, 2);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getCorreu(), i, 3);
+            tableAlumne.getModel().setValueAt(alumnes.get(i).getTelefon(), i, 4);
+        }
+    }//GEN-LAST:event_btnCercarTotsAlumneActionPerformed
 
     /**
      * @param args the command line arguments
