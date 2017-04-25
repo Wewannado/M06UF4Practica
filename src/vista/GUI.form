@@ -891,11 +891,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jScrollPane5" min="-2" pref="94" max="-2" attributes="0"/>
-<<<<<<< HEAD
-                          <EmptySpace max="32767" attributes="0"/>
-=======
                           <EmptySpace pref="290" max="32767" attributes="0"/>
->>>>>>> origin/master
                       </Group>
                   </Group>
                 </DimensionLayout>

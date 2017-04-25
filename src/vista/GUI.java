@@ -688,11 +688,7 @@ public class GUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD (94c980c) - esta casi to el alumno 
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, Short.MAX_VALUE)
-=======
             .addComponent(jTabbedPane1)
->>>>>>> origin/master (6730824) - Vista Cicle
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -715,20 +711,15 @@ public class GUI extends javax.swing.JFrame {
         cognom = cognomAlumne.getText();
         correu = correuAlumne.getText();
         telefon = telefonAlumne.getText();
-        a = new Alumne(nif, nom, cognom, correu, telefon);
         ac = new Alumne_controller();
+        a = new Alumne(nif, nom, cognom, correu, telefon);
         ac.afegir(a);
     }//GEN-LAST:event_btnAfegirAlumneActionPerformed
 
     private void bnCercarNifAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCercarNifAlumneActionPerformed
         nif = nifAlumne.getText();
-        ac = new Alumne_controller();
         a = ac.cercarNif(nif);
-        tableAlumne.getModel().setValueAt(a.getNif(), 0, 0);
-        tableAlumne.getModel().setValueAt(a.getNom(), 0, 1);
-        tableAlumne.getModel().setValueAt(a.getCognom(), 0, 2);
-        tableAlumne.getModel().setValueAt(a.getCorreu(), 0, 3);
-        tableAlumne.getModel().setValueAt(a.getTelefon(), 0, 4);
+
     }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
 
     private void btnCercarCognomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCognomActionPerformed
@@ -757,6 +748,7 @@ public class GUI extends javax.swing.JFrame {
             tableAlumne.getModel().setValueAt(alumnes.get(i).getTelefon(), i, 4);
         }
     }//GEN-LAST:event_btnCercarTotsAlumneActionPerformed
+
 
     /**
      * @param args the command line arguments
