@@ -61,7 +61,28 @@ public class GUI extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        idCurs = new javax.swing.JTextField();
+        nomCurs = new javax.swing.JTextField();
+        llistatUFCurs = new javax.swing.JTextField();
+        btnAfegirCurs = new javax.swing.JButton();
+        btnCercarTotsCurs = new javax.swing.JButton();
+        btnEliminarCurs = new javax.swing.JButton();
+        btnModificarCurs = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tablaCurs = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        idFamilia = new javax.swing.JTextField();
+        nomFamilia = new javax.swing.JTextField();
+        llistaCiclesFamilia = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tablaFamilia = new javax.swing.JTable();
+        btnAfegirFamilia = new javax.swing.JButton();
+        btnCercarTotsFamilia = new javax.swing.JButton();
+        btnEliminarFamilia = new javax.swing.JButton();
+        btnModificarFamilia = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -248,16 +269,37 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(grauCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cicle", jPanel3);
 
-        jLabel18.setText("jLabel18");
+        jLabel18.setText("ID");
 
-        jLabel19.setText("jLabel19");
+        jLabel19.setText("Nom");
 
-        jLabel20.setText("jLabel20");
+        jLabel20.setText("Llistat d'Unitats Formatives");
+
+        btnAfegirCurs.setText("Afegir Curs");
+
+        btnCercarTotsCurs.setText("Cercar Tots");
+
+        btnEliminarCurs.setText("Eliminar Curs");
+
+        btnModificarCurs.setText("Modificar Curs");
+
+        tablaCurs.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(tablaCurs);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -265,35 +307,132 @@ public class GUI extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
-                    .addComponent(jLabel20))
-                .addContainerGap(523, Short.MAX_VALUE))
+                    .addComponent(jLabel20)
+                    .addComponent(llistatUFCurs)
+                    .addComponent(nomCurs)
+                    .addComponent(idCurs))
+                .addGap(132, 132, 132)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAfegirCurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminarCurs, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnModificarCurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCercarTotsCurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel18)
-                .addGap(58, 58, 58)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(idCurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAfegirCurs)
+                        .addComponent(btnCercarTotsCurs)))
+                .addGap(27, 27, 27)
                 .addComponent(jLabel19)
-                .addGap(65, 65, 65)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomCurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarCurs)
+                    .addComponent(btnModificarCurs))
+                .addGap(25, 25, 25)
                 .addComponent(jLabel20)
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(llistatUFCurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Curs", jPanel4);
+
+        jLabel21.setText("ID");
+
+        jLabel22.setText("Nom");
+
+        jLabel23.setText("Llista de Cicles");
+
+        tablaFamilia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(tablaFamilia);
+
+        btnAfegirFamilia.setText("Afegir Familia");
+
+        btnCercarTotsFamilia.setText("Cercar Tots");
+
+        btnEliminarFamilia.setText("Eliminar Familia");
+
+        btnModificarFamilia.setText("Modificar Familia");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23)
+                            .addComponent(idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(llistaCiclesFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminarFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAfegirFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnModificarFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCercarTotsFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 80, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAfegirFamilia)
+                    .addComponent(btnCercarTotsFamilia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel22)
+                .addGap(16, 16, 16)
+                .addComponent(nomFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel23)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEliminarFamilia)
+                        .addComponent(btnModificarFamilia)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(llistaCiclesFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Familia", jPanel5);
@@ -306,7 +445,7 @@ public class GUI extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGap(0, 581, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Modul", jPanel7);
@@ -522,7 +661,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(btnEliminarUF)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(horesUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(290, 290, 290))
         );
@@ -675,7 +814,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(btnEliminarMatricula))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Matricula", jPanel6);
@@ -792,6 +931,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> boxModalitatMatricula;
     private javax.swing.JButton btnAfegirAlumne;
     private javax.swing.JButton btnAfegirCicle;
+    private javax.swing.JButton btnAfegirCurs;
+    private javax.swing.JButton btnAfegirFamilia;
     private javax.swing.JButton btnAfegirMatricula;
     private javax.swing.JButton btnAfegirUF;
     private javax.swing.JButton btnCercarCicleMatricula;
@@ -801,15 +942,21 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnCercarNIFMatricula;
     private javax.swing.JButton btnCercarTotsAlumne;
     private javax.swing.JButton btnCercarTotsCicle;
+    private javax.swing.JButton btnCercarTotsCurs;
+    private javax.swing.JButton btnCercarTotsFamilia;
     private javax.swing.JButton btnCercarTotsMatricula;
     private javax.swing.JButton btnCercarTotsUF;
     private javax.swing.JButton btnCercarUFMatricula;
     private javax.swing.JButton btnEliminarAlumne;
     private javax.swing.JButton btnEliminarCicle;
+    private javax.swing.JButton btnEliminarCurs;
+    private javax.swing.JButton btnEliminarFamilia;
     private javax.swing.JButton btnEliminarMatricula;
     private javax.swing.JButton btnEliminarUF;
     private javax.swing.JButton btnModificarAlumne;
     private javax.swing.JButton btnModificarCicle;
+    private javax.swing.JButton btnModificarCurs;
+    private javax.swing.JButton btnModificarFamilia;
     private javax.swing.JButton btnModificarMatricula;
     private javax.swing.JButton btnModificarUF;
     private javax.swing.JTextField cognomAlumne;
@@ -818,6 +965,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField grauCicle;
     private javax.swing.JTextField horesUF;
     private javax.swing.JTextField idCicle;
+    private javax.swing.JTextField idCurs;
+    private javax.swing.JTextField idFamilia;
     private javax.swing.JTextField idMatricula;
     private javax.swing.JTextField idUF;
     private javax.swing.JLabel jLabel1;
@@ -833,6 +982,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -854,18 +1006,26 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private java.awt.Label label1;
     private java.awt.Label label2;
+    private javax.swing.JTextField llistaCiclesFamilia;
     private javax.swing.JTextField llistaCursosCicle;
     private javax.swing.JTextField llistaModulsCicle;
     private javax.swing.JTextField llistaUFMatricula;
+    private javax.swing.JTextField llistatUFCurs;
     private javax.swing.JTextField nifAlumne;
     private javax.swing.JTextField nomAlumne;
     private javax.swing.JTextField nomCicle;
+    private javax.swing.JTextField nomCurs;
+    private javax.swing.JTextField nomFamilia;
     private javax.swing.JTextField nomUF;
+    private javax.swing.JTable tablaCurs;
+    private javax.swing.JTable tablaFamilia;
     private javax.swing.JTable tableAlumne;
     private javax.swing.JTable tableCicle;
     private javax.swing.JTable tableMatricula;

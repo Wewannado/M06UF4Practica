@@ -192,7 +192,7 @@
                           <Component id="grauCicle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane6" min="-2" pref="109" max="-2" attributes="0"/>
-                          <EmptySpace pref="282" max="32767" attributes="0"/>
+                          <EmptySpace pref="262" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -290,13 +290,27 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="llistatUFCurs" alignment="0" max="32767" attributes="0"/>
+                              <Component id="nomCurs" alignment="0" max="32767" attributes="0"/>
+                              <Component id="idCurs" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="523" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnAfegirCurs" max="32767" attributes="0"/>
+                              <Component id="btnEliminarCurs" pref="101" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnModificarCurs" max="32767" attributes="0"/>
+                              <Component id="btnCercarTotsCurs" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
+                      <Component id="jScrollPane7" alignment="0" pref="573" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -304,11 +318,29 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="idCurs" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnAfegirCurs" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCercarTotsCurs" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="nomCurs" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnEliminarCurs" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnModificarCurs" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="400" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="llistatUFCurs" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="jScrollPane7" min="-2" pref="111" max="-2" attributes="0"/>
+                          <EmptySpace pref="176" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -316,19 +348,66 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel18">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel18"/>
+                    <Property name="text" type="java.lang.String" value="ID"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel19"/>
+                    <Property name="text" type="java.lang.String" value="Nom"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel20">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel20"/>
+                    <Property name="text" type="java.lang.String" value="Llistat d&apos;Unitats Formatives"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JTextField" name="idCurs">
+                </Component>
+                <Component class="javax.swing.JTextField" name="nomCurs">
+                </Component>
+                <Component class="javax.swing.JTextField" name="llistatUFCurs">
+                </Component>
+                <Component class="javax.swing.JButton" name="btnAfegirCurs">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Afegir Curs"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnCercarTotsCurs">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cercar Tots"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnEliminarCurs">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Eliminar Curs"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnModificarCurs">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Modificar Curs"/>
+                  </Properties>
+                </Component>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="tablaCurs">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="4" rowCount="4">
+                            <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel5">
@@ -343,15 +422,132 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="573" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane8" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="idFamilia" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Component id="nomFamilia" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Component id="llistaCiclesFamilia" min="-2" pref="100" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnEliminarFamilia" max="32767" attributes="0"/>
+                                      <Component id="btnAfegirFamilia" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnModificarFamilia" max="32767" attributes="0"/>
+                                      <Component id="btnCercarTotsFamilia" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="80" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="601" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="idFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnAfegirFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCercarTotsFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="nomFamilia" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnEliminarFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnModificarFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="llistaCiclesFamilia" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane8" min="-2" pref="120" max="-2" attributes="0"/>
+                          <EmptySpace pref="232" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel21">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="ID"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel22">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Nom"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel23">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Llista de Cicles"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="idFamilia">
+                </Component>
+                <Component class="javax.swing.JTextField" name="nomFamilia">
+                </Component>
+                <Component class="javax.swing.JTextField" name="llistaCiclesFamilia">
+                </Component>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="tablaFamilia">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="4" rowCount="4">
+                            <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JButton" name="btnAfegirFamilia">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Afegir Familia"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnCercarTotsFamilia">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cercar Tots"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnEliminarFamilia">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Eliminar Familia"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnModificarFamilia">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Modificar Familia"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel7">
               <Constraints>
@@ -370,7 +566,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="601" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="581" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -683,7 +879,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="horesUF" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="94" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
                       </Group>
@@ -891,7 +1087,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jScrollPane5" min="-2" pref="94" max="-2" attributes="0"/>
-                          <EmptySpace pref="290" max="32767" attributes="0"/>
+                          <EmptySpace pref="270" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
