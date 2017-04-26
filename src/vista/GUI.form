@@ -804,11 +804,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Modificar Alumne"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarAlumneActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnEliminarAlumne">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Eliminar Alumne"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarAlumneActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

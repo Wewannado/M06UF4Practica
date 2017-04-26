@@ -61,11 +61,33 @@ public class Alumne_controller implements AlumneI {
 
     @Override
     public void modificar(Alumne clase) {
-        
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        System.out.println("begin");
+        etx.begin();
+        System.out.println("remove");
+        em.merge(clase);
+        System.out.println("commit");
+        //em.getTransaction().commit();
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 
     @Override
     public void eliminar(Alumne clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        System.out.println("begin");
+        etx.begin();
+        System.out.println("remove");
+        em.remove(em.contains(clase) ? clase : em.merge(clase));
+        System.out.println("commit");
+        //em.getTransaction().commit();
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 }
