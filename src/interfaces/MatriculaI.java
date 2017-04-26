@@ -9,13 +9,13 @@ import model.UnitatFormativa;
 
 public interface MatriculaI extends GenericaDAO<Matricula> {
 
-    Matricula cercarPerUf(UnitatFormativa uf);
+    List<Matricula> cercarPerUf(UnitatFormativa uf);
 
-    Matricula cercarPerCurs(Curs curs);
+    List<Matricula> cercarPerCurs(Curs curs);
 
-    Matricula cercarPerCicle(Cicle cicle);
+    List<Matricula> cercarPerCicle(Cicle cicle);
 
-    Matricula cercarPerFamilia(Familia familia);
+    List<Matricula> cercarPerFamilia(Familia familia);
 
     Matricula cercarPerNif(String nif);
 

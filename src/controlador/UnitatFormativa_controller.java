@@ -7,6 +7,8 @@ package controlador;
 
 import interfaces.UnitatFormativaI;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import model.UnitatFormativa;
 
 /**
@@ -17,7 +19,10 @@ public class UnitatFormativa_controller implements UnitatFormativaI {
 
     @Override
     public List<UnitatFormativa> cercarTots() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT u FROM UnitatFormativa u");
+        return (List<UnitatFormativa>) q.getResultList();
     }
 
     @Override

@@ -4,6 +4,7 @@ import interfaces.MatriculaI;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import model.Cicle;
 import model.Curs;
@@ -27,22 +28,27 @@ public class Matricula_Controller implements MatriculaI {
     }
 
     @Override
-    public Matricula cercarPerUf(UnitatFormativa uf) {
+    public List<Matricula> cercarPerUf(UnitatFormativa uf) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT m FROM Matricula m "
+                + "WHERE m.uf =:uf");
+        q.setParameter("uf", uf);
+        return (List<Matricula>) q.getResultList();
+    }
+
+    @Override
+    public List<Matricula> cercarPerCurs(Curs curs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Matricula cercarPerCurs(Curs curs) {
+    public List<Matricula> cercarPerCicle(Cicle cicle) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Matricula cercarPerCicle(Cicle cicle) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Matricula cercarPerFamilia(Familia familia) {
+    public List<Matricula> cercarPerFamilia(Familia familia) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
