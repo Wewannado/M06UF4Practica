@@ -4,6 +4,7 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,12 +24,13 @@ public class UnitatFormativa implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idUF;
 
+    @Column(unique=true)
     private String nom;
     private int hores;
 
     @ManyToOne
     @JoinColumn(name = "idUnidad")
-    private UnitatFormativa uf;
+    private Curs curs;
 
     @ManyToOne
     @JoinColumn(name = "idModul")
@@ -38,12 +40,9 @@ public class UnitatFormativa implements Serializable {
     @JoinColumn(name = "idMatricula")
     private Matricula matricula;
 
-    public UnitatFormativa(String nom, int hores, UnitatFormativa uf, Modul modul, Matricula matricula) {
+    public UnitatFormativa(String nom, int hores) {
         this.nom = nom;
         this.hores = hores;
-        this.uf = uf;
-        this.modul = modul;
-        this.matricula = matricula;
     }
 
     public UnitatFormativa() {
