@@ -65,4 +65,38 @@ public class Modul implements Serializable {
         return "model.Modul[ id=" + idModul + " ]";
     }
 
+    public Long getIdModul() {
+        return idModul;
+    }
+
+    public void setIdModul(Long idModul) {
+        this.idModul = idModul;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Cicle getCicleModul() {
+        return cicleModul;
+    }
+
+    public void setCicleModul(Cicle cicleModul) {
+        this.cicleModul = cicleModul;
+    }
+
+    public List<UnitatFormativa> getuF() {
+        return uF;
+    }
+
+    public void setuF(List<UnitatFormativa> uF) {
+        this.uF = uF;
+    }
+    
+    
+
 }

@@ -54,26 +54,64 @@ public class Matricula_Controller implements MatriculaI {
 
     @Override
     public Matricula cercarPerNif(String nif) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT a FROM Matricula a "
+                + "WHERE a.nif =:nifP");
+        q.setParameter("nifP", nif);
+        return (Matricula) q.getSingleResult();
     }
 
     @Override
     public List<Matricula> cercarTots() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT m FROM Matricula m ");
+        return (List<Matricula>) q.getResultList();
     }
 
     @Override
     public void afegir(Matricula clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller oem = new EM_Controller();
+        EntityManager em = oem.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        etx.begin();
+        System.out.println("persist");
+        em.persist(clase);
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 
     @Override
     public void modificar(Matricula clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        System.out.println("begin");
+        etx.begin();
+        System.out.println("remove");
+        em.merge(clase);
+        System.out.println("commit");
+        //em.getTransaction().commit();
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 
     @Override
     public void eliminar(Matricula clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        System.out.println("begin");
+        etx.begin();
+        System.out.println("remove");
+        em.remove(em.contains(clase) ? clase : em.merge(clase));
+        System.out.println("commit");
+        //em.getTransaction().commit();
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 }

@@ -2,8 +2,12 @@ package m06uf4practica;
 
 import controlador.Curs_Controller;
 import controlador.Matricula_Controller;
+import controlador.Modul_controller;
+import controlador.UnitatFormativa_controller;
 import model.Curs;
 import model.Matricula;
+import model.Modul;
+import model.UnitatFormativa;
 
 /**
  *
@@ -22,6 +26,17 @@ public class M06UF4Practica {
 //        Matricula mm = new Matricula();
 //        mm.setModalitat("UFSOLTES");
 //        mc.Insertar(mm);
+        
+        UnitatFormativa_controller ufc = new UnitatFormativa_controller();
+        UnitatFormativa uf = new UnitatFormativa();
+        uf.setNom("Hola");
+        ufc.afegir(uf);
+        
+        Modul_controller mc = new Modul_controller();
+        Modul md = new Modul();
+        md.setNom("M09");
+        
+        mc.afegir(md);
         
     }
 
