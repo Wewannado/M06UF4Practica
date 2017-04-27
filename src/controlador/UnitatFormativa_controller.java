@@ -8,6 +8,7 @@ package controlador;
 import interfaces.UnitatFormativaI;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import model.UnitatFormativa;
 
@@ -27,17 +28,47 @@ public class UnitatFormativa_controller implements UnitatFormativaI {
 
     @Override
     public void afegir(UnitatFormativa clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         EM_Controller oem = new EM_Controller();
+        EntityManager em = oem.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        etx.begin();
+        System.out.println("persist");
+        em.persist(clase);
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 
     @Override
     public void modificar(UnitatFormativa clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        System.out.println("begin");
+        etx.begin();
+        System.out.println("remove");
+        em.merge(clase);
+        System.out.println("commit");
+        //em.getTransaction().commit();
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 
     @Override
     public void eliminar(UnitatFormativa clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        System.out.println("begin");
+        etx.begin();
+        System.out.println("remove");
+        em.remove(em.contains(clase) ? clase : em.merge(clase));
+        System.out.println("commit");
+        //em.getTransaction().commit();
+        etx.commit();
+        System.out.println("close");
+        em.close();
     }
 
 }
