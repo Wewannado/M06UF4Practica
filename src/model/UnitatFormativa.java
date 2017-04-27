@@ -38,6 +38,17 @@ public class UnitatFormativa implements Serializable {
     @JoinColumn(name = "idMatricula")
     private Matricula matricula;
 
+    public UnitatFormativa(String nom, int hores, UnitatFormativa uf, Modul modul, Matricula matricula) {
+        this.nom = nom;
+        this.hores = hores;
+        this.uf = uf;
+        this.modul = modul;
+        this.matricula = matricula;
+    }
+
+    public UnitatFormativa() {
+    }
+
     public Long getId() {
         return idUF;
     }

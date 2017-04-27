@@ -49,12 +49,17 @@ public class Matricula_Controller implements MatriculaI {
 
     @Override
     public List<Matricula> cercarPerFamilia(Familia familia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT a FROM Matricula a "
+                + "WHERE a. =:nifP");
+        q.setParameter("nifP", familia.getIdFamilia());
+        return (List<Matricula>) q.getResultList();
     }
 
     @Override
     public Matricula cercarPerNif(String nif) {
-  EM_Controller emc = new EM_Controller();
+        EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT a FROM Matricula a "
                 + "WHERE a.nif =:nifP");
