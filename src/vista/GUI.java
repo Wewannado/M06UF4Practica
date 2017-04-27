@@ -6,12 +6,14 @@
 package vista;
 
 import controlador.Alumne_controller;
+import controlador.UnitatFormativa_controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.Alumne;
+import model.UnitatFormativa;
 
 /**
  *
@@ -21,6 +23,8 @@ public class GUI extends javax.swing.JFrame {
 
     String nif, nom, cognom, correu, telefon;
     Alumne_controller ac;
+    UnitatFormativa_controller ufc;
+    UnitatFormativa uf;
     Alumne a;
     JList jlist;
     
@@ -637,12 +641,32 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tableUF);
 
         btnCercarTotsUF.setText("Cercar Tots");
+        btnCercarTotsUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarTotsUFActionPerformed(evt);
+            }
+        });
 
         btnAfegirUF.setText("Afegir UF");
+        btnAfegirUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfegirUFActionPerformed(evt);
+            }
+        });
 
         btnModificarUF.setText("Modificar UF");
+        btnModificarUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarUFActionPerformed(evt);
+            }
+        });
 
         btnEliminarUF.setText("Eliminar");
+        btnEliminarUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUFActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -952,6 +976,34 @@ public class GUI extends javax.swing.JFrame {
         ac.eliminar(a);
         JOptionPane.showMessageDialog(this, "Eliminació feta correctament");
     }//GEN-LAST:event_btnEliminarAlumneActionPerformed
+
+    private void btnAfegirUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirUFActionPerformed
+        String nomuf = nomUF.getText();
+        int hores = Integer.parseInt(horesUF.getText());
+        uf = new UnitatFormativa(nomuf,hores);
+        ufc = new UnitatFormativa_controller();
+        ufc.afegir(uf);
+    }//GEN-LAST:event_btnAfegirUFActionPerformed
+
+    private void btnEliminarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUFActionPerformed
+        String nomuf = nomUF.getText();
+        ufc = new UnitatFormativa_controller();
+        UnitatFormativa asdsa = ufc.cercarUF(nomuf);
+        ufc.eliminar(asdsa);
+    }//GEN-LAST:event_btnEliminarUFActionPerformed
+
+    private void btnModificarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarUFActionPerformed
+        String nomuf = nomUF.getText();
+        ufc = new UnitatFormativa_controller();
+        UnitatFormativa asdsa = ufc.cercarUF(nomuf);
+        asdsa.setHores(666);
+        asdsa.setNom("HIJODEPUTAMECAGOENTUPUTOMUERTO");
+        ufc.modificar(asdsa);
+    }//GEN-LAST:event_btnModificarUFActionPerformed
+
+    private void btnCercarTotsUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsUFActionPerformed
+        
+    }//GEN-LAST:event_btnCercarTotsUFActionPerformed
 
     /**
      * @param args the command line arguments
