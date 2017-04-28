@@ -2,9 +2,9 @@ package interfaces;
 
 public interface GenericaDAO<T> {
 
-    void afegir(T clase);
+    boolean afegir(T clase);
 
-    void modificar(T clase);
+    boolean modificar(T clase);
 
-    void eliminar(T clase);
+    boolean eliminar(T clase);
 }

@@ -27,7 +27,7 @@ public class UnitatFormativa_controller implements UnitatFormativaI {
     }
 
     @Override
-    public void afegir(UnitatFormativa clase) {
+    public boolean afegir(UnitatFormativa clase) {
          EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -37,10 +37,11 @@ public class UnitatFormativa_controller implements UnitatFormativaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void modificar(UnitatFormativa clase) {
+    public boolean modificar(UnitatFormativa clase) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -53,10 +54,11 @@ public class UnitatFormativa_controller implements UnitatFormativaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void eliminar(UnitatFormativa clase) {
+    public boolean eliminar(UnitatFormativa clase) {
          EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -69,6 +71,7 @@ public class UnitatFormativa_controller implements UnitatFormativaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override

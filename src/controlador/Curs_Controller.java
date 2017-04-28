@@ -25,7 +25,7 @@ public class Curs_Controller implements CursI {
     }
 
     @Override
-    public void afegir(Curs curs) {
+    public boolean afegir(Curs curs) {
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -35,10 +35,11 @@ public class Curs_Controller implements CursI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void modificar(Curs curs) {
+    public boolean modificar(Curs curs) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -51,10 +52,11 @@ public class Curs_Controller implements CursI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void eliminar(Curs curs) {
+    public boolean eliminar(Curs curs) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -67,5 +69,6 @@ public class Curs_Controller implements CursI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 }

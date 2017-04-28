@@ -18,7 +18,7 @@ public class Cicle_controller implements CicleI {
     }
 
     @Override
-    public void afegir(Cicle cicle) {
+    public boolean afegir(Cicle cicle) {
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -28,10 +28,11 @@ public class Cicle_controller implements CicleI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void modificar(Cicle cicle) {
+    public boolean modificar(Cicle cicle) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -44,10 +45,11 @@ public class Cicle_controller implements CicleI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void eliminar(Cicle cicle) {
+    public boolean eliminar(Cicle cicle) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -60,6 +62,7 @@ public class Cicle_controller implements CicleI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
 }

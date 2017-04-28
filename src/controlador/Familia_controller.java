@@ -27,7 +27,7 @@ public class Familia_controller implements FamiliaI {
     }
 
     @Override
-    public void afegir(Familia familia) {
+    public boolean afegir(Familia familia) {
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -37,10 +37,11 @@ public class Familia_controller implements FamiliaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void modificar(Familia familia) {
+    public boolean modificar(Familia familia) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -52,11 +53,11 @@ public class Familia_controller implements FamiliaI {
         //em.getTransaction().commit();
         etx.commit();
         System.out.println("close");
-        em.close();
+        return true;
     }
 
     @Override
-    public void eliminar(Familia familia) {
+    public boolean eliminar(Familia familia) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -69,6 +70,7 @@ public class Familia_controller implements FamiliaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
 }

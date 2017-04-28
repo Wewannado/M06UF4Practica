@@ -47,7 +47,7 @@ public class Alumne_controller implements AlumneI {
     }
 
     @Override
-    public void afegir(Alumne clase) {
+    public boolean afegir(Alumne clase) {
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -57,10 +57,11 @@ public class Alumne_controller implements AlumneI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void modificar(Alumne clase) {
+    public boolean modificar(Alumne clase) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -73,10 +74,11 @@ public class Alumne_controller implements AlumneI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void eliminar(Alumne clase) {
+    public boolean eliminar(Alumne clase) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -89,5 +91,6 @@ public class Alumne_controller implements AlumneI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 }

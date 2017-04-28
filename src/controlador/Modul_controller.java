@@ -28,7 +28,7 @@ public class Modul_controller implements ModulI{
     }
 
     @Override
-    public void afegir(Modul clase) {
+    public boolean afegir(Modul clase) {
      EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -38,10 +38,11 @@ public class Modul_controller implements ModulI{
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void modificar(Modul clase) {
+    public boolean modificar(Modul clase) {
                EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -54,10 +55,11 @@ public class Modul_controller implements ModulI{
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void eliminar(Modul clase) {
+    public boolean eliminar(Modul clase) {
        EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -70,6 +72,7 @@ public class Modul_controller implements ModulI{
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
     
 }

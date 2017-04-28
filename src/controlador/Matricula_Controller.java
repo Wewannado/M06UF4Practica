@@ -69,7 +69,7 @@ public class Matricula_Controller implements MatriculaI {
     }
 
     @Override
-    public void afegir(Matricula clase) {
+    public boolean afegir(Matricula clase) {
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -79,10 +79,11 @@ public class Matricula_Controller implements MatriculaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void modificar(Matricula clase) {
+    public boolean modificar(Matricula clase) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -95,10 +96,11 @@ public class Matricula_Controller implements MatriculaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 
     @Override
-    public void eliminar(Matricula clase) {
+    public boolean eliminar(Matricula clase) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
@@ -111,5 +113,6 @@ public class Matricula_Controller implements MatriculaI {
         etx.commit();
         System.out.println("close");
         em.close();
+        return true;
     }
 }

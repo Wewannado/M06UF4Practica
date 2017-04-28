@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import model.Alumne;
 import model.UnitatFormativa;
 
@@ -139,8 +140,8 @@ public class GUI extends javax.swing.JFrame {
         btnAfegirMatricula = new javax.swing.JButton();
         btnCercarFamiliaMatricula = new javax.swing.JButton();
         btnModificarMatricula = new javax.swing.JButton();
-        boxModalitatMatricula = new javax.swing.JComboBox<>();
-        boxDescompteMatricula = new javax.swing.JComboBox<>();
+        boxModalitatMatricula = new javax.swing.JComboBox<String>();
+        boxDescompteMatricula = new javax.swing.JComboBox<String>();
         dataMatricula = new javax.swing.JTextField();
         alumneMatricula = new javax.swing.JTextField();
         idMatricula = new javax.swing.JTextField();
@@ -629,13 +630,13 @@ public class GUI extends javax.swing.JFrame {
 
         tableUF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nom", "Hores"
             }
         ));
         jScrollPane3.setViewportView(tableUF);
@@ -752,9 +753,9 @@ public class GUI extends javax.swing.JFrame {
 
         btnModificarMatricula.setText("Modificar Matricula");
 
-        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnEliminarMatricula.setText("Eliminar Matricula");
 
@@ -1002,7 +1003,20 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarUFActionPerformed
 
     private void btnCercarTotsUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsUFActionPerformed
-        
+        ufc = new UnitatFormativa_controller();
+        List<UnitatFormativa> ConsultaTots = ufc.cercarTots();
+        String col[] = {"Id", "Nom", "Hores"};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        for (UnitatFormativa uf : ConsultaTots) {
+            System.out.println("Trobat");
+            Object[] data = {
+                uf.getId(),
+                uf.getNom(),
+                uf.getHores()
+            };
+            tableModel.addRow(data);
+        }
+        tableUF.setModel(tableModel);
     }//GEN-LAST:event_btnCercarTotsUFActionPerformed
 
     /**

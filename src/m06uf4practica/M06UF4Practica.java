@@ -27,7 +27,7 @@ public class M06UF4Practica {
 //        mm.setModalitat("UFSOLTES");
 //        mc.Insertar(mm);
         
-        UnitatFormativa_controller ufc = new UnitatFormativa_controller();
+        //UnitatFormativa_controller ufc = new UnitatFormativa_controller();
 //        UnitatFormativa uf = new UnitatFormativa();
 //        uf.setNom("UF4");
 //        uf.setHores(300);
@@ -40,8 +40,8 @@ public class M06UF4Practica {
         
 //        mc.afegir(md);
         
-        UnitatFormativa ufM09= ufc.cercarUF("UF4");
-        System.out.println(ufM09.getHores());
+        //UnitatFormativa ufM09= ufc.cercarUF("UF4");
+       // System.out.println(ufM09.getHores());
         
     }
 
