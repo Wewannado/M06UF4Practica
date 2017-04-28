@@ -881,7 +881,7 @@
                                       <Component id="btnModificarUF" max="32767" attributes="0"/>
                                       <Component id="btnEliminarUF" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="263" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="243" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -914,8 +914,8 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="horesUF" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jScrollPane3" min="-2" pref="94" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" min="-2" pref="373" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -939,6 +939,9 @@
                 <Component class="javax.swing.JTextField" name="nomUF">
                 </Component>
                 <Component class="javax.swing.JTextField" name="idUF">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="horesUF">
                 </Component>
@@ -952,7 +955,7 @@
                     <Component class="javax.swing.JTable" name="tableUF">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="4">
+                          <Table columnCount="3" rowCount="0">
                             <Column editable="true" title="ID" type="java.lang.Object"/>
                             <Column editable="true" title="Nom" type="java.lang.Object"/>
                             <Column editable="true" title="Hores" type="java.lang.Object"/>
@@ -1010,7 +1013,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnEliminarUF">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Eliminar"/>
+                    <Property name="text" type="java.lang.String" value="Eliminar per nom"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarUFActionPerformed"/>

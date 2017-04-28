@@ -9,6 +9,8 @@ import controlador.Alumne_controller;
 import controlador.UnitatFormativa_controller;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -28,10 +30,10 @@ public class GUI extends javax.swing.JFrame {
     UnitatFormativa uf;
     Alumne a;
     JList jlist;
-    
+
     public GUI() {
         initComponents();
-                
+
     }
 
     /**
@@ -628,12 +630,11 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel6.setText("Hores");
 
+        idUF.setEditable(false);
+
         tableUF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Nom", "Hores"
@@ -662,7 +663,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarUF.setText("Eliminar");
+        btnEliminarUF.setText("Eliminar per nom");
         btnEliminarUF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarUFActionPerformed(evt);
@@ -693,7 +694,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnModificarUF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminarUF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 263, Short.MAX_VALUE)))
+                        .addGap(0, 243, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -719,8 +720,8 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(horesUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(290, 290, 290))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Unitat formativa", jPanel8);
@@ -980,43 +981,72 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnAfegirUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirUFActionPerformed
         String nomuf = nomUF.getText();
-        int hores = Integer.parseInt(horesUF.getText());
-        uf = new UnitatFormativa(nomuf,hores);
-        ufc = new UnitatFormativa_controller();
-        ufc.afegir(uf);
+        try {
+            int hores = Integer.parseInt(horesUF.getText());
+            uf = new UnitatFormativa(nomuf, hores);
+            ufc = new UnitatFormativa_controller();
+            if (ufc.afegir(uf)) {
+                JOptionPane.showMessageDialog(this, "Registre afegit");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al afegir");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El nombre d'hores ha de ser numeric");
+        } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(this, "Error. Element duplicat");
+        }
     }//GEN-LAST:event_btnAfegirUFActionPerformed
 
     private void btnEliminarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUFActionPerformed
-        String nomuf = nomUF.getText();
-        ufc = new UnitatFormativa_controller();
-        UnitatFormativa asdsa = ufc.cercarUF(nomuf);
-        ufc.eliminar(asdsa);
+        try {
+            String nomuf = nomUF.getText();
+            ufc = new UnitatFormativa_controller();
+            UnitatFormativa uf = ufc.cercarUF(nomuf);
+            if (ufc.eliminar(uf) == true) {
+                JOptionPane.showMessageDialog(this, "Registre eliminat");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar");
+            }
+        } catch (NoResultException ex) {
+            JOptionPane.showMessageDialog(this, "No s'ha trobat objecte a eliminar");
+        }
     }//GEN-LAST:event_btnEliminarUFActionPerformed
 
     private void btnModificarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarUFActionPerformed
         String nomuf = nomUF.getText();
         ufc = new UnitatFormativa_controller();
-        UnitatFormativa asdsa = ufc.cercarUF(nomuf);
-        asdsa.setHores(666);
-        asdsa.setNom("HIJODEPUTAMECAGOENTUPUTOMUERTO");
-        ufc.modificar(asdsa);
+        UnitatFormativa uf = ufc.cercarUF(nomuf);
+        uf.setHores(Integer.parseInt(horesUF.getText()));
+        uf.setNom(nomuf);
+        if (ufc.modificar(uf) == true) {
+            JOptionPane.showMessageDialog(this, "Modificació correcta");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al inserir");
+        }
     }//GEN-LAST:event_btnModificarUFActionPerformed
 
     private void btnCercarTotsUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsUFActionPerformed
-        ufc = new UnitatFormativa_controller();
-        List<UnitatFormativa> ConsultaTots = ufc.cercarTots();
-        String col[] = {"Id", "Nom", "Hores"};
-        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        for (UnitatFormativa uf : ConsultaTots) {
-            System.out.println("Trobat");
-            Object[] data = {
-                uf.getId(),
-                uf.getNom(),
-                uf.getHores()
-            };
-            tableModel.addRow(data);
+        try {
+            ufc = new UnitatFormativa_controller();
+            List<UnitatFormativa> ConsultaTots = ufc.cercarTots();
+            String col[] = {"Id", "Nom", "Hores"};
+            DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+            for (UnitatFormativa uf : ConsultaTots) {
+                System.out.println("Trobat");
+                Object[] data = {
+                    uf.getId(),
+                    uf.getNom(),
+                    uf.getHores()
+                };
+                tableModel.addRow(data);
+            }
+            tableUF.setModel(tableModel);
+            if (ConsultaTots.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Sense resultats");
+            }
+        } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(this, "Error al recuperar les dades");
         }
-        tableUF.setModel(tableModel);
     }//GEN-LAST:event_btnCercarTotsUFActionPerformed
 
     /**
