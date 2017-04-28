@@ -17,6 +17,15 @@ public class Cicle_controller implements CicleI {
         return (List<Cicle>) q.getResultList();
     }
 
+    public Cicle cercarUF(String nom) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT c FROM Cicle c "
+                + "WHERE c.nom =:nomP");
+        q.setParameter("nomP", nom);
+        return (Cicle) q.getSingleResult();
+    }
+
     @Override
     public boolean afegir(Cicle cicle) {
         EM_Controller oem = new EM_Controller();

@@ -25,6 +25,14 @@ public class Familia_controller implements FamiliaI {
         Query q = em.createQuery("SELECT f FROM Familia f ");
         return (List<Familia>) q.getResultList();
     }
+     public Familia cercarUF(String nom) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT f FROM Familia f "
+                + "WHERE f.nom =:nomP");
+        q.setParameter("nomP", nom);
+        return (Familia) q.getSingleResult();
+    }
 
     @Override
     public boolean afegir(Familia familia) {

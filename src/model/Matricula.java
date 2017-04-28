@@ -27,10 +27,14 @@ public class Matricula implements Serializable {
     @OneToMany(mappedBy = "matricula")
     private List<UnitatFormativa> ufs;
 
-    
     private String modalitat;
 
     private int descompte;
+    
+    private Cicle cicle;
+    
+    
+    
 
     public Long getIdMatricula() {
         return idMatricula;
