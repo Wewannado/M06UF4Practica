@@ -15,31 +15,24 @@ import model.UnitatFormativa;
 
 public class Matricula_Controller implements MatriculaI {
 
-    public void Insertar(Matricula m) throws RollbackException {
-        EM_Controller oem = new EM_Controller();
-        EntityManager em = oem.getEntityManager();
-        EntityTransaction etx = em.getTransaction();
-        etx.begin();
-        System.out.println("persist");
-        em.persist(m);
-        etx.commit();
-        System.out.println("close");
-        em.close();
-    }
-
     @Override
     public List<Matricula> cercarPerUf(UnitatFormativa uf) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT m FROM Matricula m "
-                + "WHERE m.uf =:uf");
-        q.setParameter("uf", uf);
+                + "WHERE m.uf =:ufP");
+        q.setParameter("ufP", uf);
         return (List<Matricula>) q.getResultList();
     }
 
     @Override
     public List<Matricula> cercarPerCurs(Curs curs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT m FROM Matricula m "
+                + "WHERE m.uf =:ufP");
+        q.setParameter("cursP", curs);
+        return (List<Matricula>) q.getResultList();
     }
 
     @Override
@@ -54,7 +47,7 @@ public class Matricula_Controller implements MatriculaI {
 
     @Override
     public Matricula cercarPerNif(String nif) {
-  EM_Controller emc = new EM_Controller();
+        EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT a FROM Matricula a "
                 + "WHERE a.nif =:nifP");

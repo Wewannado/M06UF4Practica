@@ -27,6 +27,17 @@ public class Cicle implements Serializable {
     @OneToMany(mappedBy = "cicleCurs")
     private List<Curs> cursos;
 
+    public Cicle(Long idCicle, String nom, String grau, List<Modul> moduls, List<Curs> cursos) {
+        this.idCicle = idCicle;
+        this.nom = nom;
+        this.grau = grau;
+        this.moduls = moduls;
+        this.cursos = cursos;
+    }
+
+    public Cicle() {
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
