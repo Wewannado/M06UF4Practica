@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Familia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idFamilia;
+    @Column(unique = true)
     private String nom;
     @OneToMany(mappedBy = "familia")
     private List<Cicle> cicles;

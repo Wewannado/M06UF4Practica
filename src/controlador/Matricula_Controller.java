@@ -29,6 +29,16 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerCurs(Curs curs) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT m FROM Matricula m, Curs c "
+                + "WHERE m. =:cursP AND m.curs.");
+        q.setParameter("cursP", curs);
+        return (List<Matricula>) q.getResultList();
+    }
+
+    @Override
+    public List<Matricula> cercarPerCicle(Cicle cicle) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT m FROM Matricula m "
                 + "WHERE m.uf =:ufP");
         q.setParameter("cursP", curs);
@@ -36,16 +46,11 @@ public class Matricula_Controller implements MatriculaI {
     }
 
     @Override
-    public List<Matricula> cercarPerCicle(Cicle cicle) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Matricula> cercarPerFamilia(Familia familia) {
-       EM_Controller emc = new EM_Controller();
+        EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT a FROM Matricula a "
-                + "WHERE a. =:nifP");
+                + "WHERE a.f. =:nifP");
         q.setParameter("nifP", familia.getIdFamilia());
         return (List<Matricula>) q.getResultList();
     }

@@ -17,19 +17,28 @@ import model.UnitatFormativa;
  *
  * @author ALUMNEDAM
  */
-public class Modul_controller implements ModulI{
+public class Modul_controller implements ModulI {
 
     @Override
     public List<Modul> cercarTots() {
-      EM_Controller emc = new EM_Controller();
+        EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT u FROM Modul u");
         return (List<Modul>) q.getResultList();
     }
 
+    public Modul cercarUF(String nom) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT m FROM Modul m "
+                + "WHERE m.nom =:nomP");
+        q.setParameter("nomP", nom);
+        return (Modul) q.getSingleResult();
+    }
+
     @Override
     public boolean afegir(Modul clase) {
-     EM_Controller oem = new EM_Controller();
+        EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
         EntityTransaction etx = em.getTransaction();
         etx.begin();
@@ -43,7 +52,7 @@ public class Modul_controller implements ModulI{
 
     @Override
     public boolean modificar(Modul clase) {
-               EM_Controller emc = new EM_Controller();
+        EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
         System.out.println("begin");
@@ -60,7 +69,7 @@ public class Modul_controller implements ModulI{
 
     @Override
     public boolean eliminar(Modul clase) {
-       EM_Controller emc = new EM_Controller();
+        EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         EntityTransaction etx = em.getTransaction();
         System.out.println("begin");
@@ -74,5 +83,5 @@ public class Modul_controller implements ModulI{
         em.close();
         return true;
     }
-    
+
 }
