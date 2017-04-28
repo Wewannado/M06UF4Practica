@@ -20,7 +20,7 @@ public class Curs implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idCurs;
 
-    @OneToMany(mappedBy = "uf")
+    @OneToMany(mappedBy = "curs")
     private List<UnitatFormativa> unidades;
 
     public enum Nom {

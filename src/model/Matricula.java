@@ -24,7 +24,7 @@ public class Matricula implements Serializable {
 
     private Date fecha;
 
-    @OneToMany(mappedBy = "uf")
+    @OneToMany(mappedBy = "matricula")
     private List<UnitatFormativa> ufs;
 
     

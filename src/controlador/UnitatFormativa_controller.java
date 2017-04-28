@@ -71,4 +71,14 @@ public class UnitatFormativa_controller implements UnitatFormativaI {
         em.close();
     }
 
+    @Override
+    public UnitatFormativa cercarUF(String nom) {
+       EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT a FROM UnitatFormativa a "
+                + "WHERE a.nom =:nomP");
+        q.setParameter("nomP", nom);
+        return (UnitatFormativa) q.getSingleResult();
+    }
+
 }

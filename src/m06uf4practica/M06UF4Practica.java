@@ -28,15 +28,20 @@ public class M06UF4Practica {
 //        mc.Insertar(mm);
         
         UnitatFormativa_controller ufc = new UnitatFormativa_controller();
-        UnitatFormativa uf = new UnitatFormativa();
-        uf.setNom("Hola");
-        ufc.afegir(uf);
+//        UnitatFormativa uf = new UnitatFormativa();
+//        uf.setNom("UF4");
+//        uf.setHores(300);
+//        ufc.afegir(uf);
         
-        Modul_controller mc = new Modul_controller();
-        Modul md = new Modul();
-        md.setNom("M09");
+//        Modul_controller mc = new Modul_controller();
+//        Modul md = new Modul();
+//        md.setNom("M09");
         
-        mc.afegir(md);
+        
+//        mc.afegir(md);
+        
+        UnitatFormativa ufM09= ufc.cercarUF("UF4");
+        System.out.println(ufM09.getHores());
         
     }
 
