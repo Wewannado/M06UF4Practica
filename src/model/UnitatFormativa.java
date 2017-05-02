@@ -4,12 +4,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -24,7 +26,7 @@ public class UnitatFormativa implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idUF;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String nom;
     private int hores;
 
@@ -36,19 +38,16 @@ public class UnitatFormativa implements Serializable {
     @JoinColumn(name = "idModul")
     private Modul modul;
 
-    @ManyToOne
-    @JoinColumn(name = "idMatricula")
-    private Matricula matricula;
+    @ManyToMany   
+    private List<Matricula> matriculas;
 
-    public UnitatFormativa(String nom, int hores)
-    {
+    public UnitatFormativa(String nom, int hores) {
         this.nom = nom;
         this.hores = hores;
     }
 
-    public UnitatFormativa()
-    {
-        
+    public UnitatFormativa() {
+
     }
 
     public Long getId() {

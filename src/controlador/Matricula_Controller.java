@@ -19,7 +19,8 @@ public class Matricula_Controller implements MatriculaI {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT m.alumne FROM Matricula m"
-                + " WHERE m.idMatricula IN (SELECT uf.idMatricula FROM UnitatFormativa uf)");
+                + " WHERE m.idMatricula IN (SELECT uf.idMatricula "
+                + "FROM UnitatFormativa uf WHERE uf:=ufP)");
         q.setParameter("ufP", uf);
         return (List<Matricula>) q.getResultList();
     }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -29,10 +30,8 @@ public class Matricula implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
 
-    @OneToMany(mappedBy = "matricula")
+    @ManyToMany(mappedBy = "matriculas")
     private List<UnitatFormativa> ufs;
-    
-    
 
     private String modalitat;
 
@@ -46,7 +45,6 @@ public class Matricula implements Serializable {
     @JoinColumn(name = "idCurs")
     private Curs cursMatricula;
 
-    
     @ManyToOne
     @JoinColumn(name = "idFamilia")
     private Familia familiaMatricula;
