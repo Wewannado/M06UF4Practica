@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import model.Cicle;
 import model.Curs;
 import model.Familia;
@@ -19,8 +18,8 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerUf(UnitatFormativa uf) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT m FROM Matricula m "
-                + "WHERE m.uf =:ufP");
+        Query q = em.createQuery("SELECT m.alumne FROM Matricula m"
+                + " WHERE m.idMatricula IN (SELECT uf.idMatricula FROM UnitatFormativa uf)");
         q.setParameter("ufP", uf);
         return (List<Matricula>) q.getResultList();
     }
@@ -29,8 +28,8 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerCurs(Curs curs) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT m FROM Matricula m, Curs c "
-                + "WHERE m. =:cursP AND m.curs.");
+        Query q = em.createQuery("SELECT m.alumne FROM Matricula m "
+                + "WHERE m.cursMatricula =:cursP");
         q.setParameter("cursP", curs);
         return (List<Matricula>) q.getResultList();
     }
@@ -39,9 +38,9 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerCicle(Cicle cicle) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT m FROM Matricula m "
-                + "WHERE m.uf =:ufP");
-        q.setParameter("cursP", cicle);
+        Query q = em.createQuery("SELECT m.idAlumne FROM Matricula m "
+                + "WHERE m.idCicle =:cicleP");
+        q.setParameter("cicleP", cicle);
         return (List<Matricula>) q.getResultList();
     }
 
@@ -49,9 +48,9 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerFamilia(Familia familia) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT a FROM Matricula a "
-                + "WHERE a.f. =:nifP");
-        q.setParameter("nifP", familia.getIdFamilia());
+        Query q = em.createQuery("SELECT m.idAlumne FROM Matricula m "
+                + "WHERE m.idFamilia =:FamiliaP");
+        q.setParameter("FamiliaP", familia);
         return (List<Matricula>) q.getResultList();
     }
 
@@ -59,8 +58,8 @@ public class Matricula_Controller implements MatriculaI {
     public Matricula cercarPerNif(String nif) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT a FROM Matricula a "
-                + "WHERE a.nif =:nifP");
+        Query q = em.createQuery("SELECT m FROM Matricula m "
+                + "WHERE m.idAlumne.nif =:nifP");
         q.setParameter("nifP", nif);
         return (Matricula) q.getSingleResult();
     }

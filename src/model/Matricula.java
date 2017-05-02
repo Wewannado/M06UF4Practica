@@ -23,6 +23,7 @@ public class Matricula implements Serializable {
     private Long idMatricula;
 
     @OneToOne
+    @JoinColumn(name = "idAlumne")
     private Alumne alumne;
 
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -30,6 +31,8 @@ public class Matricula implements Serializable {
 
     @OneToMany(mappedBy = "matricula")
     private List<UnitatFormativa> ufs;
+    
+    
 
     private String modalitat;
 
