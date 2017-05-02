@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 @Entity
 public class Matricula implements Serializable {
@@ -22,6 +25,7 @@ public class Matricula implements Serializable {
     @OneToOne
     private Alumne alumne;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
 
     @OneToMany(mappedBy = "matricula")
@@ -30,11 +34,19 @@ public class Matricula implements Serializable {
     private String modalitat;
 
     private int descompte;
+
+    @ManyToOne
+    @JoinColumn(name = "idCicle")
+    private Cicle cicleMatricula;
+
+    @ManyToOne
+    @JoinColumn(name = "idCurs")
+    private Curs cursMatricula;
+
     
-    private Cicle cicle;
-    
-    
-    
+    @ManyToOne
+    @JoinColumn(name = "idFamilia")
+    private Familia familiaMatricula;
 
     public Long getIdMatricula() {
         return idMatricula;

@@ -21,6 +21,9 @@ public class Familia implements Serializable {
     @OneToMany(mappedBy = "familia")
     private List<Cicle> cicles;
 
+    @OneToMany(mappedBy = "familiaMatricula")
+    private List<Matricula> matriculas;
+
     public Familia(Long idFamilia, String nom, List<Cicle> cicles) {
         this.idFamilia = idFamilia;
         this.nom = nom;

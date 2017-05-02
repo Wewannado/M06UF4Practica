@@ -29,6 +29,9 @@ public class Cicle implements Serializable {
     @OneToMany(mappedBy = "cicleCurs")
     private List<Curs> cursos;
 
+    @OneToMany(mappedBy = "cicleMatricula")
+    private List<Matricula> matriculas;
+
     public Cicle(Long idCicle, String nom, String grau, List<Modul> moduls, List<Curs> cursos) {
         this.idCicle = idCicle;
         this.nom = nom;

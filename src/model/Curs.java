@@ -23,6 +23,9 @@ public class Curs implements Serializable {
     @OneToMany(mappedBy = "curs")
     private List<UnitatFormativa> unidades;
 
+    @OneToMany(mappedBy = "cursMatricula")
+    private List<Matricula> matriculas;
+
     public enum Nom {
 
         PRIMER, SEGON
