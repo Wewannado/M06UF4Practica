@@ -97,6 +97,9 @@ public class GUI extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel28 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -144,8 +147,8 @@ public class GUI extends javax.swing.JFrame {
         btnAfegirMatricula = new javax.swing.JButton();
         btnCercarFamiliaMatricula = new javax.swing.JButton();
         btnModificarMatricula = new javax.swing.JButton();
-        boxModalitatMatricula = new javax.swing.JComboBox<>();
-        boxDescompteMatricula = new javax.swing.JComboBox<>();
+        boxModalitatMatricula = new javax.swing.JComboBox<String>();
+        boxDescompteMatricula = new javax.swing.JComboBox<String>();
         dataMatricula = new javax.swing.JTextField();
         alumneMatricula = new javax.swing.JTextField();
         idMatricula = new javax.swing.JTextField();
@@ -153,12 +156,12 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tableMatricula = new javax.swing.JTable();
         listaUFMatricula = new java.awt.List();
-        jLabel24 = new javax.swing.JLabel();
-        boxModalitatMatricula1 = new javax.swing.JComboBox<>();
+        jLabel27 = new javax.swing.JLabel();
+        boxModalitatMatricula1 = new javax.swing.JComboBox<String>();
         jLabel25 = new javax.swing.JLabel();
-        boxModalitatMatricula2 = new javax.swing.JComboBox<>();
+        boxModalitatMatricula2 = new javax.swing.JComboBox<String>();
         jLabel26 = new javax.swing.JLabel();
-        boxModalitatMatricula3 = new javax.swing.JComboBox<>();
+        boxModalitatMatricula3 = new javax.swing.JComboBox<String>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -476,6 +479,15 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel24.setText("Nom modul");
 
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane9.setViewportView(jList1);
+
+        jLabel28.setText("Seleccionades");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -483,18 +495,26 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel24)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(632, Short.MAX_VALUE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24))
+                .addGap(76, 76, 76)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel28)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(421, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel24)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel28))
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modul", jPanel7);
@@ -771,9 +791,9 @@ public class GUI extends javax.swing.JFrame {
 
         btnModificarMatricula.setText("Modificar Matricula");
 
-        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnEliminarMatricula.setText("Eliminar Matricula");
 
@@ -794,17 +814,17 @@ public class GUI extends javax.swing.JFrame {
         listaUFMatricula.setMultipleMode(true);
         listaUFMatricula.setName(""); // NOI18N
 
-        jLabel24.setText("Data");
+        jLabel27.setText("Data");
 
-        boxModalitatMatricula1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel25.setText("Cicle");
 
-        boxModalitatMatricula2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel26.setText("Familia");
 
-        boxModalitatMatricula3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -822,7 +842,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(dataMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                 .addComponent(alumneMatricula, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel24))
+                            .addComponent(jLabel27))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -898,7 +918,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(boxModalitatMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel24)
+                                .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(dataMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -1209,6 +1229,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1216,6 +1238,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1232,6 +1255,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;

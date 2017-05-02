@@ -41,7 +41,7 @@ public class Matricula_Controller implements MatriculaI {
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT m FROM Matricula m "
                 + "WHERE m.uf =:ufP");
-        q.setParameter("cursP", curs);
+        q.setParameter("cursP", cicle);
         return (List<Matricula>) q.getResultList();
     }
 
