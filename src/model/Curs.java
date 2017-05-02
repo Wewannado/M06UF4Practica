@@ -30,6 +30,8 @@ public class Curs implements Serializable {
 
         PRIMER, SEGON
     }
+    
+    private Nom nom;
     @ManyToOne
     @JoinColumn(name = "idCicle")
     private Cicle cicleCurs;
@@ -80,5 +82,16 @@ public class Curs implements Serializable {
     public String toString() {
         return "TODO";
     }
+
+    public Nom getNom() {
+        return nom;
+    }
+
+    public void setNom(Nom nom) {
+        this.nom = nom;
+    }
+    
+    
+    
 
 }

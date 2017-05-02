@@ -4,6 +4,7 @@ import controlador.Curs_Controller;
 import controlador.Matricula_Controller;
 import controlador.Modul_controller;
 import controlador.UnitatFormativa_controller;
+import java.util.List;
 import model.Curs;
 import model.Matricula;
 import model.Modul;
@@ -43,6 +44,21 @@ public class M06UF4Practica {
         //UnitatFormativa ufM09= ufc.cercarUF("UF4");
        // System.out.println(ufM09.getHores());
         
+        
+        Curs_Controller cc = new Curs_Controller();
+        
+        List <Curs> cursos = cc.cercarTots();
+        System.out.println("Hola!");
+        System.out.println("Tamany"+cursos.size());
+        for (Curs curso : cursos) {
+            List <UnitatFormativa> uflista= curso.getUnidades();
+            System.out.println("Lista!");
+             System.out.println(uflista.size());
+            for (UnitatFormativa uflista1 : uflista) {
+                System.out.println("Hola!!!!!!2");
+                System.out.println("Curso"+curso.getNom()+ uflista1.toString());
+            }
+        }
     }
 
 }
