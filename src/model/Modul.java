@@ -21,6 +21,14 @@ import javax.persistence.OneToMany;
 @Entity
 public class Modul implements Serializable {
 
+    public Modul() {
+    }
+
+    public Modul(String nom, List<UnitatFormativa> uF) {
+        this.nom = nom;
+        this.uF = uF;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

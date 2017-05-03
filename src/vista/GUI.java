@@ -7,6 +7,7 @@ package vista;
 
 import controlador.Alumne_controller;
 import controlador.Curs_Controller;
+import controlador.Modul_controller;
 import controlador.UnitatFormativa_controller;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Alumne;
 import model.Curs;
+import model.Modul;
 import model.UnitatFormativa;
 
 /**
@@ -33,6 +35,8 @@ public class GUI extends javax.swing.JFrame {
     Curs_Controller cc;
     Alumne a;
     JList jlist;
+    Modul_controller mc;
+    Modul modul;
 
     public GUI() {
         initComponents();
@@ -111,6 +115,7 @@ public class GUI extends javax.swing.JFrame {
         btnModificarModul = new javax.swing.JButton();
         btnEliminarModul = new javax.swing.JButton();
         btnAfegirModul = new javax.swing.JButton();
+        cargarUFModul = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -158,8 +163,8 @@ public class GUI extends javax.swing.JFrame {
         btnAfegirMatricula = new javax.swing.JButton();
         btnCercarFamiliaMatricula = new javax.swing.JButton();
         btnModificarMatricula = new javax.swing.JButton();
-        boxModalitatMatricula = new javax.swing.JComboBox<String>();
-        boxDescompteMatricula = new javax.swing.JComboBox<String>();
+        boxModalitatMatricula = new javax.swing.JComboBox<>();
+        boxDescompteMatricula = new javax.swing.JComboBox<>();
         dataMatricula = new javax.swing.JTextField();
         alumneMatricula = new javax.swing.JTextField();
         idMatricula = new javax.swing.JTextField();
@@ -168,11 +173,11 @@ public class GUI extends javax.swing.JFrame {
         tableMatricula = new javax.swing.JTable();
         listaUFMatricula = new java.awt.List();
         jLabel27 = new javax.swing.JLabel();
-        boxModalitatMatricula1 = new javax.swing.JComboBox<String>();
+        boxModalitatMatricula1 = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        boxModalitatMatricula2 = new javax.swing.JComboBox<String>();
+        boxModalitatMatricula2 = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
-        boxModalitatMatricula3 = new javax.swing.JComboBox<String>();
+        boxModalitatMatricula3 = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,8 +277,8 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnCercarTotsCicle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminarCicle, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
-                        .addGap(0, 200, Short.MAX_VALUE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
+                        .addGap(0, 217, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -390,8 +395,8 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnModificarCurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCercarTotsCurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(213, Short.MAX_VALUE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+                        .addContainerGap(228, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(listaUFCurs, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -486,7 +491,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnModificarFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCercarTotsFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 243, Short.MAX_VALUE)))
+                        .addGap(0, 260, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -549,6 +554,18 @@ public class GUI extends javax.swing.JFrame {
         btnEliminarModul.setText("Eliminar Modul");
 
         btnAfegirModul.setText("Afegir Modul");
+        btnAfegirModul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfegirModulActionPerformed(evt);
+            }
+        });
+
+        cargarUFModul.setText("Cargar UF");
+        cargarUFModul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarUFModulActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -561,19 +578,21 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(nomModul)
                     .addComponent(jLabel29)
                     .addComponent(idModul, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(listaUFModul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(95, 95, 95)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnModificarModul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCercarTotsModul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(87, 87, 87)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEliminarModul, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(btnAfegirModul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(listaUFModul, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28))
+                .addGap(20, 20, 20)
+                .addComponent(cargarUFModul)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCercarTotsModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarModul))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminarModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAfegirModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane9)
@@ -602,7 +621,8 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCercarTotsModul)
-                            .addComponent(btnEliminarModul))
+                            .addComponent(btnEliminarModul)
+                            .addComponent(cargarUFModul))
                         .addGap(45, 45, 45)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnModificarModul)
@@ -683,7 +703,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(166, Short.MAX_VALUE))
+                        .addContainerGap(183, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
@@ -824,7 +844,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnModificarUF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminarUF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 243, Short.MAX_VALUE)))
+                        .addGap(0, 260, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -884,9 +904,9 @@ public class GUI extends javax.swing.JFrame {
 
         btnModificarMatricula.setText("Modificar Matricula");
 
-        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         idMatricula.setEditable(false);
 
@@ -911,15 +931,15 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel27.setText("Data");
 
-        boxModalitatMatricula1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel25.setText("Cicle");
 
-        boxModalitatMatricula2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel26.setText("Familia");
 
-        boxModalitatMatricula3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -958,7 +978,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(btnAfegirMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnModificarMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCercarNIFMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(89, Short.MAX_VALUE))
+                                .addContainerGap(104, Short.MAX_VALUE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(boxDescompteMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -978,7 +998,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(boxModalitatMatricula2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel26))
-                        .addGap(0, 278, Short.MAX_VALUE))))
+                        .addGap(0, 293, Short.MAX_VALUE))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1232,7 +1252,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btCarregarLlistaUFCursActionPerformed
 
     private void btnAfegirCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirCursActionPerformed
-         String[] ufSeleccionades = listaUFCurs.getSelectedItems();
+        String[] ufSeleccionades = listaUFCurs.getSelectedItems();
         ufc = new UnitatFormativa_controller();
         Curs curs = new Curs();
         List<UnitatFormativa> llistaUF = new ArrayList<>();
@@ -1290,6 +1310,24 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al recuperar les dades");
         }
     }//GEN-LAST:event_btnCercarTotsCursActionPerformed
+
+    private void btnAfegirModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirModulActionPerformed
+        mc = new Modul_controller();
+        String[] ufSeleccionades = listaUFModul.getSelectedItems();
+        List<UnitatFormativa> listauf = new ArrayList();
+        for (String ufSeleccionade : ufSeleccionades) 
+        {
+            UnitatFormativa uf = ufc.cercarUF(ufSeleccionade);
+            listauf.add(uf);
+        }
+        String nombre = nomModul.getText();
+        modul = new Modul(nombre,listauf);
+        mc.afegir(modul);
+    }//GEN-LAST:event_btnAfegirModulActionPerformed
+
+    private void cargarUFModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarUFModulActionPerformed
+        
+    }//GEN-LAST:event_cargarUFModulActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1369,6 +1407,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarMatricula;
     private javax.swing.JButton btnModificarModul;
     private javax.swing.JButton btnModificarUF;
+    private javax.swing.JButton cargarUFModul;
     private javax.swing.JTextField cognomAlumne;
     private javax.swing.JTextField correuAlumne;
     private javax.swing.JTextField dataMatricula;
