@@ -30,12 +30,21 @@ public class Cicle_controller implements CicleI {
      * @param nom
      * @return
      */
-    public Cicle cercarUF(String nom) {
+    public Cicle cercarCicle(String nom) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT c FROM Cicle c "
                 + "WHERE c.nom =:nomP");
         q.setParameter("nomP", nom);
+        return (Cicle) q.getSingleResult();
+    }
+
+    public Cicle cercarCicleId(Long id) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT c FROM Cicle c "
+                + "WHERE c.idCicle =:idP");
+        q.setParameter("idP", id);
         return (Cicle) q.getSingleResult();
     }
 

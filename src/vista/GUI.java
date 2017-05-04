@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.Alumne_controller;
+import controlador.Cicle_controller;
 import controlador.Curs_Controller;
 import controlador.Familia_controller;
 import controlador.Modul_controller;
@@ -19,7 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Alumne;
+import model.Cicle;
 import model.Curs;
+import model.Curs.Nom;
 import model.Familia;
 import model.Modul;
 import model.UnitatFormativa;
@@ -236,14 +239,29 @@ public class GUI extends javax.swing.JFrame {
         });
 
         btnCercarTotsCicle.setText("Cercar Tots");
+        btnCercarTotsCicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarTotsCicleActionPerformed(evt);
+            }
+        });
 
         btnModificarCicle.setText("Modificar Cicle");
+        btnModificarCicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarCicleActionPerformed(evt);
+            }
+        });
 
         btnEliminarCicle.setText("Eliminar Cicle");
+        btnEliminarCicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCicleActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("Familia");
 
-        grauCicle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        grauCicle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medio", "Superior" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -267,7 +285,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jLabel15)
                             .addComponent(jLabel17)
                             .addComponent(grauCicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnModificarCicle, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAfegirCicle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -290,24 +308,21 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(btnAfegirCicle)
                     .addComponent(btnCercarTotsCicle)
                     .addComponent(familiaCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminarCicle)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(nomCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(grauCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btnModificarCicle)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEliminarCicle)
+                        .addComponent(btnModificarCicle))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nomCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(grauCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(188, 188, 188)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cicle", jPanel3);
@@ -1226,51 +1241,26 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarTotsUFActionPerformed
 
     private void btnAfegirCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirCursActionPerformed
-
-        Curs curs = new Curs();
+        Nom nom;
+        Curs_Controller cursc = new Curs_Controller();
         if (nomCurs.getSelectedItem().toString().equals("PRIMER")) {
-            curs.setNom(Curs.Nom.PRIMER);
+            nom = Curs.Nom.PRIMER;
         } else {
-            curs.setNom(Curs.Nom.SEGON);
+            nom = Curs.Nom.SEGON;
         }
-        cc = new Curs_Controller();
-        if (cc.afegir(curs)) {
+        Long idCicle = Long.parseLong(cicleCurs.getText());
+        Cicle_controller cc = new Cicle_controller();
+        Cicle c = cc.cercarCicleId(idCicle);
+        Curs curs = new Curs(nom, c);
+        if (cursc.afegir(curs)) {
             JOptionPane.showMessageDialog(this, "Afegit");
-            System.out.println(curs.getNom());
         } else {
             JOptionPane.showMessageDialog(this, "Error al inserir les dades");
         }
     }//GEN-LAST:event_btnAfegirCursActionPerformed
 
     private void btnCercarTotsCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsCursActionPerformed
-        try {
-            cc = new Curs_Controller();
-            List<Curs> ConsultaTots = cc.cercarTots();
-            String col[] = {"Id", "Nom", "UF"};
-            DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-            for (Curs curs : ConsultaTots) {
-                System.out.println("Trobat");
-                String aux = "";
-                List<UnitatFormativa> luf = curs.getUnidades();
-                System.out.println("Hola!");
-                for (UnitatFormativa col1 : luf) {
-                    aux = col1.getNom() + " ,";
-                    System.out.println("Hola!");
-                }
-                Object[] data = {
-                    curs.getId(),
-                    curs.getNom(),
-                    aux
-                };
-                tableModel.addRow(data);
-            }
-            tablaCurs.setModel(tableModel);
-            if (ConsultaTots.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Sense resultats");
-            }
-        } catch (PersistenceException ex) {
-            JOptionPane.showMessageDialog(this, "Error al recuperar les dades");
-        }
+
     }//GEN-LAST:event_btnCercarTotsCursActionPerformed
 
     private void btnAfegirModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirModulActionPerformed
@@ -1335,15 +1325,60 @@ public class GUI extends javax.swing.JFrame {
     private void btnAfegirCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirCicleActionPerformed
         String nom = nomCicle.getText();
         Long idFamilia = Long.parseLong(familiaCicle.getText());
-        String grau 
+        String grau = (String) grauCicle.getSelectedItem();
         Familia_controller fc = new Familia_controller();
-        Familia f = new Familia(nom);
-        if (fc.afegir(f)) {
+        Familia f = fc.cercarFamiliaId(idFamilia);
+        Cicle_controller cc = new Cicle_controller();
+        Cicle c = new Cicle(nom, grau, f);
+        if (cc.afegir(c)) {
             JOptionPane.showMessageDialog(this, "Afegit");
         } else {
             JOptionPane.showMessageDialog(this, "Error al inserir les dades");
         }
     }//GEN-LAST:event_btnAfegirCicleActionPerformed
+
+    private void btnCercarTotsCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsCicleActionPerformed
+        List<Cicle> ciclos = new ArrayList();
+        Cicle_controller cc = new Cicle_controller();
+        ciclos = cc.cercarTots();
+        for (int i = 0; i < ciclos.size(); i++) {
+            tableCicle.getModel().setValueAt(ciclos.get(i).getNom(), i, 0);
+            tableCicle.getModel().setValueAt(ciclos.get(i).getGrau(), i, 1);
+            tableCicle.getModel().setValueAt(ciclos.get(i).getFamilia().getNom(), i, 2);
+
+        }
+    }//GEN-LAST:event_btnCercarTotsCicleActionPerformed
+
+    private void btnModificarCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCicleActionPerformed
+        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nuevo nombre");
+        String nom = nomCicle.getText();
+        Long idFamilia = Long.parseLong(familiaCicle.getText());
+        String grau = (String) grauCicle.getSelectedItem();
+        Familia_controller fc = new Familia_controller();
+        Familia f = fc.cercarFamiliaId(idFamilia);
+        Cicle_controller cc = new Cicle_controller();
+        Cicle c = cc.cercarCicle(nom);
+        c.setNom(nuevoNombre);
+        c.setGrau(grau);
+        c.setFamilia(f);
+        cc.modificar(c);
+    }//GEN-LAST:event_btnModificarCicleActionPerformed
+
+    private void btnEliminarCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCicleActionPerformed
+        try {
+            String nom = nomCicle.getText();
+            Cicle_controller cc = new Cicle_controller();
+            Cicle c;
+            c = cc.cercarCicle(nom);
+            if (cc.eliminar(c)) {
+                JOptionPane.showMessageDialog(this, "Registre eliminat");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar");
+            }
+        } catch (NoResultException ex) {
+            JOptionPane.showMessageDialog(this, "No s'ha trobat objecte a eliminar");
+        }
+    }//GEN-LAST:event_btnEliminarCicleActionPerformed
 
     /**
      * @param args the command line arguments

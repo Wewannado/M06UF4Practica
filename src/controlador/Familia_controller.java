@@ -28,6 +28,14 @@ public class Familia_controller implements FamiliaI {
         q.setParameter("nomP", nom);
         return (Familia) q.getSingleResult();
     }
+         public Familia cercarFamiliaId(Long id) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT f FROM Familia f "
+                + "WHERE f.idFamilia =:idP");
+        q.setParameter("idP", id);
+        return (Familia) q.getSingleResult();
+    }
 
     @Override
     public boolean afegir(Familia familia) {

@@ -39,11 +39,12 @@ public class Curs implements Serializable {
     public Curs() {
     }
 
-    public Curs(Long id, ArrayList unidades) {
-        this.idCurs = id;
-        this.unidades = unidades;
-
+    public Curs(Nom nom, Cicle cicleCurs) {
+        this.nom = nom;
+        this.cicleCurs = cicleCurs;
     }
+
+   
 
     public Long getId() {
         return idCurs;

@@ -32,15 +32,69 @@ public class Cicle implements Serializable {
     @OneToMany(mappedBy = "cicleMatricula")
     private List<Matricula> matriculas;
 
-    public Cicle(Long idCicle, String nom, String grau, List<Modul> moduls, List<Curs> cursos) {
-        this.idCicle = idCicle;
+    public Cicle(String nom, String grau, Familia familia) {
         this.nom = nom;
         this.grau = grau;
-        this.moduls = moduls;
-        this.cursos = cursos;
+        this.familia = familia;
     }
 
     public Cicle() {
+    }
+
+    public Long getIdCicle() {
+        return idCicle;
+    }
+
+    public void setIdCicle(Long idCicle) {
+        this.idCicle = idCicle;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getGrau() {
+        return grau;
+    }
+
+    public void setGrau(String grau) {
+        this.grau = grau;
+    }
+
+    public Familia getFamilia() {
+        return familia;
+    }
+
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
+    }
+
+    public List<Modul> getModuls() {
+        return moduls;
+    }
+
+    public void setModuls(List<Modul> moduls) {
+        this.moduls = moduls;
+    }
+
+    public List<Curs> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curs> cursos) {
+        this.cursos = cursos;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
     }
 
     @Override
