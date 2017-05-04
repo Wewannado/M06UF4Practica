@@ -9,6 +9,12 @@ import model.Cicle;
 
 public class Cicle_controller implements CicleI {
 
+    /**
+     * Método que nos hace una consulta total en la tabla Cicle y retornamos una
+     * lista de objetos Cicle
+     *
+     * @return
+     */
     @Override
     public List<Cicle> cercarTots() {
         EM_Controller emc = new EM_Controller();
@@ -17,6 +23,13 @@ public class Cicle_controller implements CicleI {
         return (List<Cicle>) q.getResultList();
     }
 
+    /**
+     * Método que le pasamos un nombre por parámetro que realiza una consulta en
+     * la base de datos y retornamos un objeto Cicle
+     *
+     * @param nom
+     * @return
+     */
     public Cicle cercarUF(String nom) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
@@ -26,6 +39,13 @@ public class Cicle_controller implements CicleI {
         return (Cicle) q.getSingleResult();
     }
 
+    /**
+     * Método que le pasamos un objeto cicle por parámetro y lo añadimos en la
+     * base de datos
+     *
+     * @param cicle
+     * @return
+     */
     @Override
     public boolean afegir(Cicle cicle) {
         EM_Controller oem = new EM_Controller();
@@ -40,6 +60,13 @@ public class Cicle_controller implements CicleI {
         return true;
     }
 
+    /**
+     * Método que le pasamos un cicle por parámetro y modificamos el Ciclo
+     * actual por el pasado por parámetro
+     *
+     * @param cicle
+     * @return
+     */
     @Override
     public boolean modificar(Cicle cicle) {
         EM_Controller emc = new EM_Controller();
@@ -57,6 +84,13 @@ public class Cicle_controller implements CicleI {
         return true;
     }
 
+    /**
+     * Método que le pasamos un cicle por parámetro y lo eliminamos de la base
+     * de datos
+     *
+     * @param cicle
+     * @return
+     */
     @Override
     public boolean eliminar(Cicle cicle) {
         EM_Controller emc = new EM_Controller();

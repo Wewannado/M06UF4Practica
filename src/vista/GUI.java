@@ -68,13 +68,13 @@ public class GUI extends javax.swing.JFrame {
         tableCicle = new javax.swing.JTable();
         idCicle = new javax.swing.JTextField();
         nomCicle = new javax.swing.JTextField();
-        grauCicle = new javax.swing.JTextField();
         btnAfegirCicle = new javax.swing.JButton();
         btnCercarTotsCicle = new javax.swing.JButton();
         btnModificarCicle = new javax.swing.JButton();
         btnEliminarCicle = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         familiaCicle = new javax.swing.JTextField();
+        grauCicle = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -243,6 +243,8 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel17.setText("Familia");
 
+        grauCicle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -261,10 +263,10 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(nomCicle, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(familiaCicle)
-                            .addComponent(grauCicle, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(familiaCicle, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel17))
+                            .addComponent(jLabel17)
+                            .addComponent(grauCicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnModificarCicle, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1427,7 +1429,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField cursUnitatFormativa;
     private javax.swing.JTextField dataMatricula;
     private javax.swing.JTextField familiaCicle;
-    private javax.swing.JTextField grauCicle;
+    private javax.swing.JComboBox<String> grauCicle;
     private javax.swing.JTextField horesUF;
     private javax.swing.JTextField idCicle;
     private javax.swing.JTextField idCurs;
