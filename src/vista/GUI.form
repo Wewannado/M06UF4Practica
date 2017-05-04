@@ -238,6 +238,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Afegir Cicle"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAfegirCicleActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnCercarTotsCicle">
                   <Properties>
@@ -550,16 +553,25 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cercar Tots"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCercarTotsFamiliaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnEliminarFamilia">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Eliminar Familia"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarFamiliaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnModificarFamilia">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Modificar Familia"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarFamiliaActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

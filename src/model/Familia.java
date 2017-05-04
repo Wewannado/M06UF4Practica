@@ -24,8 +24,11 @@ public class Familia implements Serializable {
     @OneToMany(mappedBy = "familiaMatricula")
     private List<Matricula> matriculas;
 
-    public Familia(String nom) {        
-        this.nom = nom;       
+    public Familia() {
+    }
+
+    public Familia(String nom) {
+        this.nom = nom;
     }
 
     public Long getIdFamilia() {

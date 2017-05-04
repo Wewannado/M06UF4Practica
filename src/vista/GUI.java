@@ -229,6 +229,11 @@ public class GUI extends javax.swing.JFrame {
         idCicle.setEditable(false);
 
         btnAfegirCicle.setText("Afegir Cicle");
+        btnAfegirCicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfegirCicleActionPerformed(evt);
+            }
+        });
 
         btnCercarTotsCicle.setText("Cercar Tots");
 
@@ -436,10 +441,25 @@ public class GUI extends javax.swing.JFrame {
         });
 
         btnCercarTotsFamilia.setText("Cercar Tots");
+        btnCercarTotsFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarTotsFamiliaActionPerformed(evt);
+            }
+        });
 
         btnEliminarFamilia.setText("Eliminar Familia");
+        btnEliminarFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarFamiliaActionPerformed(evt);
+            }
+        });
 
         btnModificarFamilia.setText("Modificar Familia");
+        btnModificarFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarFamiliaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1268,6 +1288,60 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al inserir les dades");
         }
     }//GEN-LAST:event_btnAfegirFamiliaActionPerformed
+
+    private void btnCercarTotsFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsFamiliaActionPerformed
+        List<Familia> familias = new ArrayList();
+        Familia_controller fc = new Familia_controller();
+        familias = fc.cercarTots();
+        for (int i = 0; i < familias.size(); i++) {
+            tablaFamilia.getModel().setValueAt(familias.get(i).getIdFamilia(), i, 0);
+            tablaFamilia.getModel().setValueAt(familias.get(i).getNom(), i, 1);
+        }
+    }//GEN-LAST:event_btnCercarTotsFamiliaActionPerformed
+
+    private void btnModificarFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarFamiliaActionPerformed
+        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nuevo nombre");
+        String nom = nomFamilia.getText();
+        Familia_controller fc = new Familia_controller();
+        Familia f;
+        f = fc.cercarFamilia(nom);
+        f.setNom(nuevoNombre);
+        if (fc.modificar(f)) {
+            JOptionPane.showMessageDialog(this, "Modificat");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al modificar les dades");
+        }
+
+    }//GEN-LAST:event_btnModificarFamiliaActionPerformed
+
+    private void btnEliminarFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFamiliaActionPerformed
+        try {
+            String nom = nomFamilia.getText();
+            Familia_controller fc = new Familia_controller();
+            Familia f;
+            f = fc.cercarFamilia(nom);
+            if (fc.eliminar(f)) {
+                JOptionPane.showMessageDialog(this, "Registre eliminat");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar");
+            }
+        } catch (NoResultException ex) {
+            JOptionPane.showMessageDialog(this, "No s'ha trobat objecte a eliminar");
+        }
+    }//GEN-LAST:event_btnEliminarFamiliaActionPerformed
+
+    private void btnAfegirCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirCicleActionPerformed
+        String nom = nomCicle.getText();
+        Long idFamilia = Long.parseLong(familiaCicle.getText());
+        String grau 
+        Familia_controller fc = new Familia_controller();
+        Familia f = new Familia(nom);
+        if (fc.afegir(f)) {
+            JOptionPane.showMessageDialog(this, "Afegit");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+        }
+    }//GEN-LAST:event_btnAfegirCicleActionPerformed
 
     /**
      * @param args the command line arguments
