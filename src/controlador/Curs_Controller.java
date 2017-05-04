@@ -24,6 +24,14 @@ public class Curs_Controller implements CursI {
         return (List<Curs>) q.getResultList();
     }
 
+    public Curs cercarPerId(Long id) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT c FROM Curs c WHERE c.idCurs=:idP");
+        q.setParameter("idP", id);
+        return (Curs) q.getSingleResult();
+    }
+
     @Override
     public boolean afegir(Curs curs) {
         EM_Controller oem = new EM_Controller();

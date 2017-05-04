@@ -41,10 +41,13 @@ public class UnitatFormativa implements Serializable {
     @ManyToMany   
     private List<Matricula> matriculas;
 
-    public UnitatFormativa(String nom, int hores) {
+    public UnitatFormativa(String nom, int hores, Curs curs) {
         this.nom = nom;
         this.hores = hores;
+        this.curs = curs;
     }
+
+   
 
     public UnitatFormativa() {
 

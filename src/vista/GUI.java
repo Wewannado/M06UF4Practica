@@ -7,6 +7,7 @@ package vista;
 
 import controlador.Alumne_controller;
 import controlador.Curs_Controller;
+import controlador.Familia_controller;
 import controlador.Modul_controller;
 import controlador.UnitatFormativa_controller;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Alumne;
 import model.Curs;
+import model.Familia;
 import model.Modul;
 import model.UnitatFormativa;
 
@@ -427,6 +429,11 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane8.setViewportView(tablaFamilia);
 
         btnAfegirFamilia.setText("Afegir Familia");
+        btnAfegirFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfegirFamiliaActionPerformed(evt);
+            }
+        });
 
         btnCercarTotsFamilia.setText("Cercar Tots");
 
@@ -1124,8 +1131,13 @@ public class GUI extends javax.swing.JFrame {
     private void btnAfegirUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirUFActionPerformed
         String nomuf = nomUF.getText();
         try {
+            Curs curs;
+            Curs_Controller cc = new Curs_Controller();
             int hores = Integer.parseInt(horesUF.getText());
-            uf = new UnitatFormativa(nomuf, hores);
+            Long idC = Long.parseLong(cursUnitatFormativa.getText());
+            curs = cc.cercarPerId(idC);
+            JOptionPane.showMessageDialog(this, curs);
+            uf = new UnitatFormativa(nomuf, hores, curs);
             ufc = new UnitatFormativa_controller();
             if (ufc.afegir(uf)) {
                 JOptionPane.showMessageDialog(this, "Registre afegit");
@@ -1192,47 +1204,35 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarTotsUFActionPerformed
 
     private void btnAfegirCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirCursActionPerformed
-        String[] ufSeleccionades = listaUFCurs.getSelectedItems();
-        ufc = new UnitatFormativa_controller();
+
         Curs curs = new Curs();
-        List<UnitatFormativa> llistaUF = new ArrayList<>();
-        for (String ufSeleccionade : ufSeleccionades) {
-            UnitatFormativa uf = ufc.cercarUF(ufSeleccionade);
-            llistaUF.add(uf);
-        }
-        System.out.println("La llista de uf es:"+llistaUF.size());
-        curs.setUnidades(llistaUF);
-        if(nomCurs.getSelectedItem().toString().equals("PRIMER")){
+        if (nomCurs.getSelectedItem().toString().equals("PRIMER")) {
             curs.setNom(Curs.Nom.PRIMER);
-        }
-        else{
+        } else {
             curs.setNom(Curs.Nom.SEGON);
         }
         cc = new Curs_Controller();
-        if(cc.afegir(curs)){
-             JOptionPane.showMessageDialog(this, "Afegit");
-             System.out.println(curs.getNom());
+        if (cc.afegir(curs)) {
+            JOptionPane.showMessageDialog(this, "Afegit");
+            System.out.println(curs.getNom());
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
         }
-        else{
-             JOptionPane.showMessageDialog(this, "Error al inserir les dades");
-        }
-        
-
     }//GEN-LAST:event_btnAfegirCursActionPerformed
 
     private void btnCercarTotsCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsCursActionPerformed
-       try {
+        try {
             cc = new Curs_Controller();
             List<Curs> ConsultaTots = cc.cercarTots();
             String col[] = {"Id", "Nom", "UF"};
             DefaultTableModel tableModel = new DefaultTableModel(col, 0);
             for (Curs curs : ConsultaTots) {
                 System.out.println("Trobat");
-                String aux="";
-                List <UnitatFormativa> luf = curs.getUnidades();
+                String aux = "";
+                List<UnitatFormativa> luf = curs.getUnidades();
                 System.out.println("Hola!");
                 for (UnitatFormativa col1 : luf) {
-                    aux=col1.getNom()+" ,";
+                    aux = col1.getNom() + " ,";
                     System.out.println("Hola!");
                 }
                 Object[] data = {
@@ -1253,17 +1253,21 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnAfegirModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirModulActionPerformed
         mc = new Modul_controller();
-        String[] ufSeleccionades = listaUFModul.getSelectedItems();
-        List<UnitatFormativa> listauf = new ArrayList();
-        for (String ufSeleccionade : ufSeleccionades) 
-        {
-            UnitatFormativa uf = ufc.cercarUF(ufSeleccionade);
-            listauf.add(uf);
-        }
         String nombre = nomModul.getText();
-        modul = new Modul(nombre,listauf);
+        //modul = new Modul(nombre);
         mc.afegir(modul);
     }//GEN-LAST:event_btnAfegirModulActionPerformed
+
+    private void btnAfegirFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFamiliaActionPerformed
+        String nom = nomFamilia.getText();
+        Familia_controller fc = new Familia_controller();
+        Familia f = new Familia(nom);
+        if (fc.afegir(f)) {
+            JOptionPane.showMessageDialog(this, "Afegit");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+        }
+    }//GEN-LAST:event_btnAfegirFamiliaActionPerformed
 
     /**
      * @param args the command line arguments
