@@ -9,6 +9,7 @@ import controlador.Alumne_controller;
 import controlador.Cicle_controller;
 import controlador.Curs_Controller;
 import controlador.Familia_controller;
+import controlador.Matricula_Controller;
 import controlador.Modul_controller;
 import controlador.UnitatFormativa_controller;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import model.Cicle;
 import model.Curs;
 import model.Curs.Nom;
 import model.Familia;
+import model.Matricula;
 import model.Modul;
 import model.UnitatFormativa;
 
@@ -1181,26 +1183,32 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarAlumneActionPerformed
 
     private void btnAfegirUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirUFActionPerformed
-//        String nomuf = nomUF.getText();
-//        try {
-//            Curs curs;
-//            Curs_Controller cc = new Curs_Controller();
-//            int hores = Integer.parseInt(horesUF.getText());
-//            Long idC = Long.parseLong(cursUnitatFormativa.getText());
-//            curs = cc.cercarPerId(idC);
-//            JOptionPane.showMessageDialog(this, curs);
-//            uf = new UnitatFormativa(nomuf, hores, curs);
-//            ufc = new UnitatFormativa_controller();
-//            if (ufc.afegir(uf)) {
-//                JOptionPane.showMessageDialog(this, "Registre afegit");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Error al afegir");
-//            }
-//        } catch (NumberFormatException ex) {
-//            JOptionPane.showMessageDialog(this, "El nombre d'hores ha de ser numeric");
-//        } catch (PersistenceException ex) {
-//            JOptionPane.showMessageDialog(this, "Error. Element duplicat");
-//        }
+
+        try {
+            String nomuf = nomUF.getText();
+            Curs_Controller cc = new Curs_Controller();
+            Modul_controller mc = new Modul_controller();
+            Matricula_Controller matC = new Matricula_Controller();
+            UnitatFormativa_controller ufc = new UnitatFormativa_controller();
+            int hores = Integer.parseInt(horesUF.getText());
+            Long idC = Long.parseLong(cursUnitatFormativa.getText());
+            Long idModul = Long.parseLong(moduloUnitatFormativa.getText());
+            Long idMatricula = Long.parseLong(matriculaUnitatFormativa.getText());
+            Curs curs = cc.cercarPerId(idC);
+            Modul m = mc.cercarModulId(idModul);
+            Matricula mat = matC.cercarMatriculaId(idMatricula);
+            UnitatFormativa uf = new UnitatFormativa();
+            
+            if (ufc.afegir(uf)) {
+                JOptionPane.showMessageDialog(this, "Registre afegit");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al afegir");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El nombre d'hores ha de ser numeric");
+        } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(this, "Error. Element duplicat");
+        }
     }//GEN-LAST:event_btnAfegirUFActionPerformed
 
     private void btnEliminarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUFActionPerformed

@@ -14,6 +14,15 @@ import model.UnitatFormativa;
 
 public class Matricula_Controller implements MatriculaI {
 
+    public Matricula cercarMatriculaId(Long id) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT m FROM Matricula m "
+                + "WHERE m.idMatricula =:idP");
+        q.setParameter("idP", id);
+        return (Matricula) q.getResultList();
+    }
+
     @Override
     public List<Matricula> cercarPerUf(UnitatFormativa uf) {
         EM_Controller emc = new EM_Controller();

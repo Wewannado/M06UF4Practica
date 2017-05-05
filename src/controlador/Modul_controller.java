@@ -35,6 +35,14 @@ public class Modul_controller implements ModulI {
         q.setParameter("nomP", nom);
         return (Modul) q.getSingleResult();
     }
+       public Modul cercarModulId(Long id) {
+        EM_Controller emc = new EM_Controller();
+        EntityManager em = emc.getEntityManager();
+        Query q = em.createQuery("SELECT m FROM Modul m "
+                + "WHERE m.idModul =:idP");
+        q.setParameter("idP", id);
+        return (Modul) q.getSingleResult();
+    }
 
     @Override
     public boolean afegir(Modul clase) {
