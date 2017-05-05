@@ -30,7 +30,7 @@ public class Curs implements Serializable {
 
         PRIMER, SEGON
     }
-    
+
     private Nom nom;
     @ManyToOne
     @JoinColumn(name = "idCicle")
@@ -44,10 +44,16 @@ public class Curs implements Serializable {
         this.cicleCurs = cicleCurs;
     }
 
-   
-
     public Long getId() {
         return idCurs;
+    }
+
+    public Cicle getCicleCurs() {
+        return cicleCurs;
+    }
+
+    public void setCicleCurs(Cicle cicleCurs) {
+        this.cicleCurs = cicleCurs;
     }
 
     public void setId(Long id) {
@@ -91,8 +97,5 @@ public class Curs implements Serializable {
     public void setNom(Nom nom) {
         this.nom = nom;
     }
-    
-    
-    
 
 }

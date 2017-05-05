@@ -348,8 +348,18 @@ public class GUI extends javax.swing.JFrame {
         });
 
         btnEliminarCurs.setText("Eliminar Curs");
+        btnEliminarCurs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCursActionPerformed(evt);
+            }
+        });
 
         btnModificarCurs.setText("Modificar Curs");
+        btnModificarCurs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarCursActionPerformed(evt);
+            }
+        });
 
         tablaCurs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1260,7 +1270,14 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAfegirCursActionPerformed
 
     private void btnCercarTotsCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsCursActionPerformed
-
+        List<Curs> cursos = new ArrayList();
+        Curs_Controller cursc = new Curs_Controller();
+        cursos = cursc.cercarTots();
+        for (int i = 0; i < cursos.size(); i++) {
+            tablaCurs.getModel().setValueAt(cursos.get(i).getId(), i, 0);
+            tablaCurs.getModel().setValueAt(cursos.get(i).getNom(), i, 1);
+            tablaCurs.getModel().setValueAt(cursos.get(i).getCicleCurs().getNom(), i, 2);
+        }
     }//GEN-LAST:event_btnCercarTotsCursActionPerformed
 
     private void btnAfegirModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirModulActionPerformed
@@ -1379,6 +1396,33 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No s'ha trobat objecte a eliminar");
         }
     }//GEN-LAST:event_btnEliminarCicleActionPerformed
+
+    private void btnEliminarCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCursActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarCursActionPerformed
+
+    private void btnModificarCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCursActionPerformed
+        String nuevaId = JOptionPane.showInputDialog(this, "Inserta la id de curso a buscar");
+        Long idCicle = Long.parseLong(cicleCurs.getText());
+        Nom nom;
+        Cicle_controller cc = new Cicle_controller();
+        Curs_Controller cursc = new Curs_Controller();
+        Curs curso = cursc.cercarPerId(Long.parseLong(nuevaId));
+        Cicle ciclo = cc.cercarCicleId(idCicle);
+        if (nomCurs.getSelectedItem().toString().equals("PRIMER")) {
+            nom = Curs.Nom.PRIMER;
+        } else {
+            nom = Curs.Nom.SEGON;
+        }
+        curso.setNom(nom);
+        curso.setCicleCurs(ciclo);
+
+        if (cursc.modificar(curso)) {
+            JOptionPane.showMessageDialog(this, "Registre modificat");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al modificar");
+        }
+    }//GEN-LAST:event_btnModificarCursActionPerformed
 
     /**
      * @param args the command line arguments
