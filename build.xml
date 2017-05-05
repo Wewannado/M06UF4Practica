@@ -2,41 +2,48 @@
 <project name="M06UF4Practica" default="default" basedir=".">
     <description>Builds, tests, and runs the project M06UF4Practica.</description>
     <import file="nbproject/build-impl.xml"/>
+    <property name="workingDirectory" location="TeamDeploy"/>
 	
     <!--After a build, generates JavaDoc, and pack all the files into a deployment zip-->
-    <target name="-post-jar" depends="copiaJavadoc,copiaReadme,copiaJar,copiaLibrerias">   	
+    <target name="-post-jar" depends="copiaJavadoc,copiaReadme,copiaJar,copiaLibrerias,generacarpetaLOG">   	
         <zip destfile="${ant.project.name}.zip"
-         basedir="${work.dir}/"
+         basedir="${workingDirectory}/"
          update="true"/>  
     </target>  
 
+<!--Creates the LOG directory, inside working directory-->
+    <target name="generacarpetaLOG">
+        <mkdir dir="${workingDirectory}/log/"/>
+    </target> 
+
+
     <!--Copy the Libraries to lib directory, inside working directory-->
     <target name="copiaLibrerias">
-        <copy todir="${work.dir}/lib/" failonerror="false">
+        <copy todir="${workingDirectory}/lib/" failonerror="false">
             <fileset dir="libraries"/>
         </copy>	
     </target> 
     
     <!--Copy the Jar to working directory.-->
     <target name="copiaJar">
-        <copy file="${dist.dir}/${ant.project.name}.jar" tofile="${work.dir}/${ant.project.name}.jar"/>	
+        <copy file="${dist.dir}/${ant.project.name}.jar" tofile="${workingDirectory}/${ant.project.name}.jar"/>	
     </target> 
     
     <!--Copy the Javadoc to documentacio directory.-->
     <target name="copiaJavadoc" depends="-javadoc-build">    
-        <copy todir="${work.dir}/documentacio/javadoc" failonerror="false">
+        <copy todir="${workingDirectory}/documentacio/javadoc" failonerror="false">
             <fileset dir="${dist.dir}/javadoc"/>
         </copy>	
     </target> 
     
     <!--Copy the Readme.txt to documentacio directory.-->
     <target name="copiaReadme">
-        <copy file="Readme.txt" tofile="${work.dir}/documentacio/Readme.txt"/>	
+        <copy file="Readme.txt" tofile="${workingDirectory}/documentacio/Readme.txt"/>	
     </target>
 	
     <!--Removes all contents in the working directory after a clean.-->
     <target name="-post-clean">
-        <delete dir="${work.dir}"/>
+        <delete dir="${workingDirectory}"/>
     </target>  
 	
 </project>
