@@ -38,15 +38,20 @@ public class UnitatFormativa implements Serializable {
     @JoinColumn(name = "idModul")
     private Modul modul;
 
-    @ManyToMany   
-    private List<Matricula> matriculas;
-
-   
-
-   
+    @ManyToOne
+    @JoinColumn(name = "idMatricula")
+    private Matricula matricula;
 
     public UnitatFormativa() {
 
+    }
+
+    public UnitatFormativa(String nom, int hores, Curs curs, Modul modul, Matricula matricula) {
+        this.nom = nom;
+        this.hores = hores;
+        this.curs = curs;
+        this.modul = modul;
+        this.matricula = matricula;
     }
 
     public Long getId() {

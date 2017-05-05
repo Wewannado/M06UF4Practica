@@ -68,8 +68,9 @@ public class GUI extends javax.swing.JFrame {
         btnModificarCicle = new javax.swing.JButton();
         btnEliminarCicle = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        familiaCicle = new javax.swing.JTextField();
         grauCicle = new javax.swing.JComboBox<>();
+        jComboBoxCicleFamilia = new javax.swing.JComboBox<>();
+        jButtonCicleCargarFamilias = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -105,8 +106,9 @@ public class GUI extends javax.swing.JFrame {
         btnModificarModul = new javax.swing.JButton();
         btnEliminarModul = new javax.swing.JButton();
         btnAfegirModul = new javax.swing.JButton();
-        cicloModulo = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
+        jComboBoxModuloCiclo = new javax.swing.JComboBox<>();
+        jButtonCargarCiclos = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -168,11 +170,14 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tableMatricula = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
-        boxModalitatMatricula1 = new javax.swing.JComboBox<>();
+        boxCurs = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        boxModalitatMatricula2 = new javax.swing.JComboBox<>();
+        boxFamilia = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
-        boxModalitatMatricula3 = new javax.swing.JComboBox<>();
+        boxCicle = new javax.swing.JComboBox<>();
+        jButtonMatCargarCiclos = new javax.swing.JButton();
+        jButtonMatCargarCursos = new javax.swing.JButton();
+        jButtonMatCargarFamilias = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -255,6 +260,13 @@ public class GUI extends javax.swing.JFrame {
 
         grauCicle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medio", "Superior" }));
 
+        jButtonCicleCargarFamilias.setText("Cargar familias");
+        jButtonCicleCargarFamilias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCicleCargarFamiliasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -273,14 +285,20 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(nomCicle, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(familiaCicle, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(jLabel15)
                             .addComponent(jLabel17)
-                            .addComponent(grauCicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnModificarCicle, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAfegirCicle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(grauCicle, 0, 100, Short.MAX_VALUE)
+                            .addComponent(jComboBoxCicleFamilia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCicleCargarFamilias)
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnModificarCicle))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAfegirCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(75, 75, 75)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnEliminarCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,7 +317,8 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(idCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAfegirCicle)
                     .addComponent(btnCercarTotsCicle)
-                    .addComponent(familiaCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxCicleFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCicleCargarFamilias))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -580,6 +599,8 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel30.setText("Ciclo");
 
+        jButtonCargarCiclos.setText("Cargar ciclos");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -593,21 +614,26 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel30)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cicloModulo)
-                            .addComponent(jLabel24)
-                            .addComponent(nomModul)
-                            .addComponent(jLabel29)
-                            .addComponent(idModul, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                        .addGap(306, 306, 306)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jComboBoxModuloCiclo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomModul, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idModul, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCercarTotsModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModificarModul))
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminarModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAfegirModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(122, Short.MAX_VALUE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(306, 306, 306)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCercarTotsModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnModificarModul))
+                                .addGap(45, 45, 45)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEliminarModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAfegirModul, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jButtonCargarCiclos)))))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -632,11 +658,13 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnModificarModul)
                             .addComponent(btnAfegirModul))))
-                .addGap(18, 18, 18)
-                .addComponent(cicloModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxModuloCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCargarCiclos))
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modul", jPanel7);
@@ -937,9 +965,9 @@ public class GUI extends javax.swing.JFrame {
 
         btnModificarMatricula.setText("Modificar Matricula");
 
-        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Curs complet", "Uf soltes" }));
 
-        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50", "100" }));
 
         idMatricula.setEditable(false);
 
@@ -960,15 +988,30 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel27.setText("Data");
 
-        boxModalitatMatricula1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel25.setText("Cicle");
-
-        boxModalitatMatricula2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel26.setText("Familia");
 
-        boxModalitatMatricula3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jButtonMatCargarCiclos.setText("Cargar ciclos");
+        jButtonMatCargarCiclos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMatCargarCiclosActionPerformed(evt);
+            }
+        });
+
+        jButtonMatCargarCursos.setText("Cargar cursos");
+        jButtonMatCargarCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMatCargarCursosActionPerformed(evt);
+            }
+        });
+
+        jButtonMatCargarFamilias.setText("Cargar familias");
+        jButtonMatCargarFamilias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMatCargarFamiliasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -988,18 +1031,22 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(alumneMatricula, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jLabel27)
                             .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel25)
-                                    .addComponent(boxModalitatMatricula3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEliminarMatricula)
-                                .addGap(231, 231, 231))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                                .addComponent(jLabel25)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE))
+                                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                                .addComponent(boxCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButtonMatCargarCiclos)
+                                                .addGap(70, 70, 70)))
+                                        .addComponent(btnEliminarMatricula)
+                                        .addGap(231, 231, 231))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel11)
@@ -1017,12 +1064,20 @@ public class GUI extends javax.swing.JFrame {
                                             .addComponent(btnCercarTotsMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(btnAfegirMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(btnModificarMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnCercarNIFMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGap(149, 159, Short.MAX_VALUE))))
+                                            .addComponent(btnCercarNIFMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(149, 160, Short.MAX_VALUE))))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(203, 203, 203)
+                                .addComponent(jLabel26)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(boxModalitatMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(boxModalitatMatricula2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxCurs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButtonMatCargarCursos)
+                        .addGap(71, 71, 71)
+                        .addComponent(boxFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButtonMatCargarFamilias)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel6Layout.setVerticalGroup(
@@ -1053,7 +1108,8 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dataMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(boxModalitatMatricula3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(boxCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonMatCargarCiclos)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1075,13 +1131,15 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(btnEliminarMatricula)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxModalitatMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxModalitatMatricula2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(boxCurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonMatCargarCursos)
+                    .addComponent(jButtonMatCargarFamilias))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(205, Short.MAX_VALUE))
         );
@@ -1197,8 +1255,7 @@ public class GUI extends javax.swing.JFrame {
             Curs curs = cc.cercarPerId(idC);
             Modul m = mc.cercarModulId(idModul);
             Matricula mat = matC.cercarMatriculaId(idMatricula);
-            UnitatFormativa uf = new UnitatFormativa();
-            
+            UnitatFormativa uf = new UnitatFormativa(nomuf, hores, curs, m, mat);
             if (ufc.afegir(uf)) {
                 JOptionPane.showMessageDialog(this, "Registre afegit");
             } else {
@@ -1294,17 +1351,17 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarTotsCursActionPerformed
 
     private void btnAfegirModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirModulActionPerformed
-        Modul_controller mc = new Modul_controller();
-        String nombre = nomModul.getText();
-        Long idCicle = Long.parseLong(cicloModulo.getText());
-        Cicle_controller cc = new Cicle_controller();
-        Cicle c = cc.cercarCicleId(idCicle);
-        Modul modul = new Modul(nombre, c);
-        if (mc.afegir(modul)) {
-            JOptionPane.showMessageDialog(this, "Afegit");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
-        }
+//        Modul_controller mc = new Modul_controller();
+//        String nombre = nomModul.getText();
+//        Long idCicle = Long.parseLong(cicloModulo.getText());
+//        Cicle_controller cc = new Cicle_controller();
+//        Cicle c = cc.cercarCicleId(idCicle);
+//        Modul modul = new Modul(nombre, c);
+//        if (mc.afegir(modul)) {
+//            JOptionPane.showMessageDialog(this, "Afegit");
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+//        }
     }//GEN-LAST:event_btnAfegirModulActionPerformed
 
     private void btnAfegirFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFamiliaActionPerformed
@@ -1361,10 +1418,10 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnAfegirCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirCicleActionPerformed
         String nom = nomCicle.getText();
-        Long idFamilia = Long.parseLong(familiaCicle.getText());
+        String nomFamilia = (String) jComboBoxCicleFamilia.getSelectedItem();
         String grau = (String) grauCicle.getSelectedItem();
         Familia_controller fc = new Familia_controller();
-        Familia f = fc.cercarFamiliaId(idFamilia);
+        Familia f = fc.cercarFamilia(nomFamilia);
         Cicle_controller cc = new Cicle_controller();
         Cicle c = new Cicle(nom, grau, f);
         if (cc.afegir(c)) {
@@ -1389,10 +1446,10 @@ public class GUI extends javax.swing.JFrame {
     private void btnModificarCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCicleActionPerformed
         String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nuevo nombre");
         String nom = nomCicle.getText();
-        Long idFamilia = Long.parseLong(familiaCicle.getText());
+        String nomFamilia = (String) jComboBoxCicleFamilia.getSelectedItem();
         String grau = (String) grauCicle.getSelectedItem();
         Familia_controller fc = new Familia_controller();
-        Familia f = fc.cercarFamiliaId(idFamilia);
+        Familia f = fc.cercarFamilia(nomFamilia);
         Cicle_controller cc = new Cicle_controller();
         Cicle c = cc.cercarCicle(nom);
         c.setNom(nuevoNombre);
@@ -1452,20 +1509,20 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarCursActionPerformed
 
     private void btnModificarModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarModulActionPerformed
-        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta un nuevo nombre");
-        String nom = nomModul.getText();
-        Long idCicle = Long.parseLong(cicloModulo.getText());
-        Modul_controller mc = new Modul_controller();
-        Modul m = mc.cercarModul(nom);
-        m.setNom(nuevoNombre);
-        Cicle_controller cc = new Cicle_controller();
-        Cicle c = cc.cercarCicleId(idCicle);
-        m.setCicleModul(c);
-        if (mc.modificar(m)) {
-            JOptionPane.showMessageDialog(this, "Registre modificat");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al modificar");
-        }
+//        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta un nuevo nombre");
+//        String nom = nomModul.getText();
+//        Long idCicle = Long.parseLong(cicloModulo.getText());
+//        Modul_controller mc = new Modul_controller();
+//        Modul m = mc.cercarModul(nom);
+//        m.setNom(nuevoNombre);
+//        Cicle_controller cc = new Cicle_controller();
+//        Cicle c = cc.cercarCicleId(idCicle);
+//        m.setCicleModul(c);
+//        if (mc.modificar(m)) {
+//            JOptionPane.showMessageDialog(this, "Registre modificat");
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Error al modificar");
+//        }
     }//GEN-LAST:event_btnModificarModulActionPerformed
 
     private void btnCercarTotsModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsModulActionPerformed
@@ -1489,6 +1546,59 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al eliminar");
         }
     }//GEN-LAST:event_btnEliminarModulActionPerformed
+
+    private void jButtonMatCargarCiclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMatCargarCiclosActionPerformed
+        //MATRICULA
+        Cicle_controller cc = new Cicle_controller();
+        List<Cicle> ciclos = cc.cercarTots();
+        if (ciclos.size() > 0) {
+            boxCicle.removeAllItems();
+            for (Cicle ciclo : ciclos) {
+                boxCicle.addItem(ciclo.getNom());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay ciclos");
+        }
+    }//GEN-LAST:event_jButtonMatCargarCiclosActionPerformed
+
+    private void jButtonMatCargarCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMatCargarCursosActionPerformed
+        Curs_Controller cu = new Curs_Controller();
+        List<Curs> cursos = cu.cercarTots();
+        if (cursos.size() > 0) {
+            boxCurs.removeAllItems();
+            for (Curs curso : cursos) {
+                boxCurs.addItem(curso.getNom().name());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay cursos");
+        }
+    }//GEN-LAST:event_jButtonMatCargarCursosActionPerformed
+
+    private void jButtonCicleCargarFamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCicleCargarFamiliasActionPerformed
+        Familia_controller famC = new Familia_controller();
+        List<Familia> familias = famC.cercarTots();
+        if (familias.size() > 0) {
+            jComboBoxCicleFamilia.removeAllItems();
+            for (Familia familia : familias) {
+                jComboBoxCicleFamilia.addItem(familia.getNom());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay familias");
+        }
+    }//GEN-LAST:event_jButtonCicleCargarFamiliasActionPerformed
+
+    private void jButtonMatCargarFamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMatCargarFamiliasActionPerformed
+        Familia_controller famC = new Familia_controller();
+        List<Familia> familias = famC.cercarTots();
+        if (familias.size() > 0) {
+            boxFamilia.removeAllItems();
+            for (Familia familia : familias) {
+                boxFamilia.addItem(familia.getNom());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay familias");
+        }
+    }//GEN-LAST:event_jButtonMatCargarFamiliasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1522,11 +1632,11 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alumneMatricula;
     private javax.swing.JButton bnCercarNifAlumne;
+    private javax.swing.JComboBox<String> boxCicle;
+    private javax.swing.JComboBox<String> boxCurs;
     private javax.swing.JComboBox<String> boxDescompteMatricula;
+    private javax.swing.JComboBox<String> boxFamilia;
     private javax.swing.JComboBox<String> boxModalitatMatricula;
-    private javax.swing.JComboBox<String> boxModalitatMatricula1;
-    private javax.swing.JComboBox<String> boxModalitatMatricula2;
-    private javax.swing.JComboBox<String> boxModalitatMatricula3;
     private javax.swing.JButton btnAfegirAlumne;
     private javax.swing.JButton btnAfegirCicle;
     private javax.swing.JButton btnAfegirCurs;
@@ -1562,12 +1672,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarModul;
     private javax.swing.JButton btnModificarUF;
     private javax.swing.JTextField cicleCurs;
-    private javax.swing.JTextField cicloModulo;
     private javax.swing.JTextField cognomAlumne;
     private javax.swing.JTextField correuAlumne;
     private javax.swing.JTextField cursUnitatFormativa;
     private javax.swing.JTextField dataMatricula;
-    private javax.swing.JTextField familiaCicle;
     private javax.swing.JComboBox<String> grauCicle;
     private javax.swing.JTextField horesUF;
     private javax.swing.JTextField idCicle;
@@ -1576,6 +1684,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField idMatricula;
     private javax.swing.JTextField idModul;
     private javax.swing.JTextField idUF;
+    private javax.swing.JButton jButtonCargarCiclos;
+    private javax.swing.JButton jButtonCicleCargarFamilias;
+    private javax.swing.JButton jButtonMatCargarCiclos;
+    private javax.swing.JButton jButtonMatCargarCursos;
+    private javax.swing.JButton jButtonMatCargarFamilias;
+    private javax.swing.JComboBox<String> jComboBoxCicleFamilia;
+    private javax.swing.JComboBox<String> jComboBoxModuloCiclo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

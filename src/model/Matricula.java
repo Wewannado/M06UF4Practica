@@ -30,7 +30,7 @@ public class Matricula implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
 
-    @ManyToMany(mappedBy = "matriculas")
+    @OneToMany(mappedBy = "matricula")
     private List<UnitatFormativa> ufs;
 
     private String modalitat;
