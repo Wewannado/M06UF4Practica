@@ -24,9 +24,9 @@ public class Modul implements Serializable {
     public Modul() {
     }
 
-    public Modul(String nom, List<UnitatFormativa> uF) {
+    public Modul(String nom, Cicle cicleModul) {
         this.nom = nom;
-        this.uF = uF;
+        this.cicleModul = cicleModul;
     }
 
     private static final long serialVersionUID = 1L;
@@ -105,7 +105,5 @@ public class Modul implements Serializable {
     public void setuF(List<UnitatFormativa> uF) {
         this.uF = uF;
     }
-    
-    
 
 }

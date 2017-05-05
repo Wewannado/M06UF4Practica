@@ -27,7 +27,7 @@ public class Modul_controller implements ModulI {
         return (List<Modul>) q.getResultList();
     }
 
-    public Modul cercarUF(String nom) {
+    public Modul cercarModul(String nom) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT m FROM Modul m "
