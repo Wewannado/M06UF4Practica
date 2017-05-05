@@ -8,10 +8,12 @@ import javax.persistence.Query;
 import model.Familia;
 
 public class Familia_controller implements FamiliaI {
+
     /**
-     * 
-     * 
-     * @return 
+     * Método en el cual hacemos una búsqueda total y nos retorna una lista de
+     * familias
+     *
+     * @return
      */
     @Override
     public List<Familia> cercarTots() {
@@ -20,7 +22,15 @@ public class Familia_controller implements FamiliaI {
         Query q = em.createQuery("SELECT f FROM Familia f ");
         return (List<Familia>) q.getResultList();
     }
-     public Familia cercarFamilia(String nom) {
+
+    /**
+     * Método que le pasamos un nombre por parámetro y hacemos una busqueda por
+     * ese nombre especifico
+     *
+     * @param nom
+     * @return
+     */
+    public Familia cercarFamilia(String nom) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT f FROM Familia f "
@@ -28,7 +38,15 @@ public class Familia_controller implements FamiliaI {
         q.setParameter("nomP", nom);
         return (Familia) q.getSingleResult();
     }
-         public Familia cercarFamiliaId(Long id) {
+
+    /**
+     * Método que buscamos una familia a raiz de su id, devolvemos un objeto
+     * Familia
+     *
+     * @param id
+     * @return
+     */
+    public Familia cercarFamiliaId(Long id) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT f FROM Familia f "
@@ -37,6 +55,12 @@ public class Familia_controller implements FamiliaI {
         return (Familia) q.getSingleResult();
     }
 
+    /**
+     * Con este método añadimos una familia a la base de datos
+     *
+     * @param familia
+     * @return
+     */
     @Override
     public boolean afegir(Familia familia) {
         EM_Controller oem = new EM_Controller();
@@ -51,6 +75,13 @@ public class Familia_controller implements FamiliaI {
         return true;
     }
 
+    /**
+     * Recibimos un objeto familia y le hacemos la sobreescritura comparandolo
+     * con el de la base de datos
+     *
+     * @param familia
+     * @return
+     */
     @Override
     public boolean modificar(Familia familia) {
         EM_Controller emc = new EM_Controller();
@@ -67,6 +98,13 @@ public class Familia_controller implements FamiliaI {
         return true;
     }
 
+    /**
+     * Con este método realizamos un borrado de una familia que esté en la base
+     * de datos
+     *
+     * @param familia
+     * @return
+     */
     @Override
     public boolean eliminar(Familia familia) {
         EM_Controller emc = new EM_Controller();
