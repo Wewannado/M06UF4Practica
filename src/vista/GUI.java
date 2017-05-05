@@ -563,6 +563,11 @@ public class GUI extends javax.swing.JFrame {
         });
 
         btnEliminarModul.setText("Eliminar Modul");
+        btnEliminarModul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarModulActionPerformed(evt);
+            }
+        });
 
         btnAfegirModul.setText("Afegir Modul");
         btnAfegirModul.addActionListener(new java.awt.event.ActionListener() {
@@ -1456,8 +1461,26 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarModulActionPerformed
 
     private void btnCercarTotsModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsModulActionPerformed
-        
+        List<Modul> modulos = new ArrayList();
+        Modul_controller mc = new Modul_controller();
+        modulos = mc.cercarTots();
+        for (int i = 0; i < modulos.size(); i++) {
+            tablaModul.getModel().setValueAt(modulos.get(i).getId(), i, 0);
+            tablaModul.getModel().setValueAt(modulos.get(i).getNom(), i, 1);
+            tablaModul.getModel().setValueAt(modulos.get(i).getCicleModul().getNom(), i, 2);
+        }
     }//GEN-LAST:event_btnCercarTotsModulActionPerformed
+
+    private void btnEliminarModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarModulActionPerformed
+        String nom = nomModul.getText();
+        Modul_controller mc = new Modul_controller();
+        Modul m = mc.cercarModul(nom);
+        if (mc.eliminar(m)) {
+            JOptionPane.showMessageDialog(this, "Registre eliminat");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar");
+        }
+    }//GEN-LAST:event_btnEliminarModulActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1479,7 +1502,7 @@ public class GUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
