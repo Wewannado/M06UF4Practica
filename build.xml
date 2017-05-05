@@ -8,7 +8,8 @@
     <target name="-post-jar" depends="copiaJavadoc,copiaReadme,copiaJar,copiaLibrerias,generacarpetaLOG">   	
         <zip destfile="${ant.project.name}.zip"
          basedir="${workingDirectory}/"
-         update="true"/>  
+         update="true"/> 
+        <delete dir="${workingDirectory}"/> 
     </target>  
 
 <!--Creates the LOG directory, inside working directory-->
@@ -26,7 +27,7 @@
     
     <!--Copy the Jar to working directory.-->
     <target name="copiaJar">
-        <copy file="${dist.dir}/${ant.project.name}.jar" tofile="${workingDirectory}/${ant.project.name}.jar"/>	
+        <copy file="${dist.dir}/${ant.project.name}.jar" tofile="${workingDirectory}/${ant.project.name}.jar"/>  
     </target> 
     
     <!--Copy the Javadoc to documentacio directory.-->
@@ -44,6 +45,7 @@
     <!--Removes all contents in the working directory after a clean.-->
     <target name="-post-clean">
         <delete dir="${workingDirectory}"/>
+        <delete dir="${dist.dir}"/>
     </target>  
 	
 </project>
