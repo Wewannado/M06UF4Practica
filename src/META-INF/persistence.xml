@@ -10,6 +10,7 @@
       <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="hibernate.show_sql" value="false"/> 
     </properties>
   </persistence-unit>
   
@@ -23,6 +24,7 @@
       <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="hibernate.show_sql" value="false"/> 
     </properties>
   </persistence-unit>
 </persistence>

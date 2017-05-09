@@ -12,15 +12,18 @@ import controlador.Familia_controller;
 import controlador.Matricula_Controller;
 import controlador.Modul_controller;
 import controlador.UnitatFormativa_controller;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 import model.Alumne;
 import model.Cicle;
 import model.Curs;
@@ -35,9 +38,25 @@ import model.UnitatFormativa;
  * @author ALUMNEDAM
  */
 public class GUI extends javax.swing.JFrame {
+    
+    private static final String INSERT_OK = "Inserció feta correctament";
+    private static final String INSERT_FAIL = "Error al realitzar la inserció";
+    private static final String MODIFICATION_OK = "Modificació feta correctament";
+    private static final String MODIFICATION_FAIL = "Error al realitzar la modificació.";
+    private static final String DELETE_OK = "Eliminació feta correctament";
+    private static final String DELETE_FAILED = "Error al realitzar la eliminació";
+    
+    private static final String NOT_FOUND = "No s'ha trobat l'objecte";
 
     public GUI() {
         initComponents();
+        try {
+            LogManager.getLogManager().readConfiguration(new FileInputStream("log.properties"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | SecurityException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -56,6 +75,17 @@ public class GUI extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        idFamilia = new javax.swing.JTextField();
+        nomFamilia = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tablaFamilia = new javax.swing.JTable();
+        btnAfegirFamilia = new javax.swing.JButton();
+        btnCercarTotsFamilia = new javax.swing.JButton();
+        btnEliminarFamilia = new javax.swing.JButton();
+        btnModificarFamilia = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -69,8 +99,8 @@ public class GUI extends javax.swing.JFrame {
         btnModificarCicle = new javax.swing.JButton();
         btnEliminarCicle = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        grauCicle = new javax.swing.JComboBox<>();
-        jComboBoxCicleFamilia = new javax.swing.JComboBox<>();
+        grauCicle = new javax.swing.JComboBox<String>();
+        jComboBoxCicleFamilia = new javax.swing.JComboBox<String>();
         jButtonCicleCargarFamilias = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -84,19 +114,8 @@ public class GUI extends javax.swing.JFrame {
         tablaCurs = new javax.swing.JTable();
         nomCurs = new javax.swing.JComboBox();
         jLabel28 = new javax.swing.JLabel();
-        jComboBoxCursCicles = new javax.swing.JComboBox<>();
+        jComboBoxCursCicles = new javax.swing.JComboBox<String>();
         jButtonCarregarCursCicles = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        idFamilia = new javax.swing.JTextField();
-        nomFamilia = new javax.swing.JTextField();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tablaFamilia = new javax.swing.JTable();
-        btnAfegirFamilia = new javax.swing.JButton();
-        btnCercarTotsFamilia = new javax.swing.JButton();
-        btnEliminarFamilia = new javax.swing.JButton();
-        btnModificarFamilia = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         nomModul = new javax.swing.JTextField();
@@ -109,8 +128,30 @@ public class GUI extends javax.swing.JFrame {
         btnEliminarModul = new javax.swing.JButton();
         btnAfegirModul = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
-        jComboBoxModuloCiclo = new javax.swing.JComboBox<>();
+        jComboBoxModuloCiclo = new javax.swing.JComboBox<String>();
         jButtonCargarCiclos = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        label1 = new java.awt.Label();
+        label2 = new java.awt.Label();
+        jLabel6 = new javax.swing.JLabel();
+        nomUF = new javax.swing.JTextField();
+        idUF = new javax.swing.JTextField();
+        horesUF = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableUF = new javax.swing.JTable();
+        btnCercarTotsUF = new javax.swing.JButton();
+        btnAfegirUF = new javax.swing.JButton();
+        btnModificarUF = new javax.swing.JButton();
+        btnEliminarUF = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jComboBoxUFModul = new javax.swing.JComboBox<String>();
+        jComboBoxUFCurs = new javax.swing.JComboBox<String>();
+        jComboBoxUFMatricula = new javax.swing.JComboBox<String>();
+        jButtonCarregarUFModul = new javax.swing.JButton();
+        jButtonCarregarUFCurs = new javax.swing.JButton();
+        jButtonCarregarUFMatricula = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -130,28 +171,6 @@ public class GUI extends javax.swing.JFrame {
         btnAfegirAlumne = new javax.swing.JButton();
         btnModificarAlumne = new javax.swing.JButton();
         btnEliminarAlumne = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
-        label2 = new java.awt.Label();
-        jLabel6 = new javax.swing.JLabel();
-        nomUF = new javax.swing.JTextField();
-        idUF = new javax.swing.JTextField();
-        horesUF = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tableUF = new javax.swing.JTable();
-        btnCercarTotsUF = new javax.swing.JButton();
-        btnAfegirUF = new javax.swing.JButton();
-        btnModificarUF = new javax.swing.JButton();
-        btnEliminarUF = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jComboBoxUFModul = new javax.swing.JComboBox<>();
-        jComboBoxUFCurs = new javax.swing.JComboBox<>();
-        jComboBoxUFMatricula = new javax.swing.JComboBox<>();
-        jButtonCarregarUFModul = new javax.swing.JButton();
-        jButtonCarregarUFCurs = new javax.swing.JButton();
-        jButtonCarregarUFMatricula = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -166,23 +185,23 @@ public class GUI extends javax.swing.JFrame {
         btnAfegirMatricula = new javax.swing.JButton();
         btnCercarFamiliaMatricula = new javax.swing.JButton();
         btnModificarMatricula = new javax.swing.JButton();
-        boxModalitatMatricula = new javax.swing.JComboBox<>();
-        boxDescompteMatricula = new javax.swing.JComboBox<>();
+        boxModalitatMatricula = new javax.swing.JComboBox<String>();
+        boxDescompteMatricula = new javax.swing.JComboBox<String>();
         idMatricula = new javax.swing.JTextField();
         btnEliminarMatricula = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tableMatricula = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
-        boxCurs = new javax.swing.JComboBox<>();
+        boxCurs = new javax.swing.JComboBox<String>();
         jLabel25 = new javax.swing.JLabel();
-        boxFamilia = new javax.swing.JComboBox<>();
+        boxFamilia = new javax.swing.JComboBox<String>();
         jLabel26 = new javax.swing.JLabel();
-        boxCicle = new javax.swing.JComboBox<>();
+        boxCicle = new javax.swing.JComboBox<String>();
         jButtonMatCargarCiclos = new javax.swing.JButton();
         jButtonMatCargarCursos = new javax.swing.JButton();
         jButtonMatCargarFamilias = new javax.swing.JButton();
         jXDatePicker = new org.jdesktop.swingx.JXDatePicker();
-        jComboBoxMatAlumne = new javax.swing.JComboBox<>();
+        jComboBoxMatAlumne = new javax.swing.JComboBox<String>();
         jButtonCargarMatAlumnos = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -212,6 +231,106 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel21.setText("ID");
+
+        jLabel22.setText("Nom");
+
+        idFamilia.setEditable(false);
+
+        tablaFamilia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Nom"
+            }
+        ));
+        jScrollPane8.setViewportView(tablaFamilia);
+
+        btnAfegirFamilia.setText("Afegir Familia");
+        btnAfegirFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfegirFamiliaActionPerformed(evt);
+            }
+        });
+
+        btnCercarTotsFamilia.setText("Cercar Tots");
+        btnCercarTotsFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarTotsFamiliaActionPerformed(evt);
+            }
+        });
+
+        btnEliminarFamilia.setText("Eliminar Familia");
+        btnEliminarFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarFamiliaActionPerformed(evt);
+            }
+        });
+
+        btnModificarFamilia.setText("Modificar Familia");
+        btnModificarFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarFamiliaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22)
+                            .addComponent(idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminarFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAfegirFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnModificarFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCercarTotsFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 347, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAfegirFamilia)
+                    .addComponent(btnCercarTotsFamilia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel22)
+                .addGap(16, 16, 16)
+                .addComponent(nomFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminarFamilia)
+                    .addComponent(btnModificarFamilia))
+                .addGap(120, 120, 120)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Familia", jPanel5);
 
         jLabel13.setText("ID");
 
@@ -264,7 +383,7 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel17.setText("Familia");
 
-        grauCicle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medio", "Superior" }));
+        grauCicle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Medio", "Superior" }));
 
         jButtonCicleCargarFamilias.setText("Cargar familias");
         jButtonCicleCargarFamilias.addActionListener(new java.awt.event.ActionListener() {
@@ -335,7 +454,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(grauCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(188, 188, 188)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cicle", jPanel3);
@@ -420,7 +539,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnModificarCurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCercarTotsCurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(312, Short.MAX_VALUE))
+                        .addContainerGap(315, Short.MAX_VALUE))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,103 +584,6 @@ public class GUI extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Curs", jPanel4);
-
-        jLabel21.setText("ID");
-
-        jLabel22.setText("Nom");
-
-        idFamilia.setEditable(false);
-
-        tablaFamilia.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane8.setViewportView(tablaFamilia);
-
-        btnAfegirFamilia.setText("Afegir Familia");
-        btnAfegirFamilia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAfegirFamiliaActionPerformed(evt);
-            }
-        });
-
-        btnCercarTotsFamilia.setText("Cercar Tots");
-        btnCercarTotsFamilia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCercarTotsFamiliaActionPerformed(evt);
-            }
-        });
-
-        btnEliminarFamilia.setText("Eliminar Familia");
-        btnEliminarFamilia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarFamiliaActionPerformed(evt);
-            }
-        });
-
-        btnModificarFamilia.setText("Modificar Familia");
-        btnModificarFamilia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarFamiliaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel22)
-                            .addComponent(idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nomFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(94, 94, 94)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEliminarFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAfegirFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(65, 65, 65)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnModificarFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCercarTotsFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 341, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel21)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAfegirFamilia)
-                    .addComponent(btnCercarTotsFamilia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel22)
-                .addGap(16, 16, 16)
-                .addComponent(nomFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminarFamilia)
-                    .addComponent(btnModificarFamilia))
-                .addGap(120, 120, 120)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Familia", jPanel5);
 
         jLabel24.setText("Nom modul");
 
@@ -687,6 +709,184 @@ public class GUI extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Modul", jPanel7);
+
+        label1.setText("ID");
+
+        label2.setText("Nom");
+
+        jLabel6.setText("Hores");
+
+        idUF.setEditable(false);
+
+        tableUF.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nom", "Hores", "Title 4", "Title 5", "Title 6"
+            }
+        ));
+        jScrollPane3.setViewportView(tableUF);
+
+        btnCercarTotsUF.setText("Cercar Tots");
+        btnCercarTotsUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarTotsUFActionPerformed(evt);
+            }
+        });
+
+        btnAfegirUF.setText("Afegir UF");
+        btnAfegirUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfegirUFActionPerformed(evt);
+            }
+        });
+
+        btnModificarUF.setText("Modificar UF");
+        btnModificarUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarUFActionPerformed(evt);
+            }
+        });
+
+        btnEliminarUF.setText("Eliminar per nom");
+        btnEliminarUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUFActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Modul");
+
+        jLabel20.setText("Curs");
+
+        jLabel23.setText("Matricula");
+
+        jButtonCarregarUFModul.setText("Carregar mòduls");
+        jButtonCarregarUFModul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCarregarUFModulActionPerformed(evt);
+            }
+        });
+
+        jButtonCarregarUFCurs.setText("Carregar cursos");
+        jButtonCarregarUFCurs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCarregarUFCursActionPerformed(evt);
+            }
+        });
+
+        jButtonCarregarUFMatricula.setText("Carregar matricules");
+        jButtonCarregarUFMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCarregarUFMatriculaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomUF)
+                            .addComponent(idUF, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel20)
+                            .addComponent(jComboBoxUFCurs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel16))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(horesUF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                                            .addComponent(jComboBoxUFModul, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonCarregarUFModul)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                                                .addComponent(btnCercarTotsUF)
+                                                .addGap(64, 64, 64)
+                                                .addComponent(btnModificarUF, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                                                .addComponent(btnAfegirUF, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnEliminarUF)))
+                                        .addGap(65, 65, 65))))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonCarregarUFCurs)
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel23)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jComboBoxUFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonCarregarUFMatricula)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCercarTotsUF)
+                    .addComponent(btnModificarUF)
+                    .addComponent(horesUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nomUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAfegirUF)
+                            .addComponent(btnEliminarUF)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBoxUFModul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCarregarUFModul))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel20))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxUFCurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxUFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCarregarUFCurs)
+                    .addComponent(jButtonCarregarUFMatricula))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Unitat formativa", jPanel8);
 
         jLabel1.setText("NIF");
 
@@ -829,189 +1029,11 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(btnModificarAlumne)
                             .addComponent(btnEliminarAlumne))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Alumne", jPanel2);
-
-        label1.setText("ID");
-
-        label2.setText("Nom");
-
-        jLabel6.setText("Hores");
-
-        idUF.setEditable(false);
-
-        tableUF.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nom", "Hores", "Title 4", "Title 5", "Title 6"
-            }
-        ));
-        jScrollPane3.setViewportView(tableUF);
-
-        btnCercarTotsUF.setText("Cercar Tots");
-        btnCercarTotsUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCercarTotsUFActionPerformed(evt);
-            }
-        });
-
-        btnAfegirUF.setText("Afegir UF");
-        btnAfegirUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAfegirUFActionPerformed(evt);
-            }
-        });
-
-        btnModificarUF.setText("Modificar UF");
-        btnModificarUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarUFActionPerformed(evt);
-            }
-        });
-
-        btnEliminarUF.setText("Eliminar per nom");
-        btnEliminarUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarUFActionPerformed(evt);
-            }
-        });
-
-        jLabel16.setText("Modul");
-
-        jLabel20.setText("Curs");
-
-        jLabel23.setText("Matricula");
-
-        jButtonCarregarUFModul.setText("Carregar mòduls");
-        jButtonCarregarUFModul.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCarregarUFModulActionPerformed(evt);
-            }
-        });
-
-        jButtonCarregarUFCurs.setText("Carregar cursos");
-        jButtonCarregarUFCurs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCarregarUFCursActionPerformed(evt);
-            }
-        });
-
-        jButtonCarregarUFMatricula.setText("Carregar matricules");
-        jButtonCarregarUFMatricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCarregarUFMatriculaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nomUF)
-                            .addComponent(idUF, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                            .addComponent(jLabel20)
-                            .addComponent(jComboBoxUFCurs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel16))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(horesUF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                                            .addComponent(jComboBoxUFModul, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonCarregarUFModul)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                                .addComponent(btnCercarTotsUF)
-                                                .addGap(64, 64, 64)
-                                                .addComponent(btnModificarUF, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                                .addComponent(btnAfegirUF, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnEliminarUF)))
-                                        .addGap(65, 65, 65))))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonCarregarUFCurs)
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jComboBoxUFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonCarregarUFMatricula)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCercarTotsUF)
-                    .addComponent(btnModificarUF)
-                    .addComponent(horesUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nomUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAfegirUF)
-                            .addComponent(btnEliminarUF)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBoxUFModul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonCarregarUFModul))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel20))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxUFCurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxUFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCarregarUFCurs)
-                    .addComponent(jButtonCarregarUFMatricula))
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Unitat formativa", jPanel8);
 
         jLabel7.setText("ID");
 
@@ -1074,9 +1096,9 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Curs complet", "Uf soltes" }));
+        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curs complet", "Uf soltes" }));
 
-        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50", "100" }));
+        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "100" }));
 
         idMatricula.setEditable(false);
 
@@ -1265,7 +1287,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jButtonMatCargarFamilias))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Matricula", jPanel6);
@@ -1304,7 +1326,7 @@ public class GUI extends javax.swing.JFrame {
         Alumne_controller ac = new Alumne_controller();
         Alumne a = new Alumne(nif, nom, cognom, correu, telefon);
         ac.afegir(a);
-        JOptionPane.showMessageDialog(this, "Inserció feta correctament");
+        JOptionPane.showMessageDialog(this, INSERT_OK);
     }//GEN-LAST:event_btnAfegirAlumneActionPerformed
 
     private void bnCercarNifAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCercarNifAlumneActionPerformed
@@ -1314,10 +1336,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
 
     private void btnCercarCognomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCognomActionPerformed
-        List<Alumne> alumnes = new ArrayList();
         String cognom = cognomAlumne.getText();
         Alumne_controller ac = new Alumne_controller();
-        alumnes = ac.cercarCognom(cognom);
+        List<Alumne> alumnes = ac.cercarCognom(cognom);
         for (int i = 0; i < alumnes.size(); i++) {
             tableAlumne.getModel().setValueAt(alumnes.get(i).getNif(), i, 0);
             tableAlumne.getModel().setValueAt(alumnes.get(i).getNom(), i, 1);
@@ -1353,7 +1374,7 @@ public class GUI extends javax.swing.JFrame {
         a.setCorreu(correu);
         a.setTelefon(telefon);
         ac.modificar(a);
-        JOptionPane.showMessageDialog(this, "Modificació feta correctament");
+        JOptionPane.showMessageDialog(this, MODIFICATION_OK);
     }//GEN-LAST:event_btnModificarAlumneActionPerformed
 
     private void btnEliminarAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumneActionPerformed
@@ -1361,7 +1382,7 @@ public class GUI extends javax.swing.JFrame {
         Alumne_controller ac = new Alumne_controller();
         Alumne a = ac.cercarNif(nif);
         ac.eliminar(a);
-        JOptionPane.showMessageDialog(this, "Eliminació feta correctament");
+        JOptionPane.showMessageDialog(this, DELETE_OK);
     }//GEN-LAST:event_btnEliminarAlumneActionPerformed
 
     private void btnAfegirUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirUFActionPerformed
@@ -1380,9 +1401,9 @@ public class GUI extends javax.swing.JFrame {
             Matricula mat = matC.cercarMatriculaId(idMatricula);
             UnitatFormativa uf = new UnitatFormativa(nomuf, hores, curs, m, mat);
             if (ufc.afegir(uf)) {
-                JOptionPane.showMessageDialog(this, "Registre afegit");
+                JOptionPane.showMessageDialog(this, INSERT_OK);
             } else {
-                JOptionPane.showMessageDialog(this, "Error al afegir");
+                JOptionPane.showMessageDialog(this, INSERT_FAIL);
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El nombre d'hores ha de ser numeric");
@@ -1407,7 +1428,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarUFActionPerformed
 
     private void btnModificarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarUFActionPerformed
-        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nuevo nombre");
+        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nou nom");
         String nomuf = nomUF.getText();
         Curs_Controller cc = new Curs_Controller();
         Modul_controller mc = new Modul_controller();
@@ -1427,9 +1448,9 @@ public class GUI extends javax.swing.JFrame {
         uf.setModul(m);
         uf.setMatricula(mat);
         if (ufc.modificar(uf) == true) {
-            JOptionPane.showMessageDialog(this, "Modificació correcta");
+            JOptionPane.showMessageDialog(this, INSERT_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al inserir");
+            JOptionPane.showMessageDialog(this, INSERT_FAIL);
         }
     }//GEN-LAST:event_btnModificarUFActionPerformed
 
@@ -1460,9 +1481,9 @@ public class GUI extends javax.swing.JFrame {
         Cicle c = cc.cercarCicle(nomCicle);
         Curs curs = new Curs(nom, c);
         if (cursc.afegir(curs)) {
-            JOptionPane.showMessageDialog(this, "Afegit");
+            JOptionPane.showMessageDialog(this, INSERT_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+            JOptionPane.showMessageDialog(this, INSERT_FAIL);
         }
     }//GEN-LAST:event_btnAfegirCursActionPerformed
 
@@ -1485,9 +1506,9 @@ public class GUI extends javax.swing.JFrame {
         Cicle c = cc.cercarCicle(nomCicle);
         Modul modul = new Modul(nombre, c);
         if (mc.afegir(modul)) {
-            JOptionPane.showMessageDialog(this, "Afegit");
+            JOptionPane.showMessageDialog(this, INSERT_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+            JOptionPane.showMessageDialog(this, INSERT_FAIL);
         }
     }//GEN-LAST:event_btnAfegirModulActionPerformed
 
@@ -1496,9 +1517,9 @@ public class GUI extends javax.swing.JFrame {
         Familia_controller fc = new Familia_controller();
         Familia f = new Familia(nom);
         if (fc.afegir(f)) {
-            JOptionPane.showMessageDialog(this, "Afegit");
+            JOptionPane.showMessageDialog(this, INSERT_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+            JOptionPane.showMessageDialog(this, INSERT_FAIL);
         }
     }//GEN-LAST:event_btnAfegirFamiliaActionPerformed
 
@@ -1520,9 +1541,9 @@ public class GUI extends javax.swing.JFrame {
         f = fc.cercarFamilia(nom);
         f.setNom(nuevoNombre);
         if (fc.modificar(f)) {
-            JOptionPane.showMessageDialog(this, "Modificat");
+            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al modificar les dades");
+            JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
         }
 
     }//GEN-LAST:event_btnModificarFamiliaActionPerformed
@@ -1534,12 +1555,12 @@ public class GUI extends javax.swing.JFrame {
             Familia f;
             f = fc.cercarFamilia(nom);
             if (fc.eliminar(f)) {
-                JOptionPane.showMessageDialog(this, "Registre eliminat");
+                JOptionPane.showMessageDialog(this, DELETE_OK);
             } else {
-                JOptionPane.showMessageDialog(this, "Error al eliminar");
+                JOptionPane.showMessageDialog(this, DELETE_FAILED);
             }
         } catch (NoResultException ex) {
-            JOptionPane.showMessageDialog(this, "No s'ha trobat objecte a eliminar");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnEliminarFamiliaActionPerformed
 
@@ -1552,9 +1573,9 @@ public class GUI extends javax.swing.JFrame {
         Cicle_controller cc = new Cicle_controller();
         Cicle c = new Cicle(nom, grau, f);
         if (cc.afegir(c)) {
-            JOptionPane.showMessageDialog(this, "Afegit");
+            JOptionPane.showMessageDialog(this, INSERT_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+            JOptionPane.showMessageDialog(this, INSERT_FAIL);
         }
     }//GEN-LAST:event_btnAfegirCicleActionPerformed
 
@@ -1592,12 +1613,12 @@ public class GUI extends javax.swing.JFrame {
             Cicle c;
             c = cc.cercarCicle(nom);
             if (cc.eliminar(c)) {
-                JOptionPane.showMessageDialog(this, "Registre eliminat");
+                JOptionPane.showMessageDialog(this, DELETE_OK);
             } else {
-                JOptionPane.showMessageDialog(this, "Error al eliminar");
+                JOptionPane.showMessageDialog(this, DELETE_FAILED);
             }
         } catch (NoResultException ex) {
-            JOptionPane.showMessageDialog(this, "No s'ha trobat objecte a eliminar");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnEliminarCicleActionPerformed
 
@@ -1606,9 +1627,9 @@ public class GUI extends javax.swing.JFrame {
         Curs_Controller cursc = new Curs_Controller();
         Curs curso = cursc.cercarPerId(Long.parseLong(nuevaId));
         if (cursc.eliminar(curso)) {
-            JOptionPane.showMessageDialog(this, "Registre eliminat");
+            JOptionPane.showMessageDialog(this, DELETE_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al eliminar");
+            JOptionPane.showMessageDialog(this, DELETE_FAILED);
         }
     }//GEN-LAST:event_btnEliminarCursActionPerformed
 
@@ -1620,7 +1641,7 @@ public class GUI extends javax.swing.JFrame {
         Curs_Controller cursc = new Curs_Controller();
         Curs curso = cursc.cercarPerId(Long.parseLong(nuevaId));
         Cicle ciclo = cc.cercarCicle(nomCicle);
-        if (nomCurs.getSelectedItem().toString().equals("PRIMER")) {
+        if (nomCurs.getSelectedItem().toString().equals(Curs.Nom.PRIMER.toString())) {
             nom = Curs.Nom.PRIMER;
         } else {
             nom = Curs.Nom.SEGON;
@@ -1629,9 +1650,9 @@ public class GUI extends javax.swing.JFrame {
         curso.setCicleCurs(ciclo);
 
         if (cursc.modificar(curso)) {
-            JOptionPane.showMessageDialog(this, "Registre modificat");
+            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al modificar");
+            JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
         }
     }//GEN-LAST:event_btnModificarCursActionPerformed
 
@@ -1646,9 +1667,9 @@ public class GUI extends javax.swing.JFrame {
         Cicle c = cc.cercarCicle(nomCicle);
         m.setCicleModul(c);
         if (mc.modificar(m)) {
-            JOptionPane.showMessageDialog(this, "Registre modificat");
+            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al modificar");
+            JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
         }
     }//GEN-LAST:event_btnModificarModulActionPerformed
 
@@ -1668,9 +1689,9 @@ public class GUI extends javax.swing.JFrame {
         Modul_controller mc = new Modul_controller();
         Modul m = mc.cercarModul(nom);
         if (mc.eliminar(m)) {
-            JOptionPane.showMessageDialog(this, "Registre eliminat");
+            JOptionPane.showMessageDialog(this, DELETE_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al eliminar");
+            JOptionPane.showMessageDialog(this, DELETE_FAILED);
         }
     }//GEN-LAST:event_btnEliminarModulActionPerformed
 
@@ -1684,7 +1705,7 @@ public class GUI extends javax.swing.JFrame {
                 boxCicle.addItem(ciclo.getNom());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay ciclos");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonMatCargarCiclosActionPerformed
 
@@ -1697,7 +1718,7 @@ public class GUI extends javax.swing.JFrame {
                 boxCurs.addItem(String.valueOf(curso.getId()));
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay cursos");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonMatCargarCursosActionPerformed
 
@@ -1710,7 +1731,7 @@ public class GUI extends javax.swing.JFrame {
                 jComboBoxCicleFamilia.addItem(familia.getNom());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay familias");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCicleCargarFamiliasActionPerformed
 
@@ -1723,7 +1744,7 @@ public class GUI extends javax.swing.JFrame {
                 boxFamilia.addItem(familia.getNom());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay familias");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonMatCargarFamiliasActionPerformed
 
@@ -1736,7 +1757,7 @@ public class GUI extends javax.swing.JFrame {
                 jComboBoxCursCicles.addItem(ciclo.getNom());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay ciclos");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCarregarCursCiclesActionPerformed
 
@@ -1749,7 +1770,7 @@ public class GUI extends javax.swing.JFrame {
                 jComboBoxModuloCiclo.addItem(ciclo.getNom());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay ciclos");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCargarCiclosActionPerformed
 
@@ -1762,7 +1783,7 @@ public class GUI extends javax.swing.JFrame {
                 jComboBoxUFModul.addItem(modulo.getNom());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay modulos");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCarregarUFModulActionPerformed
 
@@ -1775,7 +1796,7 @@ public class GUI extends javax.swing.JFrame {
                 jComboBoxUFCurs.addItem(String.valueOf(curso.getId()));
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay cursos");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCarregarUFCursActionPerformed
 
@@ -1788,7 +1809,7 @@ public class GUI extends javax.swing.JFrame {
                 jComboBoxUFMatricula.addItem(String.valueOf(matricula.getIdMatricula()));
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay matriculas");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCarregarUFMatriculaActionPerformed
 
@@ -1811,9 +1832,9 @@ public class GUI extends javax.swing.JFrame {
         Familia fam = fc.cercarFamilia(nomFamilia);
         Matricula matricula = new Matricula(a, fecha, modalitat, descompte, cicle, curs, fam);
         if (mc.afegir(matricula)) {
-            JOptionPane.showMessageDialog(this, "Afegit");
+            JOptionPane.showMessageDialog(this, INSERT_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al inserir les dades");
+            JOptionPane.showMessageDialog(this, INSERT_FAIL);
         }
     }//GEN-LAST:event_btnAfegirMatriculaActionPerformed
 
@@ -1826,7 +1847,7 @@ public class GUI extends javax.swing.JFrame {
                 jComboBoxMatAlumne.addItem(alumno.getNif());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay alumnos");
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCargarMatAlumnosActionPerformed
 
@@ -1873,9 +1894,9 @@ public class GUI extends javax.swing.JFrame {
         mat.setCicleMatricula(cicle);
         mat.setFamiliaMatricula(fam);
         if (mc.modificar(mat)) {
-            JOptionPane.showMessageDialog(this, "Registre modificat");
+            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al modificar");
+            JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
         }
     }//GEN-LAST:event_btnModificarMatriculaActionPerformed
 
@@ -1884,9 +1905,9 @@ public class GUI extends javax.swing.JFrame {
         Matricula_Controller mc = new Matricula_Controller();
         Matricula mat = mc.cercarMatriculaId(Long.parseLong(idMat));
         if (mc.eliminar(mat)) {
-            JOptionPane.showMessageDialog(this, "Registre eliminat");
+            JOptionPane.showMessageDialog(this, DELETE_OK);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al eliminar");
+            JOptionPane.showMessageDialog(this, DELETE_FAILED);
         }
     }//GEN-LAST:event_btnEliminarMatriculaActionPerformed
 
