@@ -62,6 +62,31 @@ public class UnitatFormativa implements Serializable {
         this.idUF = id;
     }
 
+    public void setCurs(Curs curs) {
+        this.curs = curs;
+    }
+
+    public void setModul(Modul modul) {
+        this.modul = modul;
+    }
+
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
+    }
+
+    public Curs getCurs() {
+        return curs;
+    }
+
+    public Modul getModul() {
+        return modul;
+    }
+
+    public Matricula getMatricula() {
+        return matricula;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;

@@ -38,6 +38,8 @@ public class Curs_Controller implements CursI {
         return (Curs) q.getSingleResult();
     }
 
+
+
     /**
      * Método que se le pasa un curso por parámetro y lo añadimos a la base de
      * datos
@@ -82,6 +84,7 @@ public class Curs_Controller implements CursI {
         em.close();
         return true;
     }
+
     /**
      * Método que le pasamos un curso por parámetro y lo eliminamos de la base
      * de datos

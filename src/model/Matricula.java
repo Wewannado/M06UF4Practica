@@ -24,7 +24,7 @@ public class Matricula implements Serializable {
     private Long idMatricula;
 
     @OneToOne
-    @JoinColumn(name = "idAlumne")
+    @JoinColumn(name = "idAlumne", unique = true)
     private Alumne alumne;
 
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -48,6 +48,19 @@ public class Matricula implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idFamilia")
     private Familia familiaMatricula;
+
+    public Matricula() {
+    }
+
+    public Matricula(Alumne alumne, Date fecha, String modalitat, int descompte, Cicle cicleMatricula, Curs cursMatricula, Familia familiaMatricula) {
+        this.alumne = alumne;
+        this.fecha = fecha;
+        this.modalitat = modalitat;
+        this.descompte = descompte;
+        this.cicleMatricula = cicleMatricula;
+        this.cursMatricula = cursMatricula;
+        this.familiaMatricula = familiaMatricula;
+    }
 
     public Long getIdMatricula() {
         return idMatricula;
@@ -95,6 +108,38 @@ public class Matricula implements Serializable {
 
     public void setDescompte(int descompte) {
         this.descompte = descompte;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Cicle getCicleMatricula() {
+        return cicleMatricula;
+    }
+
+    public void setCicleMatricula(Cicle cicleMatricula) {
+        this.cicleMatricula = cicleMatricula;
+    }
+
+    public Curs getCursMatricula() {
+        return cursMatricula;
+    }
+
+    public void setCursMatricula(Curs cursMatricula) {
+        this.cursMatricula = cursMatricula;
+    }
+
+    public Familia getFamiliaMatricula() {
+        return familiaMatricula;
+    }
+
+    public void setFamiliaMatricula(Familia familiaMatricula) {
+        this.familiaMatricula = familiaMatricula;
     }
 
 }

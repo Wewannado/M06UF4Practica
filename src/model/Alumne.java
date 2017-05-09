@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class Alumne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long idAlumne;
+    @Column(unique = true)
     private String nif;
     private String nom;
     private String cognom;

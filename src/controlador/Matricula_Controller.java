@@ -20,7 +20,7 @@ public class Matricula_Controller implements MatriculaI {
         Query q = em.createQuery("SELECT m FROM Matricula m "
                 + "WHERE m.idMatricula =:idP");
         q.setParameter("idP", id);
-        return (Matricula) q.getResultList();
+        return (Matricula) q.getSingleResult();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerCurs(Curs curs) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT m.alumne FROM Matricula m "
+        Query q = em.createQuery("SELECT m FROM Matricula m "
                 + "WHERE m.cursMatricula =:cursP");
         q.setParameter("cursP", curs);
         return (List<Matricula>) q.getResultList();
@@ -48,8 +48,8 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerCicle(Cicle cicle) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT m.idAlumne FROM Matricula m "
-                + "WHERE m.idCicle =:cicleP");
+        Query q = em.createQuery("SELECT m FROM Matricula m "
+                + "WHERE m.cicleMatricula =:cicleP");
         q.setParameter("cicleP", cicle);
         return (List<Matricula>) q.getResultList();
     }
@@ -58,8 +58,8 @@ public class Matricula_Controller implements MatriculaI {
     public List<Matricula> cercarPerFamilia(Familia familia) {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
-        Query q = em.createQuery("SELECT m.idAlumne FROM Matricula m "
-                + "WHERE m.idFamilia =:FamiliaP");
+        Query q = em.createQuery("SELECT m FROM Matricula m "
+                + "WHERE m.familiaMatricula =:FamiliaP");
         q.setParameter("FamiliaP", familia);
         return (List<Matricula>) q.getResultList();
     }
@@ -69,7 +69,7 @@ public class Matricula_Controller implements MatriculaI {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT m FROM Matricula m "
-                + "WHERE m.idAlumne.nif =:nifP");
+                + "WHERE m.alumne.nif =:nifP");
         q.setParameter("nifP", nif);
         return (Matricula) q.getSingleResult();
     }

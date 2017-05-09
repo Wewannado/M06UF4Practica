@@ -27,11 +27,11 @@ public class Curs implements Serializable {
     private List<Matricula> matriculas;
 
     public enum Nom {
-
         PRIMER, SEGON
     }
 
     private Nom nom;
+    
     @ManyToOne
     @JoinColumn(name = "idCicle")
     private Cicle cicleCurs;
