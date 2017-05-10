@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Alumne;
 import model.Cicle;
 import model.Curs;
@@ -38,14 +39,14 @@ import model.UnitatFormativa;
  * @author ALUMNEDAM
  */
 public class GUI extends javax.swing.JFrame {
-    
+
     private static final String INSERT_OK = "Inserció feta correctament";
     private static final String INSERT_FAIL = "Error al realitzar la inserció";
     private static final String MODIFICATION_OK = "Modificació feta correctament";
     private static final String MODIFICATION_FAIL = "Error al realitzar la modificació.";
     private static final String DELETE_OK = "Eliminació feta correctament";
     private static final String DELETE_FAILED = "Error al realitzar la eliminació";
-    
+
     private static final String NOT_FOUND = "No s'ha trobat l'objecte";
 
     public GUI() {
@@ -99,8 +100,8 @@ public class GUI extends javax.swing.JFrame {
         btnModificarCicle = new javax.swing.JButton();
         btnEliminarCicle = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        grauCicle = new javax.swing.JComboBox<String>();
-        jComboBoxCicleFamilia = new javax.swing.JComboBox<String>();
+        grauCicle = new javax.swing.JComboBox<>();
+        jComboBoxCicleFamilia = new javax.swing.JComboBox<>();
         jButtonCicleCargarFamilias = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -114,7 +115,7 @@ public class GUI extends javax.swing.JFrame {
         tablaCurs = new javax.swing.JTable();
         nomCurs = new javax.swing.JComboBox();
         jLabel28 = new javax.swing.JLabel();
-        jComboBoxCursCicles = new javax.swing.JComboBox<String>();
+        jComboBoxCursCicles = new javax.swing.JComboBox<>();
         jButtonCarregarCursCicles = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -128,7 +129,7 @@ public class GUI extends javax.swing.JFrame {
         btnEliminarModul = new javax.swing.JButton();
         btnAfegirModul = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
-        jComboBoxModuloCiclo = new javax.swing.JComboBox<String>();
+        jComboBoxModuloCiclo = new javax.swing.JComboBox<>();
         jButtonCargarCiclos = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
@@ -146,9 +147,9 @@ public class GUI extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jComboBoxUFModul = new javax.swing.JComboBox<String>();
-        jComboBoxUFCurs = new javax.swing.JComboBox<String>();
-        jComboBoxUFMatricula = new javax.swing.JComboBox<String>();
+        jComboBoxUFModul = new javax.swing.JComboBox<>();
+        jComboBoxUFCurs = new javax.swing.JComboBox<>();
+        jComboBoxUFMatricula = new javax.swing.JComboBox<>();
         jButtonCarregarUFModul = new javax.swing.JButton();
         jButtonCarregarUFCurs = new javax.swing.JButton();
         jButtonCarregarUFMatricula = new javax.swing.JButton();
@@ -177,7 +178,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        btnCercarUFMatricula = new javax.swing.JButton();
         btnCercarNIFMatricula = new javax.swing.JButton();
         btnCercarCursMatricula = new javax.swing.JButton();
         btnCercarTotsMatricula = new javax.swing.JButton();
@@ -185,23 +185,23 @@ public class GUI extends javax.swing.JFrame {
         btnAfegirMatricula = new javax.swing.JButton();
         btnCercarFamiliaMatricula = new javax.swing.JButton();
         btnModificarMatricula = new javax.swing.JButton();
-        boxModalitatMatricula = new javax.swing.JComboBox<String>();
-        boxDescompteMatricula = new javax.swing.JComboBox<String>();
+        boxModalitatMatricula = new javax.swing.JComboBox<>();
+        boxDescompteMatricula = new javax.swing.JComboBox<>();
         idMatricula = new javax.swing.JTextField();
         btnEliminarMatricula = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tableMatricula = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
-        boxCurs = new javax.swing.JComboBox<String>();
+        boxCurs = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        boxFamilia = new javax.swing.JComboBox<String>();
+        boxFamilia = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
-        boxCicle = new javax.swing.JComboBox<String>();
+        boxCicle = new javax.swing.JComboBox<>();
         jButtonMatCargarCiclos = new javax.swing.JButton();
         jButtonMatCargarCursos = new javax.swing.JButton();
         jButtonMatCargarFamilias = new javax.swing.JButton();
         jXDatePicker = new org.jdesktop.swingx.JXDatePicker();
-        jComboBoxMatAlumne = new javax.swing.JComboBox<String>();
+        jComboBoxMatAlumne = new javax.swing.JComboBox<>();
         jButtonCargarMatAlumnos = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -240,19 +240,24 @@ public class GUI extends javax.swing.JFrame {
 
         tablaFamilia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Nom"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane8.setViewportView(tablaFamilia);
+        if (tablaFamilia.getColumnModel().getColumnCount() > 0) {
+            tablaFamilia.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         btnAfegirFamilia.setText("Afegir Familia");
         btnAfegirFamilia.addActionListener(new java.awt.event.ActionListener() {
@@ -340,16 +345,26 @@ public class GUI extends javax.swing.JFrame {
 
         tableCicle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nom cicle", "Grau cicle", "Familia"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(tableCicle);
+        if (tableCicle.getColumnModel().getColumnCount() > 0) {
+            tableCicle.getColumnModel().getColumn(0).setResizable(false);
+            tableCicle.getColumnModel().getColumn(1).setResizable(false);
+            tableCicle.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         idCicle.setEditable(false);
 
@@ -383,7 +398,7 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel17.setText("Familia");
 
-        grauCicle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Medio", "Superior" }));
+        grauCicle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medio", "Superior" }));
 
         jButtonCicleCargarFamilias.setText("Cargar familias");
         jButtonCicleCargarFamilias.addActionListener(new java.awt.event.ActionListener() {
@@ -495,16 +510,26 @@ public class GUI extends javax.swing.JFrame {
 
         tablaCurs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id curs", "Nom curs", "Cicle"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane7.setViewportView(tablaCurs);
+        if (tablaCurs.getColumnModel().getColumnCount() > 0) {
+            tablaCurs.getColumnModel().getColumn(0).setResizable(false);
+            tablaCurs.getColumnModel().getColumn(1).setResizable(false);
+            tablaCurs.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         nomCurs.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PRIMER", "SEGON" }));
 
@@ -594,16 +619,26 @@ public class GUI extends javax.swing.JFrame {
 
         tablaModul.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id mòdul", "Nom mòdul", "Cicle"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane9.setViewportView(tablaModul);
+        if (tablaModul.getColumnModel().getColumnCount() > 0) {
+            tablaModul.getColumnModel().getColumn(0).setResizable(false);
+            tablaModul.getColumnModel().getColumn(1).setResizable(false);
+            tablaModul.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnCercarTotsModul.setText("Cercar Tots");
         btnCercarTotsModul.addActionListener(new java.awt.event.ActionListener() {
@@ -720,17 +755,29 @@ public class GUI extends javax.swing.JFrame {
 
         tableUF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nom", "Hores", "Title 4", "Title 5", "Title 6"
+                "ID UF", "Nom UF", "Hores", "Curs", "Mòdul", "Matricula"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tableUF);
+        if (tableUF.getColumnModel().getColumnCount() > 0) {
+            tableUF.getColumnModel().getColumn(0).setResizable(false);
+            tableUF.getColumnModel().getColumn(1).setResizable(false);
+            tableUF.getColumnModel().getColumn(2).setResizable(false);
+            tableUF.getColumnModel().getColumn(3).setResizable(false);
+            tableUF.getColumnModel().getColumn(4).setResizable(false);
+            tableUF.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         btnCercarTotsUF.setText("Cercar Tots");
         btnCercarTotsUF.addActionListener(new java.awt.event.ActionListener() {
@@ -900,18 +947,28 @@ public class GUI extends javax.swing.JFrame {
 
         tableAlumne.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "NIF", "Nom", "Cognom", "Correu", "Telefon"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableAlumne);
+        if (tableAlumne.getColumnModel().getColumnCount() > 0) {
+            tableAlumne.getColumnModel().getColumn(0).setResizable(false);
+            tableAlumne.getColumnModel().getColumn(1).setResizable(false);
+            tableAlumne.getColumnModel().getColumn(2).setResizable(false);
+            tableAlumne.getColumnModel().getColumn(3).setResizable(false);
+            tableAlumne.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         btnCercarTotsAlumne.setText("Cercar Tots");
         btnCercarTotsAlumne.addActionListener(new java.awt.event.ActionListener() {
@@ -1045,8 +1102,6 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel12.setText("Descompte");
 
-        btnCercarUFMatricula.setText("Cercar per UF");
-
         btnCercarNIFMatricula.setText("Cercar per NIF");
         btnCercarNIFMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1096,9 +1151,9 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curs complet", "Uf soltes" }));
+        boxModalitatMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Curs complet", "Uf soltes" }));
 
-        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "100" }));
+        boxDescompteMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50", "100" }));
 
         idMatricula.setEditable(false);
 
@@ -1111,16 +1166,31 @@ public class GUI extends javax.swing.JFrame {
 
         tableMatricula.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "null", "null", "Title 7", "Title 8"
+                "id matricula", "Nif alumne", "Data", "Modalitat", "Descompte", "Cicle", "Curs", "Matricula"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(tableMatricula);
+        if (tableMatricula.getColumnModel().getColumnCount() > 0) {
+            tableMatricula.getColumnModel().getColumn(0).setResizable(false);
+            tableMatricula.getColumnModel().getColumn(1).setResizable(false);
+            tableMatricula.getColumnModel().getColumn(2).setResizable(false);
+            tableMatricula.getColumnModel().getColumn(3).setResizable(false);
+            tableMatricula.getColumnModel().getColumn(4).setResizable(false);
+            tableMatricula.getColumnModel().getColumn(5).setResizable(false);
+            tableMatricula.getColumnModel().getColumn(6).setResizable(false);
+            tableMatricula.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         jLabel27.setText("Data");
 
@@ -1178,38 +1248,35 @@ public class GUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addComponent(jLabel25)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addComponent(boxCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButtonMatCargarCiclos)
-                                                .addGap(70, 70, 70)))
-                                        .addComponent(btnEliminarMatricula)
-                                        .addGap(231, 231, 231))
+                                        .addComponent(boxCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                                        .addComponent(jButtonMatCargarCiclos)
+                                        .addGap(417, 417, 417))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(boxDescompteMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel25)
                                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addComponent(jComboBoxMatAlumne, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(27, 27, 27)
-                                                .addComponent(jButtonCargarMatAlumnos)))
-                                        .addGap(59, 59, 59)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnCercarUFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnCercarCursMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnCercarFamiliaMatricula)
-                                            .addComponent(btnCercarCicleMatricula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(22, 22, 22)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(btnCercarTotsMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnAfegirMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnModificarMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnCercarNIFMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(boxDescompteMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel12)
+                                                    .addComponent(jLabel8)
+                                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                                        .addComponent(jComboBoxMatAlumne, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(27, 27, 27)
+                                                        .addComponent(jButtonCargarMatAlumnos)))
+                                                .addGap(59, 59, 59)
+                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(btnCercarCursMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnCercarFamiliaMatricula)
+                                                        .addComponent(btnCercarCicleMatricula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(btnEliminarMatricula))
+                                                .addGap(22, 22, 22)
+                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(btnCercarTotsMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnAfegirMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnModificarMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnCercarNIFMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(203, 203, 203)
@@ -1263,8 +1330,8 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(btnCercarNIFMatricula))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCercarUFMatricula)
-                            .addComponent(btnCercarTotsMatricula))
+                            .addComponent(btnCercarTotsMatricula)
+                            .addComponent(btnEliminarMatricula))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCercarFamiliaMatricula)
@@ -1272,9 +1339,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCercarCicleMatricula)
-                            .addComponent(btnModificarMatricula))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarMatricula)))
+                            .addComponent(btnModificarMatricula))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -1333,13 +1398,30 @@ public class GUI extends javax.swing.JFrame {
         String nif = nifAlumne.getText();
         Alumne_controller ac = new Alumne_controller();
         Alumne a = ac.cercarNif(nif);
+        DefaultTableModel dtm = (DefaultTableModel) tableAlumne.getModel();
+        if (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+        dtm.addRow(new Object[]{});
+        tableAlumne.getModel().setValueAt(a.getNif(), 0, 0);
+        tableAlumne.getModel().setValueAt(a.getNom(), 0, 1);
+        tableAlumne.getModel().setValueAt(a.getCognom(), 0, 2);
+        tableAlumne.getModel().setValueAt(a.getCorreu(), 0, 3);
+        tableAlumne.getModel().setValueAt(a.getTelefon(), 0, 4);
     }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
 
     private void btnCercarCognomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCognomActionPerformed
         String cognom = cognomAlumne.getText();
         Alumne_controller ac = new Alumne_controller();
         List<Alumne> alumnes = ac.cercarCognom(cognom);
+        DefaultTableModel dtm = (DefaultTableModel) tableAlumne.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < alumnes.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < alumnes.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableAlumne.getModel().setValueAt(alumnes.get(i).getNif(), i, 0);
             tableAlumne.getModel().setValueAt(alumnes.get(i).getNom(), i, 1);
             tableAlumne.getModel().setValueAt(alumnes.get(i).getCognom(), i, 2);
@@ -1352,7 +1434,14 @@ public class GUI extends javax.swing.JFrame {
         List<Alumne> alumnes = new ArrayList();
         Alumne_controller ac = new Alumne_controller();
         alumnes = ac.cercarTots();
+        DefaultTableModel dtm = (DefaultTableModel) tableAlumne.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < alumnes.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < alumnes.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableAlumne.getModel().setValueAt(alumnes.get(i).getNif(), i, 0);
             tableAlumne.getModel().setValueAt(alumnes.get(i).getNom(), i, 1);
             tableAlumne.getModel().setValueAt(alumnes.get(i).getCognom(), i, 2);
@@ -1457,8 +1546,15 @@ public class GUI extends javax.swing.JFrame {
     private void btnCercarTotsUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsUFActionPerformed
         List<UnitatFormativa> ufs = new ArrayList();
         UnitatFormativa_controller ufc = new UnitatFormativa_controller();
-        ufs = ufc.cercarTots();      
+        ufs = ufc.cercarTots();
+        DefaultTableModel dtm = (DefaultTableModel) tableUF.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < ufs.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < ufs.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableUF.getModel().setValueAt(ufs.get(i).getId(), i, 0);
             tableUF.getModel().setValueAt(ufs.get(i).getNom(), i, 1);
             tableUF.getModel().setValueAt(ufs.get(i).getHores(), i, 2);
@@ -1491,7 +1587,14 @@ public class GUI extends javax.swing.JFrame {
         List<Curs> cursos = new ArrayList();
         Curs_Controller cursc = new Curs_Controller();
         cursos = cursc.cercarTots();
+        DefaultTableModel dtm = (DefaultTableModel) tablaCurs.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < cursos.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < cursos.size(); i++) {
+            dtm.addRow(new Object[]{});
             tablaCurs.getModel().setValueAt(cursos.get(i).getId(), i, 0);
             tablaCurs.getModel().setValueAt(cursos.get(i).getNom(), i, 1);
             tablaCurs.getModel().setValueAt(cursos.get(i).getCicleCurs().getNom(), i, 2);
@@ -1527,7 +1630,14 @@ public class GUI extends javax.swing.JFrame {
         List<Familia> familias = new ArrayList();
         Familia_controller fc = new Familia_controller();
         familias = fc.cercarTots();
+        DefaultTableModel dtm = (DefaultTableModel) tablaFamilia.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < familias.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < familias.size(); i++) {
+            dtm.addRow(new Object[]{});
             tablaFamilia.getModel().setValueAt(familias.get(i).getIdFamilia(), i, 0);
             tablaFamilia.getModel().setValueAt(familias.get(i).getNom(), i, 1);
         }
@@ -1583,11 +1693,17 @@ public class GUI extends javax.swing.JFrame {
         List<Cicle> ciclos = new ArrayList();
         Cicle_controller cc = new Cicle_controller();
         ciclos = cc.cercarTots();
+        DefaultTableModel dtm = (DefaultTableModel) tableCicle.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < ciclos.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < ciclos.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableCicle.getModel().setValueAt(ciclos.get(i).getNom(), i, 0);
             tableCicle.getModel().setValueAt(ciclos.get(i).getGrau(), i, 1);
             tableCicle.getModel().setValueAt(ciclos.get(i).getFamilia().getNom(), i, 2);
-
         }
     }//GEN-LAST:event_btnCercarTotsCicleActionPerformed
 
@@ -1677,7 +1793,14 @@ public class GUI extends javax.swing.JFrame {
         List<Modul> modulos = new ArrayList();
         Modul_controller mc = new Modul_controller();
         modulos = mc.cercarTots();
+        DefaultTableModel dtm = (DefaultTableModel) tablaModul.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < modulos.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < modulos.size(); i++) {
+            dtm.addRow(new Object[]{});
             tablaModul.getModel().setValueAt(modulos.get(i).getId(), i, 0);
             tablaModul.getModel().setValueAt(modulos.get(i).getNom(), i, 1);
             tablaModul.getModel().setValueAt(modulos.get(i).getCicleModul().getNom(), i, 2);
@@ -1855,7 +1978,14 @@ public class GUI extends javax.swing.JFrame {
         List<Matricula> matriculas = new ArrayList();
         Matricula_Controller mc = new Matricula_Controller();
         matriculas = mc.cercarTots();
+        DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < matriculas.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < matriculas.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
             tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
             tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
@@ -1915,6 +2045,11 @@ public class GUI extends javax.swing.JFrame {
         String nif = (String) jComboBoxMatAlumne.getSelectedItem();
         Matricula_Controller mc = new Matricula_Controller();
         Matricula matricula = mc.cercarPerNif(nif);
+        DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
+        if (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+        dtm.addRow(new Object[]{});
         tableMatricula.getModel().setValueAt(matricula.getIdMatricula(), 0, 0);
         tableMatricula.getModel().setValueAt(matricula.getAlumne().getNif(), 0, 1);
         tableMatricula.getModel().setValueAt(matricula.getDate(), 0, 2);
@@ -1932,11 +2067,22 @@ public class GUI extends javax.swing.JFrame {
         Curs curs = cc.cercarPerId(idCurs);
         Matricula_Controller mc = new Matricula_Controller();
         List<Matricula> matriculas = mc.cercarPerCurs(curs);
+        DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < matriculas.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < matriculas.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
             tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNom(), i, 2);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 3);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getModalitat(), i, 3);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getDescompte(), i, 4);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 5);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 6);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 7);
         }
     }//GEN-LAST:event_btnCercarCursMatriculaActionPerformed
 
@@ -1946,11 +2092,22 @@ public class GUI extends javax.swing.JFrame {
         Cicle cicle = cc.cercarCicle(nomCicle);
         Matricula_Controller mc = new Matricula_Controller();
         List<Matricula> matriculas = mc.cercarPerCicle(cicle);
+        DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < matriculas.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < matriculas.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
             tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNom(), i, 2);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 3);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getModalitat(), i, 3);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getDescompte(), i, 4);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 5);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 6);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 7);
         }
     }//GEN-LAST:event_btnCercarCicleMatriculaActionPerformed
 
@@ -1960,11 +2117,22 @@ public class GUI extends javax.swing.JFrame {
         Familia familia = fc.cercarFamilia(nomFamilia);
         Matricula_Controller mc = new Matricula_Controller();
         List<Matricula> matriculas = mc.cercarPerFamilia(familia);
+        DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
+        if (dtm.getRowCount() > 0) {
+            for (int i = 0; i < matriculas.size(); i++) {
+                dtm.removeRow(i);
+            }
+        }
         for (int i = 0; i < matriculas.size(); i++) {
+            dtm.addRow(new Object[]{});
             tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
             tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNom(), i, 2);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 3);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getModalitat(), i, 3);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getDescompte(), i, 4);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 5);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 6);
+            tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 7);
         }
     }//GEN-LAST:event_btnCercarFamiliaMatriculaActionPerformed
 
@@ -2023,7 +2191,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnCercarTotsMatricula;
     private javax.swing.JButton btnCercarTotsModul;
     private javax.swing.JButton btnCercarTotsUF;
-    private javax.swing.JButton btnCercarUFMatricula;
     private javax.swing.JButton btnEliminarAlumne;
     private javax.swing.JButton btnEliminarCicle;
     private javax.swing.JButton btnEliminarCurs;

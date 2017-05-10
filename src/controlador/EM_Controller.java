@@ -14,10 +14,11 @@ import javax.persistence.Persistence;
  * @author Jorge
  */
 public class EM_Controller {
-     public EntityManager getEntityManager() {
+
+    public EntityManager getEntityManager() {
         //Crear el gestor de persistencia EM
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EXTERNA");
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("INTERNAA");
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EXTERNA");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("INTERNAA");
         EntityManager em = emf.createEntityManager();
         return em;
     }
