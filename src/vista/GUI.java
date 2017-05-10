@@ -1905,15 +1905,14 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCicleCargarFamiliasActionPerformed
 
     private void jButtonMatCargarFamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMatCargarFamiliasActionPerformed
-        
-        Familia_controller famC = new Familia_controller();
-        List<Familia> familias = famC.cercarTots();
-        if (familias.size() > 0) {
+        try {
+            Familia_controller famC = new Familia_controller();
+            List<Familia> familias = famC.cercarTots();
             boxFamilia.removeAllItems();
             for (Familia familia : familias) {
                 boxFamilia.addItem(familia.getNom());
             }
-        } else {
+        } catch (NotFoundException ex) {
             JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonMatCargarFamiliasActionPerformed
@@ -1958,14 +1957,14 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCarregarUFModulActionPerformed
 
     private void jButtonCarregarUFCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarregarUFCursActionPerformed
-        Curs_Controller cu = new Curs_Controller();
-        List<Curs> cursos = cu.cercarTots();
-        if (cursos.size() > 0) {
+        try {
+            Curs_Controller cu = new Curs_Controller();
+            List<Curs> cursos = cu.cercarTots();
             jComboBoxUFCurs.removeAllItems();
             for (Curs curso : cursos) {
                 jComboBoxUFCurs.addItem(String.valueOf(curso.getId()));
             }
-        } else {
+        } catch (NotFoundException ex) {
             JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCarregarUFCursActionPerformed
@@ -1984,27 +1983,31 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCarregarUFMatriculaActionPerformed
 
     private void btnAfegirMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirMatriculaActionPerformed
-        String nif = (String) jComboBoxMatAlumne.getSelectedItem();
-        Date fecha = jXDatePicker.getDate();
-        Long idCurs = Long.parseLong((String) boxCurs.getSelectedItem());
-        int descompte = Integer.parseInt((String) boxDescompteMatricula.getSelectedItem());
-        String modalitat = (String) boxModalitatMatricula.getSelectedItem();
-        String nomCicle = (String) boxCicle.getSelectedItem();
-        String nomFamilia = (String) boxFamilia.getSelectedItem();
-        Alumne_controller ac = new Alumne_controller();
-        Curs_Controller cc = new Curs_Controller();
-        Cicle_controller cicleC = new Cicle_controller();
-        Familia_controller fc = new Familia_controller();
-        Matricula_Controller mc = new Matricula_Controller();
-        Alumne a = ac.cercarNif(nif);
-        Curs curs = cc.cercarPerId(idCurs);
-        Cicle cicle = cicleC.cercarCicle(nomCicle);
-        Familia fam = fc.cercarFamilia(nomFamilia);
-        Matricula matricula = new Matricula(a, fecha, modalitat, descompte, cicle, curs, fam);
-        if (mc.afegir(matricula)) {
-            JOptionPane.showMessageDialog(this, INSERT_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, INSERT_FAIL);
+        try {
+            String nif = (String) jComboBoxMatAlumne.getSelectedItem();
+            Date fecha = jXDatePicker.getDate();
+            Long idCurs = Long.parseLong((String) boxCurs.getSelectedItem());
+            int descompte = Integer.parseInt((String) boxDescompteMatricula.getSelectedItem());
+            String modalitat = (String) boxModalitatMatricula.getSelectedItem();
+            String nomCicle = (String) boxCicle.getSelectedItem();
+            String nomFamilia = (String) boxFamilia.getSelectedItem();
+            Alumne_controller ac = new Alumne_controller();
+            Curs_Controller cc = new Curs_Controller();
+            Cicle_controller cicleC = new Cicle_controller();
+            Familia_controller fc = new Familia_controller();
+            Matricula_Controller mc = new Matricula_Controller();
+            Alumne a = ac.cercarNif(nif);
+            Curs curs = cc.cercarPerId(idCurs);
+            Cicle cicle = cicleC.cercarCicle(nomCicle);
+            Familia fam = fc.cercarFamilia(nomFamilia);
+            Matricula matricula = new Matricula(a, fecha, modalitat, descompte, cicle, curs, fam);
+            if (mc.afegir(matricula)) {
+                JOptionPane.showMessageDialog(this, INSERT_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, INSERT_FAIL);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnAfegirMatriculaActionPerformed
 
@@ -2045,35 +2048,39 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarTotsMatriculaActionPerformed
 
     private void btnModificarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMatriculaActionPerformed
-        String idMat = JOptionPane.showInputDialog(this, "Inserta la id de matricula a buscar");
-        String nif = (String) jComboBoxMatAlumne.getSelectedItem();
-        Date fecha = jXDatePicker.getDate();
-        Long idCurs = Long.parseLong((String) boxCurs.getSelectedItem());
-        int descompte = Integer.parseInt((String) boxDescompteMatricula.getSelectedItem());
-        String modalitat = (String) boxModalitatMatricula.getSelectedItem();
-        String nomCicle = (String) boxCicle.getSelectedItem();
-        String nomFamilia = (String) boxFamilia.getSelectedItem();
-        Alumne_controller ac = new Alumne_controller();
-        Curs_Controller cc = new Curs_Controller();
-        Cicle_controller cicleC = new Cicle_controller();
-        Familia_controller fc = new Familia_controller();
-        Matricula_Controller mc = new Matricula_Controller();
-        Alumne a = ac.cercarNif(nif);
-        Curs curs = cc.cercarPerId(idCurs);
-        Cicle cicle = cicleC.cercarCicle(nomCicle);
-        Familia fam = fc.cercarFamilia(nomFamilia);
-        Matricula mat = mc.cercarMatriculaId(Long.parseLong(idMat));
-        mat.setModalitat(modalitat);
-        mat.setDate(fecha);
-        mat.setCursMatricula(curs);
-        mat.setDescompte(descompte);
-        mat.setAlumne(a);
-        mat.setCicleMatricula(cicle);
-        mat.setFamiliaMatricula(fam);
-        if (mc.modificar(mat)) {
-            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
+        try {
+            String idMat = JOptionPane.showInputDialog(this, "Inserta la id de matricula a buscar");
+            String nif = (String) jComboBoxMatAlumne.getSelectedItem();
+            Date fecha = jXDatePicker.getDate();
+            Long idCurs = Long.parseLong((String) boxCurs.getSelectedItem());
+            int descompte = Integer.parseInt((String) boxDescompteMatricula.getSelectedItem());
+            String modalitat = (String) boxModalitatMatricula.getSelectedItem();
+            String nomCicle = (String) boxCicle.getSelectedItem();
+            String nomFamilia = (String) boxFamilia.getSelectedItem();
+            Alumne_controller ac = new Alumne_controller();
+            Curs_Controller cc = new Curs_Controller();
+            Cicle_controller cicleC = new Cicle_controller();
+            Familia_controller fc = new Familia_controller();
+            Matricula_Controller mc = new Matricula_Controller();
+            Alumne a = ac.cercarNif(nif);
+            Curs curs = cc.cercarPerId(idCurs);
+            Cicle cicle = cicleC.cercarCicle(nomCicle);
+            Familia fam = fc.cercarFamilia(nomFamilia);
+            Matricula mat = mc.cercarMatriculaId(Long.parseLong(idMat));
+            mat.setModalitat(modalitat);
+            mat.setDate(fecha);
+            mat.setCursMatricula(curs);
+            mat.setDescompte(descompte);
+            mat.setAlumne(a);
+            mat.setCicleMatricula(cicle);
+            mat.setFamiliaMatricula(fam);
+            if (mc.modificar(mat)) {
+                JOptionPane.showMessageDialog(this, MODIFICATION_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnModificarMatriculaActionPerformed
 
@@ -2109,52 +2116,60 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarNIFMatriculaActionPerformed
 
     private void btnCercarCursMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCursMatriculaActionPerformed
-        Long idCurs = Long.parseLong((String) boxCurs.getSelectedItem());
-        Curs_Controller cc = new Curs_Controller();
-        Curs curs = cc.cercarPerId(idCurs);
-        Matricula_Controller mc = new Matricula_Controller();
-        List<Matricula> matriculas = mc.cercarPerCurs(curs);
-        DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
-        if (dtm.getRowCount() > 0) {
-            for (int i = 0; i < matriculas.size(); i++) {
-                dtm.removeRow(i);
+        try {
+            Long idCurs = Long.parseLong((String) boxCurs.getSelectedItem());
+            Curs_Controller cc = new Curs_Controller();
+            Curs curs = cc.cercarPerId(idCurs);
+            Matricula_Controller mc = new Matricula_Controller();
+            List<Matricula> matriculas = mc.cercarPerCurs(curs);
+            DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
+            if (dtm.getRowCount() > 0) {
+                for (int i = 0; i < matriculas.size(); i++) {
+                    dtm.removeRow(i);
+                }
             }
-        }
-        for (int i = 0; i < matriculas.size(); i++) {
-            dtm.addRow(new Object[]{});
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getModalitat(), i, 3);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getDescompte(), i, 4);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 5);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 6);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 7);
+            for (int i = 0; i < matriculas.size(); i++) {
+                dtm.addRow(new Object[]{});
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getModalitat(), i, 3);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getDescompte(), i, 4);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 5);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 6);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 7);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnCercarCursMatriculaActionPerformed
 
     private void btnCercarCicleMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCicleMatriculaActionPerformed
-        String nomCicle = (String) boxCicle.getSelectedItem();
-        Cicle_controller cc = new Cicle_controller();
-        Cicle cicle = cc.cercarCicle(nomCicle);
-        Matricula_Controller mc = new Matricula_Controller();
-        List<Matricula> matriculas = mc.cercarPerCicle(cicle);
-        DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
-        if (dtm.getRowCount() > 0) {
-            for (int i = 0; i < matriculas.size(); i++) {
-                dtm.removeRow(i);
+        try {
+            String nomCicle = (String) boxCicle.getSelectedItem();
+            Cicle_controller cc = new Cicle_controller();
+            Cicle cicle = cc.cercarCicle(nomCicle);
+            Matricula_Controller mc = new Matricula_Controller();
+            List<Matricula> matriculas = mc.cercarPerCicle(cicle);
+            DefaultTableModel dtm = (DefaultTableModel) tableMatricula.getModel();
+            if (dtm.getRowCount() > 0) {
+                for (int i = 0; i < matriculas.size(); i++) {
+                    dtm.removeRow(i);
+                }
             }
-        }
-        for (int i = 0; i < matriculas.size(); i++) {
-            dtm.addRow(new Object[]{});
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getModalitat(), i, 3);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getDescompte(), i, 4);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 5);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 6);
-            tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 7);
+            for (int i = 0; i < matriculas.size(); i++) {
+                dtm.addRow(new Object[]{});
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getIdMatricula(), i, 0);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getAlumne().getNif(), i, 1);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getDate(), i, 2);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getModalitat(), i, 3);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getDescompte(), i, 4);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getCicleMatricula().getNom(), i, 5);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getCursMatricula().getNom().name(), i, 6);
+                tableMatricula.getModel().setValueAt(matriculas.get(i).getFamiliaMatricula().getNom(), i, 7);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnCercarCicleMatriculaActionPerformed
 
