@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import model.Cicle;
+import exceptions.NotFoundException;
 
 public class Cicle_controller implements CicleI {
 
@@ -29,23 +30,32 @@ public class Cicle_controller implements CicleI {
      *
      * @param nom
      * @return
+     * @throws exceptions.NotFoundException
      */
-    public Cicle cercarCicle(String nom) {
+    public Cicle cercarCicle(String nom) throws NotFoundException {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT c FROM Cicle c "
                 + "WHERE c.nom =:nomP");
         q.setParameter("nomP", nom);
-        return (Cicle) q.getSingleResult();
+        try {
+            return (Cicle) q.getSingleResult();
+        } catch (javax.persistence.NoResultException ex) {
+            throw new NotFoundException("No s'ha trobat el cicle: " + nom);
+        }
     }
 
-    public Cicle cercarCicleId(Long id) {
+    public Cicle cercarCicleId(Long id) throws exceptions.NotFoundException {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT c FROM Cicle c "
                 + "WHERE c.idCicle =:idP");
         q.setParameter("idP", id);
-        return (Cicle) q.getSingleResult();
+        try {
+            return (Cicle) q.getSingleResult();
+        } catch (javax.persistence.NoResultException ex) {
+            throw new NotFoundException("No s'ha trobat el cicle amb id : " + id);
+        }
     }
 
     /**

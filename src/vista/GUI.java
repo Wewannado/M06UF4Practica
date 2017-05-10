@@ -12,6 +12,7 @@ import controlador.Familia_controller;
 import controlador.Matricula_Controller;
 import controlador.Modul_controller;
 import controlador.UnitatFormativa_controller;
+import exceptions.NotFoundException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,7 +29,6 @@ import javax.swing.table.DefaultTableModel;
 import model.Alumne;
 import model.Cicle;
 import model.Curs;
-import model.Curs.Nom;
 import model.Familia;
 import model.Matricula;
 import model.Modul;
@@ -1395,19 +1395,23 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAfegirAlumneActionPerformed
 
     private void bnCercarNifAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCercarNifAlumneActionPerformed
-        String nif = nifAlumne.getText();
-        Alumne_controller ac = new Alumne_controller();
-        Alumne a = ac.cercarNif(nif);
-        DefaultTableModel dtm = (DefaultTableModel) tableAlumne.getModel();
-        if (dtm.getRowCount() > 0) {
-            dtm.removeRow(0);
+        try {
+            String nif = nifAlumne.getText();
+            Alumne_controller ac = new Alumne_controller();
+            Alumne a = ac.cercarNif(nif);
+            DefaultTableModel dtm = (DefaultTableModel) tableAlumne.getModel();
+            if (dtm.getRowCount() > 0) {
+                dtm.removeRow(0);
+            }
+            dtm.addRow(new Object[]{});
+            tableAlumne.getModel().setValueAt(a.getNif(), 0, 0);
+            tableAlumne.getModel().setValueAt(a.getNom(), 0, 1);
+            tableAlumne.getModel().setValueAt(a.getCognom(), 0, 2);
+            tableAlumne.getModel().setValueAt(a.getCorreu(), 0, 3);
+            tableAlumne.getModel().setValueAt(a.getTelefon(), 0, 4);
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
-        dtm.addRow(new Object[]{});
-        tableAlumne.getModel().setValueAt(a.getNif(), 0, 0);
-        tableAlumne.getModel().setValueAt(a.getNom(), 0, 1);
-        tableAlumne.getModel().setValueAt(a.getCognom(), 0, 2);
-        tableAlumne.getModel().setValueAt(a.getCorreu(), 0, 3);
-        tableAlumne.getModel().setValueAt(a.getTelefon(), 0, 4);
     }//GEN-LAST:event_bnCercarNifAlumneActionPerformed
 
     private void btnCercarCognomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarCognomActionPerformed
@@ -1451,27 +1455,35 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarTotsAlumneActionPerformed
 
     private void btnModificarAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarAlumneActionPerformed
-        String nif = nifAlumne.getText();
-        String nom = nomAlumne.getText();
-        String cognom = cognomAlumne.getText();
-        String correu = correuAlumne.getText();
-        String telefon = telefonAlumne.getText();
-        Alumne_controller ac = new Alumne_controller();
-        Alumne a = ac.cercarNif(nif);
-        a.setNom(nom);
-        a.setCognom(cognom);
-        a.setCorreu(correu);
-        a.setTelefon(telefon);
-        ac.modificar(a);
-        JOptionPane.showMessageDialog(this, MODIFICATION_OK);
+        try {
+            String nif = nifAlumne.getText();
+            String nom = nomAlumne.getText();
+            String cognom = cognomAlumne.getText();
+            String correu = correuAlumne.getText();
+            String telefon = telefonAlumne.getText();
+            Alumne_controller ac = new Alumne_controller();
+            Alumne a = ac.cercarNif(nif);
+            a.setNom(nom);
+            a.setCognom(cognom);
+            a.setCorreu(correu);
+            a.setTelefon(telefon);
+            ac.modificar(a);
+            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
+        }
     }//GEN-LAST:event_btnModificarAlumneActionPerformed
 
     private void btnEliminarAlumneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumneActionPerformed
-        String nif = nifAlumne.getText();
-        Alumne_controller ac = new Alumne_controller();
-        Alumne a = ac.cercarNif(nif);
-        ac.eliminar(a);
-        JOptionPane.showMessageDialog(this, DELETE_OK);
+        try {
+            String nif = nifAlumne.getText();
+            Alumne_controller ac = new Alumne_controller();
+            Alumne a = ac.cercarNif(nif);
+            ac.eliminar(a);
+            JOptionPane.showMessageDialog(this, DELETE_OK);
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, DELETE_FAILED);
+        }
     }//GEN-LAST:event_btnEliminarAlumneActionPerformed
 
     private void btnAfegirUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirUFActionPerformed
@@ -1498,48 +1510,54 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El nombre d'hores ha de ser numeric");
         } catch (PersistenceException ex) {
             JOptionPane.showMessageDialog(this, "Error. Element duplicat");
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnAfegirUFActionPerformed
 
     private void btnEliminarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUFActionPerformed
-//        try {
-//            String nomuf = nomUF.getText();
-//            ufc = new UnitatFormativa_controller();
-//            UnitatFormativa uf = ufc.cercarUF(nomuf);
-//            if (ufc.eliminar(uf) == true) {
-//                JOptionPane.showMessageDialog(this, "Registre eliminat");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Error al eliminar");
-//            }
-//        } catch (NoResultException ex) {
-//            JOptionPane.showMessageDialog(this, "No s'ha trobat objecte a eliminar");
-//        }
+        try {
+            String nomuf = nomUF.getText();
+            UnitatFormativa_controller ufc = new UnitatFormativa_controller();
+            UnitatFormativa uf = ufc.cercarUF(nomuf);
+            if (ufc.eliminar(uf)) {
+                JOptionPane.showMessageDialog(this, DELETE_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, DELETE_FAILED);
+            }
+        } catch (NoResultException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
+        }
     }//GEN-LAST:event_btnEliminarUFActionPerformed
 
     private void btnModificarUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarUFActionPerformed
-        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nou nom");
-        String nomuf = nomUF.getText();
-        Curs_Controller cc = new Curs_Controller();
-        Modul_controller mc = new Modul_controller();
-        Matricula_Controller matC = new Matricula_Controller();
-        UnitatFormativa_controller ufc = new UnitatFormativa_controller();
-        int hores = Integer.parseInt(horesUF.getText());
-        Long idCurs = Long.parseLong((String) jComboBoxUFCurs.getSelectedItem());
-        String nomModul = (String) jComboBoxUFModul.getSelectedItem();
-        Long idMatricula = Long.parseLong((String) jComboBoxUFMatricula.getSelectedItem());
-        Curs curs = cc.cercarPerId(idCurs);
-        Modul m = mc.cercarModul(nomModul);
-        Matricula mat = matC.cercarMatriculaId(idMatricula);
-        UnitatFormativa uf = ufc.cercarUF(nomuf);
-        uf.setNom(nuevoNombre);
-        uf.setHores(hores);
-        uf.setCurs(curs);
-        uf.setModul(m);
-        uf.setMatricula(mat);
-        if (ufc.modificar(uf) == true) {
-            JOptionPane.showMessageDialog(this, INSERT_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, INSERT_FAIL);
+        try {
+            String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nou nom");
+            String nomuf = nomUF.getText();
+            Curs_Controller cc = new Curs_Controller();
+            Modul_controller mc = new Modul_controller();
+            Matricula_Controller matC = new Matricula_Controller();
+            UnitatFormativa_controller ufc = new UnitatFormativa_controller();
+            int hores = Integer.parseInt(horesUF.getText());
+            Long idCurs = Long.parseLong((String) jComboBoxUFCurs.getSelectedItem());
+            String nomModul = (String) jComboBoxUFModul.getSelectedItem();
+            Long idMatricula = Long.parseLong((String) jComboBoxUFMatricula.getSelectedItem());
+            Curs curs = cc.cercarPerId(idCurs);
+            Modul m = mc.cercarModul(nomModul);
+            Matricula mat = matC.cercarMatriculaId(idMatricula);
+            UnitatFormativa uf = ufc.cercarUF(nomuf);
+            uf.setNom(nuevoNombre);
+            uf.setHores(hores);
+            uf.setCurs(curs);
+            uf.setModul(m);
+            uf.setMatricula(mat);
+            if (ufc.modificar(uf)) {
+                JOptionPane.showMessageDialog(this, INSERT_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, INSERT_FAIL);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnModificarUFActionPerformed
 
@@ -1565,53 +1583,64 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarTotsUFActionPerformed
 
     private void btnAfegirCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirCursActionPerformed
-        Nom nom;
-        Curs_Controller cursc = new Curs_Controller();
-        if (nomCurs.getSelectedItem().toString().equals("PRIMER")) {
-            nom = Curs.Nom.PRIMER;
-        } else {
-            nom = Curs.Nom.SEGON;
-        }
-        String nomCicle = (String) jComboBoxCursCicles.getSelectedItem();
-        Cicle_controller cc = new Cicle_controller();
-        Cicle c = cc.cercarCicle(nomCicle);
-        Curs curs = new Curs(nom, c);
-        if (cursc.afegir(curs)) {
-            JOptionPane.showMessageDialog(this, INSERT_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, INSERT_FAIL);
+        try {
+            Curs_Controller cursc = new Curs_Controller();
+            String nomCicle = (String) jComboBoxCursCicles.getSelectedItem();
+            Cicle_controller cc = new Cicle_controller();
+            Cicle c = cc.cercarCicle(nomCicle);
+            Curs curs = new Curs();
+            curs.setCicleCurs(c);
+            if (nomCurs.getSelectedItem().toString().equals("PRIMER")) {
+                c.setNom(Curs.Nom.PRIMER.toString());
+            } else {
+                c.setNom(Curs.Nom.SEGON.toString());
+            }
+            if (cursc.afegir(curs)) {
+                JOptionPane.showMessageDialog(this, INSERT_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, INSERT_FAIL);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnAfegirCursActionPerformed
 
     private void btnCercarTotsCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsCursActionPerformed
-        List<Curs> cursos = new ArrayList();
-        Curs_Controller cursc = new Curs_Controller();
-        cursos = cursc.cercarTots();
-        DefaultTableModel dtm = (DefaultTableModel) tablaCurs.getModel();
-        if (dtm.getRowCount() > 0) {
-            for (int i = 0; i < cursos.size(); i++) {
-                dtm.removeRow(i);
+        try {
+            Curs_Controller cursc = new Curs_Controller();
+            List<Curs> cursos = cursc.cercarTots();
+            DefaultTableModel dtm = (DefaultTableModel) tablaCurs.getModel();
+            if (dtm.getRowCount() > 0) {
+                for (int i = 0; i < cursos.size(); i++) {
+                    dtm.removeRow(i);
+                }
             }
-        }
-        for (int i = 0; i < cursos.size(); i++) {
-            dtm.addRow(new Object[]{});
-            tablaCurs.getModel().setValueAt(cursos.get(i).getId(), i, 0);
-            tablaCurs.getModel().setValueAt(cursos.get(i).getNom(), i, 1);
-            tablaCurs.getModel().setValueAt(cursos.get(i).getCicleCurs().getNom(), i, 2);
+            for (int i = 0; i < cursos.size(); i++) {
+                dtm.addRow(new Object[]{});
+                tablaCurs.getModel().setValueAt(cursos.get(i).getId(), i, 0);
+                tablaCurs.getModel().setValueAt(cursos.get(i).getNom(), i, 1);
+                tablaCurs.getModel().setValueAt(cursos.get(i).getCicleCurs().getNom(), i, 2);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnCercarTotsCursActionPerformed
 
     private void btnAfegirModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirModulActionPerformed
-        Modul_controller mc = new Modul_controller();
-        String nombre = nomModul.getText();
-        String nomCicle = (String) jComboBoxModuloCiclo.getSelectedItem();
-        Cicle_controller cc = new Cicle_controller();
-        Cicle c = cc.cercarCicle(nomCicle);
-        Modul modul = new Modul(nombre, c);
-        if (mc.afegir(modul)) {
-            JOptionPane.showMessageDialog(this, INSERT_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, INSERT_FAIL);
+        try {
+            Modul_controller mc = new Modul_controller();
+            String nombre = nomModul.getText();
+            String nomCicle = (String) jComboBoxModuloCiclo.getSelectedItem();
+            Cicle_controller cc = new Cicle_controller();
+            Cicle c = cc.cercarCicle(nomCicle);
+            Modul modul = new Modul(nombre, c);
+            if (mc.afegir(modul)) {
+                JOptionPane.showMessageDialog(this, INSERT_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, INSERT_FAIL);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnAfegirModulActionPerformed
 
@@ -1627,19 +1656,22 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAfegirFamiliaActionPerformed
 
     private void btnCercarTotsFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarTotsFamiliaActionPerformed
-        List<Familia> familias = new ArrayList();
-        Familia_controller fc = new Familia_controller();
-        familias = fc.cercarTots();
-        DefaultTableModel dtm = (DefaultTableModel) tablaFamilia.getModel();
-        if (dtm.getRowCount() > 0) {
-            for (int i = 0; i < familias.size(); i++) {
-                dtm.removeRow(i);
+        try {
+            Familia_controller fc = new Familia_controller();
+            List<Familia> familias = fc.cercarTots();
+            DefaultTableModel dtm = (DefaultTableModel) tablaFamilia.getModel();
+            if (dtm.getRowCount() > 0) {
+                for (int i = 0; i < familias.size(); i++) {
+                    dtm.removeRow(i);
+                }
             }
-        }
-        for (int i = 0; i < familias.size(); i++) {
-            dtm.addRow(new Object[]{});
-            tablaFamilia.getModel().setValueAt(familias.get(i).getIdFamilia(), i, 0);
-            tablaFamilia.getModel().setValueAt(familias.get(i).getNom(), i, 1);
+            for (int i = 0; i < familias.size(); i++) {
+                dtm.addRow(new Object[]{});
+                tablaFamilia.getModel().setValueAt(familias.get(i).getIdFamilia(), i, 0);
+                tablaFamilia.getModel().setValueAt(familias.get(i).getNom(), i, 1);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnCercarTotsFamiliaActionPerformed
 
@@ -1708,18 +1740,22 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercarTotsCicleActionPerformed
 
     private void btnModificarCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCicleActionPerformed
-        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nuevo nombre");
-        String nom = nomCicle.getText();
-        String nomFamilia = (String) jComboBoxCicleFamilia.getSelectedItem();
-        String grau = (String) grauCicle.getSelectedItem();
-        Familia_controller fc = new Familia_controller();
-        Familia f = fc.cercarFamilia(nomFamilia);
-        Cicle_controller cc = new Cicle_controller();
-        Cicle c = cc.cercarCicle(nom);
-        c.setNom(nuevoNombre);
-        c.setGrau(grau);
-        c.setFamilia(f);
-        cc.modificar(c);
+        try {
+            String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta el nuevo nombre");
+            String nom = nomCicle.getText();
+            String nomFamilia = (String) jComboBoxCicleFamilia.getSelectedItem();
+            String grau = (String) grauCicle.getSelectedItem();
+            Familia_controller fc = new Familia_controller();
+            Familia f = fc.cercarFamilia(nomFamilia);
+            Cicle_controller cc = new Cicle_controller();
+            Cicle c = cc.cercarCicle(nom);
+            c.setNom(nuevoNombre);
+            c.setGrau(grau);
+            c.setFamilia(f);
+            cc.modificar(c);
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
+        }
     }//GEN-LAST:event_btnModificarCicleActionPerformed
 
     private void btnEliminarCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCicleActionPerformed
@@ -1733,59 +1769,69 @@ public class GUI extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, DELETE_FAILED);
             }
-        } catch (NoResultException ex) {
+        } catch (NotFoundException ex) {
             JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnEliminarCicleActionPerformed
 
     private void btnEliminarCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCursActionPerformed
-        String nuevaId = JOptionPane.showInputDialog(this, "Inserta la id de curso a buscar");
-        Curs_Controller cursc = new Curs_Controller();
-        Curs curso = cursc.cercarPerId(Long.parseLong(nuevaId));
-        if (cursc.eliminar(curso)) {
-            JOptionPane.showMessageDialog(this, DELETE_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, DELETE_FAILED);
+        try {
+            String nuevaId = JOptionPane.showInputDialog(this, "Inserta la id de curso a buscar");
+
+            Curs_Controller cursc = new Curs_Controller();
+            Curs curso = cursc.cercarPerId(Long.parseLong(nuevaId));
+            if (cursc.eliminar(curso)) {
+                JOptionPane.showMessageDialog(this, DELETE_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, DELETE_FAILED);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnEliminarCursActionPerformed
 
     private void btnModificarCursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCursActionPerformed
-        String nuevaId = JOptionPane.showInputDialog(this, "Inserta la id de curso a buscar");
-        String nomCicle = (String) jComboBoxCursCicles.getSelectedItem();
-        Nom nom;
-        Cicle_controller cc = new Cicle_controller();
-        Curs_Controller cursc = new Curs_Controller();
-        Curs curso = cursc.cercarPerId(Long.parseLong(nuevaId));
-        Cicle ciclo = cc.cercarCicle(nomCicle);
-        if (nomCurs.getSelectedItem().toString().equals(Curs.Nom.PRIMER.toString())) {
-            nom = Curs.Nom.PRIMER;
-        } else {
-            nom = Curs.Nom.SEGON;
-        }
-        curso.setNom(nom);
-        curso.setCicleCurs(ciclo);
-
-        if (cursc.modificar(curso)) {
-            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
+        try {
+            String nuevaId = JOptionPane.showInputDialog(this, "Inserta la id de curso a buscar");
+            String nomCicle = (String) jComboBoxCursCicles.getSelectedItem();
+            Cicle_controller cc = new Cicle_controller();
+            Curs_Controller cursc = new Curs_Controller();
+            Curs curso = cursc.cercarPerId(Long.parseLong(nuevaId));
+            Cicle ciclo = cc.cercarCicle(nomCicle);
+            if (nomCurs.getSelectedItem().toString().equals(Curs.Nom.PRIMER.toString())) {
+                curso.setNom(Curs.Nom.PRIMER);
+            } else {
+                curso.setNom(Curs.Nom.SEGON);
+            }
+            curso.setCicleCurs(ciclo);
+            if (cursc.modificar(curso)) {
+                JOptionPane.showMessageDialog(this, MODIFICATION_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnModificarCursActionPerformed
 
     private void btnModificarModulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarModulActionPerformed
-        String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta un nuevo nombre");
-        String nom = nomModul.getText();
-        String nomCicle = (String) jComboBoxModuloCiclo.getSelectedItem();
-        Modul_controller mc = new Modul_controller();
-        Modul m = mc.cercarModul(nom);
-        m.setNom(nuevoNombre);
-        Cicle_controller cc = new Cicle_controller();
-        Cicle c = cc.cercarCicle(nomCicle);
-        m.setCicleModul(c);
-        if (mc.modificar(m)) {
-            JOptionPane.showMessageDialog(this, MODIFICATION_OK);
-        } else {
-            JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
+        try {
+            String nuevoNombre = JOptionPane.showInputDialog(this, "Inserta un nuevo nombre");
+            String nom = nomModul.getText();
+            String nomCicle = (String) jComboBoxModuloCiclo.getSelectedItem();
+            Modul_controller mc = new Modul_controller();
+            Modul m = mc.cercarModul(nom);
+            m.setNom(nuevoNombre);
+            Cicle_controller cc = new Cicle_controller();
+            Cicle c = cc.cercarCicle(nomCicle);
+            m.setCicleModul(c);
+            if (mc.modificar(m)) {
+                JOptionPane.showMessageDialog(this, MODIFICATION_OK);
+            } else {
+                JOptionPane.showMessageDialog(this, MODIFICATION_FAIL);
+            }
+        } catch (NotFoundException ex) {
+            JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_btnModificarModulActionPerformed
 
@@ -1833,32 +1879,33 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMatCargarCiclosActionPerformed
 
     private void jButtonMatCargarCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMatCargarCursosActionPerformed
-        Curs_Controller cu = new Curs_Controller();
-        List<Curs> cursos = cu.cercarTots();
-        if (cursos.size() > 0) {
+        try {
+            Curs_Controller cu = new Curs_Controller();
+            List<Curs> cursos = cu.cercarTots();
             boxCurs.removeAllItems();
             for (Curs curso : cursos) {
                 boxCurs.addItem(String.valueOf(curso.getId()));
             }
-        } else {
+        } catch (NotFoundException ex) {
             JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonMatCargarCursosActionPerformed
 
     private void jButtonCicleCargarFamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCicleCargarFamiliasActionPerformed
-        Familia_controller famC = new Familia_controller();
-        List<Familia> familias = famC.cercarTots();
-        if (familias.size() > 0) {
+        try {
+            Familia_controller famC = new Familia_controller();
+            List<Familia> familias = famC.cercarTots();
             jComboBoxCicleFamilia.removeAllItems();
             for (Familia familia : familias) {
                 jComboBoxCicleFamilia.addItem(familia.getNom());
             }
-        } else {
+        } catch (NotFoundException ex) {
             JOptionPane.showMessageDialog(this, NOT_FOUND);
         }
     }//GEN-LAST:event_jButtonCicleCargarFamiliasActionPerformed
 
     private void jButtonMatCargarFamiliasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMatCargarFamiliasActionPerformed
+        
         Familia_controller famC = new Familia_controller();
         List<Familia> familias = famC.cercarTots();
         if (familias.size() > 0) {

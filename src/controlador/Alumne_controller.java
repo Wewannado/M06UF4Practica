@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import exceptions.NotFoundException;
 import model.Alumne;
 
 public class Alumne_controller implements AlumneI {
@@ -15,15 +16,21 @@ public class Alumne_controller implements AlumneI {
      *
      * @param nif
      * @return
+     * @throws exceptions.NotFoundException
      */
     @Override
-    public Alumne cercarNif(String nif) {
+    public Alumne cercarNif(String nif) throws NotFoundException{
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT a FROM Alumne a "
                 + "WHERE a.nif =:nifP");
         q.setParameter("nifP", nif);
+        try{
         return (Alumne) q.getSingleResult();
+        }
+        catch (javax.persistence.NoResultException ex){
+            throw  new NotFoundException("No s'ha trobat el nif: "+nif);
+        }
     }
 
     /**

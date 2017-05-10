@@ -1,5 +1,6 @@
 package controlador;
 
+import exceptions.NotFoundException;
 import interfaces.CursI;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,11 +17,15 @@ public class Curs_Controller implements CursI {
      * @return
      */
     @Override
-    public List<Curs> cercarTots() {
+    public List<Curs> cercarTots() throws NotFoundException {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT c FROM Curs c ");
-        return (List<Curs>) q.getResultList();
+        try {
+            return (List<Curs>) q.getResultList();
+        } catch (javax.persistence.NoResultException ex) {
+            throw new NotFoundException();
+        }
     }
 
     /**
@@ -30,15 +35,17 @@ public class Curs_Controller implements CursI {
      * @param id
      * @return
      */
-    public Curs cercarPerId(Long id) {
+    public Curs cercarPerId(Long id) throws NotFoundException {
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT c FROM Curs c WHERE c.idCurs=:idP");
         q.setParameter("idP", id);
-        return (Curs) q.getSingleResult();
+        try {
+            return (Curs) q.getSingleResult();
+        } catch (javax.persistence.NoResultException ex) {
+            throw new NotFoundException("No s'ha trobat curs amb id: " + id);
+        }
     }
-
-
 
     /**
      * Método que se le pasa un curso por parámetro y lo añadimos a la base de

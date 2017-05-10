@@ -1,5 +1,6 @@
 package controlador;
 
+import exceptions.NotFoundException;
 import interfaces.FamiliaI;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,11 +17,15 @@ public class Familia_controller implements FamiliaI {
      * @return
      */
     @Override
-    public List<Familia> cercarTots() {
+    public List<Familia> cercarTots() throws NotFoundException{
         EM_Controller emc = new EM_Controller();
         EntityManager em = emc.getEntityManager();
         Query q = em.createQuery("SELECT f FROM Familia f ");
+        try{
         return (List<Familia>) q.getResultList();
+        }catch (javax.persistence.NoResultException ex) {
+            throw new NotFoundException();
+        }
     }
 
     /**
