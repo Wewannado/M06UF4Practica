@@ -1790,7 +1790,7 @@
                             <Column editable="false" title="Descompte" type="java.lang.Object"/>
                             <Column editable="false" title="Cicle" type="java.lang.Object"/>
                             <Column editable="false" title="Curs" type="java.lang.Object"/>
-                            <Column editable="false" title="Matricula" type="java.lang.Object"/>
+                            <Column editable="false" title="Familia" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

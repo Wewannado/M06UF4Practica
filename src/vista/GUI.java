@@ -1169,7 +1169,7 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id matricula", "Nif alumne", "Data", "Modalitat", "Descompte", "Cicle", "Curs", "Matricula"
+                "id matricula", "Nif alumne", "Data", "Modalitat", "Descompte", "Cicle", "Curs", "Familia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
